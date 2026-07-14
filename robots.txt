@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xn--hc0bug19yo4ksghrpb480c.com/sitemap.xml
