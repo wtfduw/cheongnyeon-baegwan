@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- 청년배관 홈페이지 v9 (2026-07-14) — 소셜 아이콘 이미지 통일, og https, 사진 경량화 -->
+<!-- 청년배관 홈페이지 v9.1 (2026-07-17) — 카카오 채널 링크(url) 업데이트 -->
+<!-- 청년배관 홈페이지 v9.2 (2026-07-17) — favicon 추가 -->
 <!-- 청년배관 홈페이지 v10 (2026-07-17) — 전면 리디자인: 딥네이비+옐로우 / 라인 아이콘 / 상단 띠 / 탭 내 가격 + 가격표 섹션 / 블로그 배너 / 하단 고정 바 / 파비콘 -->
 <html lang="ko">
 <head>
@@ -15,323 +18,397 @@
 <meta name="naver-site-verification" content="9f769b01e157d45d22086ae439a56a22cb4ec123" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년배관 | 광주·전라 전지역 출동 배관 전문</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/">
 <meta property="og:title" content="청년배관 | 광주·전라 전지역 출동 배관 전문">
 <meta property="og:description" content="광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.">
 <meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;background:#fff;color:#182338;overflow-x:hidden;word-break:keep-all;line-height:1.65;padding-bottom:58px}
+body{font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;background:#fff;color:#1a1a2e;overflow-x:hidden;word-break:keep-all;line-height:1.6}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:inherit;border:none;background:none}
+button{cursor:pointer;font-family:inherit;border:none}
 img{max-width:100%;display:block}
-.ic{width:1em;height:1em;flex-shrink:0}
 
 :root{
-  --n950:#0A1628;   /* 최심 네이비 (푸터) */
-  --n900:#10233F;   /* 히어로/가격표 배경 */
-  --n800:#16304F;   /* 어두운 카드 */
-  --n700:#1F406A;
-  --navy:#16304F;   /* 텍스트용 네이비 */
-  --yel:#FFC400;    /* 유일한 포인트 컬러 */
-  --paper:#F5F7FB;  /* 밝은 섹션 배경 */
-  --t1:#182338;--t2:#4b5563;--t3:#98a2b3;--bd:#e5e9f0;
-  --wt2:rgba(255,255,255,.66);--wt3:rgba(255,255,255,.42);
+  --navy:#1c3557;--navy2:#2563a4;
+  --red:#e82020;--yellow:#FFD600;--green:#10b981;
+  --bgalt:#f5f7fb;--t1:#1a1a2e;--t2:#4b5563;--t3:#9ca3af;--bd:#e5e7eb;
 }
 
 /* ── 공통 ── */
 .inner{max-width:1100px;margin:0 auto;padding:0 5%}
-.sec{padding:84px 5%}
-.rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.sec{padding:88px 5%}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
 .rv.on{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.nb{white-space:nowrap}
-.sec-tag{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--yel);margin-bottom:10px;text-align:center}
-.sec-ttl{font-family:'SUITE Variable',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.25;letter-spacing:-1px;color:var(--t1);margin-bottom:36px;text-align:center}
-.on-dark .sec-ttl{color:#fff}
-.on-dark .sec-tag{color:var(--yel)}
-@media (prefers-reduced-motion:reduce){
-  .rv{opacity:1;transform:none;transition:none}
-  *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+
+/* ── 플로팅 버튼 (크기 통일) ── */
+.floating{position:fixed;bottom:22px;right:16px;z-index:98;display:flex;flex-direction:column;gap:9px;align-items:flex-end}
+.fl{display:flex;align-items:center;justify-content:center;gap:7px;
+  width:116px;padding:12px 0;
+  border-radius:50px;font-size:13px;font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .2s}
+.fl:hover{transform:translateY(-2px)}
+.fl-call{background:var(--red);color:#fff}
+.fl-kakao{background:#f5c800;color:#3a2800}
+
+/* ── 헤더 ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  padding:0 4%;gap:12px;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--bd);
+  box-shadow:0 1px 6px rgba(0,0,0,.05);
+  transition:box-shadow .3s;
 }
-
-/* ── 상단 띠 ── */
-.topbar{background:var(--n950);display:flex;align-items:center;justify-content:center;gap:16px;padding:9px 4%;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
-.tpb-social{display:flex;gap:15px}
-.tpb-social a{color:var(--wt2);display:flex;transition:color .2s}
-.tpb-social a:hover{color:#fff}
-.tpb-social .ic{font-size:16px}
-.tpb-txt{font-size:12px;color:var(--wt3);font-weight:600;letter-spacing:.3px}
-
-/* ── 상단 고정 묶음 (상단 띠 + 헤더) ── */
-.site-head{position:sticky;top:0;z-index:100}
-header{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:rgba(16,35,63,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07)}
-section[id]{scroll-margin-top:104px}
+/* 브랜드 */
 .hdr-brand{display:flex;align-items:center;gap:9px}
-.hdr-char{height:38px;width:auto}
-.hdr-logo{font-family:'SUITE Variable',sans-serif;font-size:21px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.1}
-.hdr-logo em{color:var(--yel);font-style:normal}
-.hdr-sub{font-size:11px;color:var(--wt3);font-weight:600;margin-top:1px}
-.hdr-nav{display:flex;gap:2px}
-.hdr-nav a{font-size:15px;font-weight:600;color:var(--wt2);padding:7px 13px;border-radius:8px;cursor:pointer;transition:all .18s;white-space:nowrap}
-.hdr-nav a:hover{background:rgba(255,255,255,.08);color:#fff}
-.hdr-right{display:flex;align-items:center;gap:8px}
-.hdr-ham{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px}
-.hdr-ham span{width:22px;height:2px;background:#fff;border-radius:2px}
-@media(max-width:1023px){.hdr-nav{display:none}.hdr-ham{display:flex}}
-@media(max-width:420px){.hdr-sub{display:none}.hdr-char{height:32px}}
+.hdr-char{height:42px;width:auto}
+.hdr-logo{font-family:'Nanum Gothic',sans-serif;font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1}
+.hdr-logo em{color:var(--red);font-style:normal}
+.hdr-sub{font-size:14px;color:var(--t3);margin-top:2px;font-weight:600}
+/* 네비 — 진짜 가운데 정렬 */
+.hdr-nav{display:flex;gap:8px;justify-content:center}
+.hdr-nav a{font-size:18px;font-weight:600;color:var(--t2);padding:6px 15px;border-radius:8px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.hdr-nav a:hover{background:var(--bgalt);color:var(--navy)}
+/* 오른쪽 */
+.hdr-right{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.hdr-social{display:flex;gap:5px}
+.s-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;transition:opacity .2s}
+.s-ico:hover{opacity:.75}
+.s-blog{background:#03c75a;color:#fff}
+.s-yt{background:#ff0000;color:#fff;font-size:14px}
+.s-ig{background:linear-gradient(135deg,#f09433,#dc2743);color:#fff;font-size:13px}
+.s-ico img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.cta-s img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.hdr-cta{background:var(--red);color:#fff;padding:8px 16px;border-radius:50px;font-size:13px;font-weight:700;animation:pulse-r 2.2s infinite;white-space:nowrap}
+@keyframes pulse-r{0%,100%{box-shadow:0 0 0 0 rgba(232,32,32,.4)}50%{box-shadow:0 0 0 8px rgba(232,32,32,0)}}
+/* 햄버거 */
+.hdr-ham{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;width:36px;height:36px}
+.hdr-ham span{width:22px;height:2px;background:var(--navy);border-radius:2px}
+
+@media(max-width:1023px){.hdr-nav,.hdr-social{display:none}.hdr-ham{display:flex}}
+@media(max-width:420px){.hdr-sub{display:none}.hdr-char{height:36px}}
 
 /* ── 모바일 메뉴 ── */
-.mm{position:fixed;inset:0;z-index:300;background:var(--n900);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;color:#fff}
+.mm{position:fixed;inset:0;z-index:200;background:#fff;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
 .mm.open{transform:translateX(0)}
-.mm-top{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.mm-top{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--bd)}
 .mm-brand{display:flex;align-items:center;gap:8px}
-.mm-char{height:34px}
-.mm-logo{font-family:'SUITE Variable',sans-serif;font-size:17px;font-weight:800;color:#fff}
-.mm-logo em{color:var(--yel);font-style:normal}
-.mm-close{font-size:20px;color:var(--wt2);padding:4px}
-.mm-body{flex:1;overflow-y:auto;padding:14px 16px}
-.mm-lbl{font-size:11px;font-weight:700;color:var(--wt3);letter-spacing:2px;text-transform:uppercase;padding:12px 8px 8px}
-.mm-item{display:flex;align-items:center;gap:12px;padding:13px 12px;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:background .15s}
-.mm-item:hover{background:rgba(255,255,255,.07)}
-.mm-item .ic{font-size:20px;color:var(--yel)}
-.mm-foot{padding:16px 20px;border-top:1px solid rgba(255,255,255,.08)}
-.mm-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--yel);color:var(--n900);border-radius:50px;padding:14px;text-align:center;font-size:16px;font-weight:800;width:100%}
+.mm-char{height:36px}
+.mm-logo{font-family:'Nanum Gothic',sans-serif;font-size:17px;font-weight:800;color:var(--navy)}
+.mm-logo em{color:var(--red);font-style:normal}
+.mm-close{background:none;font-size:22px;color:var(--t2);padding:4px}
+.mm-body{flex:1;overflow-y:auto;padding:12px 16px}
+.mm-lbl{font-size:11px;font-weight:700;color:var(--t3);letter-spacing:2px;text-transform:uppercase;padding:14px 8px 8px}
+.mm-item{display:flex;align-items:center;gap:12px;padding:13px 12px;border-radius:12px;font-size:16px;font-weight:600;color:var(--t1);cursor:pointer;transition:background .15s}
+.mm-item:hover{background:var(--bgalt)}
+.mm-item em{font-size:20px;font-style:normal}
+.mm-foot{padding:16px 20px;border-top:1px solid var(--bd);display:flex;flex-direction:column;gap:12px}
+.mm-social-row{display:flex;gap:10px}
+.mm-s{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.mm-s img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.mm-cta{background:var(--red);color:#fff;border-radius:50px;padding:14px;text-align:center;font-size:16px;font-weight:700}
 
 /* ── 히어로 ── */
-.hero{background:linear-gradient(160deg,var(--n950) 0%,var(--n900) 60%,#132A4C 100%);padding:62px 5% 56px;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;top:-120px;right:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,196,0,.06) 0%,transparent 62%);border-radius:50%;pointer-events:none}
-.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;text-align:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,196,0,.1);border:1px solid rgba(255,196,0,.3);color:var(--yel);padding:7px 15px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:22px}
-.bdot{width:7px;height:7px;background:var(--yel);border-radius:50%;animation:blink 1.4s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-.hero h1{font-family:'SUITE Variable',sans-serif;font-size:clamp(30px,4.6vw,54px);font-weight:800;line-height:1.28;letter-spacing:-1.5px;color:#fff;margin-bottom:18px}
-.hero h1 em{color:var(--yel);font-style:normal}
-.hero-sub{font-size:clamp(14px,1.7vw,17px);color:var(--wt2);line-height:1.9;margin-bottom:30px}
-.hero-btns{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
-.btn-call{display:inline-flex;align-items:center;gap:9px;background:var(--yel);color:var(--n900);padding:15px 26px;border-radius:50px;font-size:15px;font-weight:800;box-shadow:0 6px 22px rgba(255,196,0,.28);transition:transform .2s,box-shadow .2s}
-.btn-call:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,196,0,.4)}
-.btn-kakao{display:inline-flex;align-items:center;gap:9px;background:transparent;border:1.5px solid rgba(255,255,255,.32);color:#fff;padding:13.5px 26px;border-radius:50px;font-size:15px;font-weight:800;transition:all .2s}
-.btn-kakao:hover{border-color:#fff;transform:translateY(-2px)}
-.btn-kakao .ic{color:var(--yel)}
+.hero{min-height:90vh;display:flex;align-items:center;padding:80px 5% 50px;background:linear-gradient(135deg,#eef3ff 0%,#f8faff 55%,#fffdf0 100%);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-80px;right:-80px;width:520px;height:520px;background:radial-gradient(circle,rgba(37,99,164,.07) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr;gap:32px;max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(232,32,32,.08);border:1px solid rgba(232,32,32,.22);color:var(--red);padding:6px 13px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:18px}
+.bdot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.1}}
+.hero h1{font-family:'SUITE Variable',sans-serif;font-size:clamp(40px,6vw,80px);font-weight:800;line-height:1.05;letter-spacing:-2px;color:var(--navy)}
+.hero h1 em{color:var(--red);font-style:normal;display:block}
+.red-bar{width:52px;height:5px;background:var(--red);border-radius:3px;margin:16px 0 18px}
+.hero-sub{font-size:1.15em;font-weight:800;color:var(--navy);line-height:1.85;margin-bottom:28px}
+.hero-sub b{color:var(--navy);font-weight:800}
+.hero-btns{display:flex;gap:11px;flex-wrap:wrap}
+.btn-call{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:14px 26px;border-radius:50px;font-size:15px;font-weight:700;box-shadow:0 4px 18px rgba(232,32,32,.35);transition:transform .2s,box-shadow .2s}
+.btn-call:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,32,32,.5)}
+.btn-kakao{display:inline-flex;align-items:center;gap:8px;background:#f5c800;color:#3a2800;padding:14px 22px;border-radius:50px;font-size:14px;font-weight:700;transition:transform .2s}
+.btn-kakao:hover{transform:translateY(-2px)}
+
+.hero-btns{justify-content:center}
+.hero-badge,.red-bar{margin-left:auto;margin-right:auto}
+.red-bar{margin:16px auto 18px}
+.hero h1{text-align:center}
+.hero-sub{text-align:center}
 
 /* ── 히어로 슬라이드쇼 ── */
-.hero-slideshow{position:relative;border-radius:18px;overflow:hidden;background:var(--n800);box-shadow:0 14px 46px rgba(0,0,0,.4);aspect-ratio:8/3;min-height:200px;width:100%;max-width:980px;margin:0 auto}
-.slide-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);height:100%}
-.slide{min-width:100%;padding:12px;flex-shrink:0;display:flex;flex-direction:column}
-.slide-photos{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1}
-.slide-photo{border-radius:10px;overflow:hidden;position:relative;border:2px solid rgba(255,255,255,.14)}
+.hero-slideshow{
+  position:relative;border-radius:20px;overflow:hidden;
+  background:#f5f7fb;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);
+  aspect-ratio:8/3;
+  min-height:200px;
+  width:100%;
+}
+.slide-track{
+  display:flex;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  height:100%;
+}
+.slide{min-width:100%;padding:14px;flex-shrink:0;display:flex;flex-direction:column;}
+.slide-photos{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;}
+.slide-photo{border-radius:10px;overflow:hidden;position:relative;border:3px solid transparent}
 .slide-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.slide-photo.after{border-color:var(--yel)}
+.slide-photo.before{border-color:var(--navy2)}
+.slide-photo.after{border-color:var(--red)}
 .slide-lbl{position:absolute;top:8px;left:8px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:5px;z-index:1}
-.lbl-b{background:rgba(10,22,40,.82);color:#fff}
-.lbl-a{background:var(--yel);color:var(--n900)}
-.slide-caption{text-align:center;color:var(--wt2);font-size:13px;font-weight:600;margin-top:8px}
+.lbl-b{background:rgba(37,99,164,.9);color:#fff}
+.lbl-a{background:rgba(232,32,32,.9);color:#fff}
+.slide-photo-single{border-radius:10px;overflow:hidden;position:relative;border:3px solid var(--navy2);flex:1}
+.slide-photo-single img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide-caption{text-align:center;color:var(--t2);font-size:13px;font-weight:600;margin-top:6px}
 @media(max-width:768px){
   .hero-slideshow{aspect-ratio:auto;min-height:0}
   .slide-photos{grid-template-columns:1fr}
   .slide-photo{aspect-ratio:4/3}
 }
-.slide-dots{display:flex;justify-content:center;gap:6px;padding:8px 0 4px}
-.sdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:all .2s}
-.sdot.act{background:var(--yel);width:20px;border-radius:4px}
-.slide-btn{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:rgba(10,22,40,.55);color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
-.slide-btn:hover{background:rgba(10,22,40,.8)}
+/* 도트 */
+.slide-dots{display:flex;justify-content:center;gap:6px;padding:6px 0 2px}
+.sdot{width:7px;height:7px;border-radius:50%;background:rgba(28,53,87,.2);cursor:pointer;transition:all .2s}
+.sdot.act{background:var(--navy);width:20px;border-radius:4px}
+/* 화살표 */
+.slide-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(0,0,0,.45);color:#fff;
+  font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;border:none;cursor:pointer;
+}
+.slide-btn:hover{background:rgba(0,0,0,.65)}
 .slide-prev{left:8px}
 .slide-next{right:8px}
 
-/* ── 신뢰 띠 (히어로와 연결) ── */
-.trust-bar{background:var(--n950);padding:26px 5%}
+/* ── 신뢰 띠 ── */
+.trust-bar{background:var(--navy);padding:28px 5%}
 .trust-bar .inner{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
-.tb-item{padding:0 10px;border-right:1px solid rgba(255,255,255,.08)}
+.tb-item{padding:0 10px;border-right:1px solid rgba(255,255,255,.1)}
 .tb-item:last-child{border-right:none}
-.tb-num{font-family:'SUITE Variable',sans-serif;font-size:clamp(24px,3.6vw,38px);font-weight:800;color:var(--yel);line-height:1;letter-spacing:-.5px}
-.tb-lbl{font-size:13px;color:var(--wt3);margin-top:6px}
-@media(max-width:480px){.trust-bar .inner{grid-template-columns:1fr;gap:18px}.tb-item{border:none;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06)}.tb-item:last-child{border:none;padding-bottom:0}}
+.tb-num{font-family:'Nanum Gothic',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:800;color:var(--yellow);line-height:1}
+.tb-lbl{font-size:13px;color:rgba(255,255,255,.5);margin-top:5px}
+@media(max-width:480px){.trust-bar .inner{grid-template-columns:1fr;gap:20px}.tb-item{border:none;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}.tb-item:last-child{border:none;padding-bottom:0}}
 
-/* ── 서비스 탭 ── */
-#services{padding:84px 5%;background:var(--paper)}
-.svc-tabs-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:24px}
-.svc-tab{display:inline-flex;align-items:center;gap:7px;padding:11px 0;justify-content:center;border-radius:50px;border:1.5px solid var(--bd);font-size:14px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;background:#fff}
-.svc-tab .ic{font-size:17px;color:var(--t3);transition:color .2s}
-.svc-tab:hover{border-color:var(--n800);color:var(--n800)}
-.svc-tab:hover .ic{color:var(--n800)}
-.svc-tab.act{background:var(--n900);color:#fff;border-color:var(--n900)}
-.svc-tab.act .ic{color:var(--yel)}
-@media(max-width:900px){.svc-tabs-row{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.svc-tabs-row{grid-template-columns:repeat(2,1fr)}}
+/* ── 서비스 섹션 ── */
+#services{padding:88px 5%;background:#fff}
+.sec-tag{font-size:15px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--navy2);margin-bottom:12px}
+.sec-ttl{font-family:'Nanum Gothic',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.15;letter-spacing:-1.5px;color:var(--t1);margin-bottom:36px;text-align:center}
+.sec-ttl em{color:var(--navy2);font-style:normal}
 
-.svc-panel{background:#fff;border-radius:20px;padding:32px 28px;border:1.5px solid var(--bd);box-shadow:0 3px 18px rgba(22,48,79,.05);animation:panelIn .3s ease}
+/* 탭 — 그리드로 균등 배치 (마지막 항목이 혼자 남는 것 방지) */
+.svc-tabs-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:28px}
+.svc-tab{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 0;justify-content:center;
+  border-radius:50px;border:1.5px solid var(--bd);
+  font-size:14px;font-weight:600;color:var(--t2);
+  cursor:pointer;transition:all .2s;background:#fafafa;
+}
+.svc-tab:hover{border-color:var(--navy2);color:var(--navy2);background:#fff}
+.svc-tab.act{background:var(--navy);color:#fff;border-color:var(--navy)}
+.svc-tab .te{font-size:15px}
+
+@media(max-width:900px){
+  .svc-tabs-row{grid-template-columns:repeat(3,1fr)}
+}
+
+/* 패널 — 서비스명 / 증상+가격 나란히 / 사진 나란히 / 버튼 */
+.svc-panel{
+  background:var(--bgalt);border-radius:22px;
+  padding:32px 28px;border:1.5px solid var(--bd);
+  animation:panelIn .3s ease;
+}
 @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.svc-panel-name{font-family:'SUITE Variable',sans-serif;font-size:24px;font-weight:800;color:var(--n900);margin-bottom:18px;letter-spacing:-.5px;display:flex;align-items:center;gap:10px}
-.svc-panel-name .ic{font-size:26px;color:var(--yel);background:var(--n900);border-radius:10px;padding:6px;width:38px;height:38px}
-.svc-sym-title{font-size:11px;font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
-.svc-symptoms{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--bd)}
+.svc-panel-name{font-family:'Nanum Gothic',sans-serif;font-size:26px;font-weight:800;color:var(--navy);margin-bottom:20px;letter-spacing:-.5px}
+/* 증상 + 가격 나란히 */
+.svc-panel-mid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--bd)}
+.svc-sym-title{font-size:11px;font-weight:700;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.svc-symptoms{list-style:none;display:flex;flex-direction:column;gap:8px}
 .svc-symptoms li{font-size:14px;color:var(--t2);display:flex;align-items:center;gap:8px}
-.svc-symptoms li .ic{color:var(--yel);background:var(--n900);border-radius:50%;padding:3px;width:17px;height:17px}
-@media(max-width:640px){.svc-symptoms{grid-template-columns:1fr}}
+.svc-symptoms li::before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;flex-shrink:0}
+.svc-price-box{background:#fff;border-radius:12px;border:1px solid var(--bd);padding:16px 18px;display:flex;flex-direction:column;justify-content:center}
+.svc-price-lbl{font-size:12px;color:var(--t3);margin-bottom:5px}
+.svc-price-num{font-family:'Nanum Gothic',sans-serif;font-size:28px;font-weight:800;color:var(--navy2);letter-spacing:-.5px}
+.svc-price-note{font-size:12px;color:var(--t3);margin-top:4px}
+/* 사진 나란히 */
 .svc-panel-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-.svc-panel-photo{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:4/3;border:2px solid var(--bd);cursor:pointer}
+.svc-panel-photo{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:4/3;border:3px solid transparent;cursor:pointer}
 .svc-panel-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.svc-panel-photo.after{border-color:var(--yel)}
+.svc-panel-photo.before{border-color:var(--navy2)}
+.svc-panel-photo.after{border-color:var(--red)}
 .svc-panel-photo-lbl{position:absolute;top:8px;left:8px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:5px;z-index:1}
+.svc-panel-photo-single{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:16/7;border:3px solid var(--navy2);margin-bottom:20px;cursor:pointer}
+.svc-panel-photo-single img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* 서비스 패널 사진 슬라이드 (쌍이 여러 개일 때) */
 .svc-slide-wrap{position:relative;overflow:hidden;border-radius:12px;margin-bottom:20px}
 .svc-slide{min-width:100%;flex-shrink:0;margin-bottom:0}
 .svc-slide-wrap .slide-dots{position:absolute;bottom:2px;left:0;right:0}
-.svc-slide-wrap .sdot{background:rgba(22,48,79,.25)}
-.svc-slide-wrap .sdot.act{background:var(--n900)}
-.svc-panel-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-/* 패널 내 가격 표시 */
-.svc-price-strip{display:flex;align-items:center;justify-content:space-between;gap:6px 14px;background:var(--paper);border:1.5px solid var(--bd);border-radius:14px;padding:16px 20px;margin-bottom:20px;flex-wrap:wrap}
-.svc-price-strip .lbl{font-size:13px;font-weight:700;color:var(--t2)}
-.svc-price-strip .num{font-family:'SUITE Variable',sans-serif;font-size:26px;font-weight:800;color:var(--n900);letter-spacing:-.5px}
-.svc-price-strip .note{flex-basis:100%;font-size:12px;color:var(--t3)}
-.svc-price-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
-.svc-price-rows .r{display:flex;justify-content:space-between;align-items:center;background:var(--paper);border:1.5px solid var(--bd);border-radius:12px;padding:12px 18px}
-.svc-price-rows .r .l{font-size:14px;font-weight:600;color:var(--t1)}
-.svc-price-rows .r .n{font-family:'SUITE Variable',sans-serif;font-size:19px;font-weight:800;color:var(--n900);letter-spacing:-.3px}
-.svc-call-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--yel);color:var(--n900);padding:15px 26px;border-radius:12px;font-size:15px;font-weight:800;box-shadow:0 4px 14px rgba(255,196,0,.3);transition:all .2s;flex:1;min-width:200px}
-.svc-call-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,196,0,.42)}
-.svc-price-link{font-size:14px;font-weight:600;color:var(--t2);display:inline-flex;align-items:center;gap:5px;padding:8px 4px}
-.svc-price-link:hover{color:var(--n900)}
-@media(max-width:640px){.svc-panel{padding:22px 16px}}
 
-/* ── 가격표 ── */
-#price{padding:84px 5%;background:var(--n900)}
-.price-sub{text-align:center;color:var(--wt2);font-size:14px;margin:-24px 0 34px}
-.price-list{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:9px}
-.price-row{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:15px 20px}
-.price-row-lbl{font-size:15px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:10px}
-.price-row-lbl .ic{color:var(--n800);font-size:18px}
-.price-row-num{font-family:'SUITE Variable',sans-serif;font-size:17px;font-weight:800;color:var(--n900);letter-spacing:-.3px;white-space:nowrap}
-.price-row.quote{background:var(--n800);border:1px solid rgba(255,255,255,.1)}
-.price-row.quote .price-row-lbl{color:#fff}
-.price-row.quote .price-row-lbl .ic{color:var(--wt3)}
-.price-row.quote .price-row-num{color:var(--yel);font-size:14px}
-.price-note{max-width:640px;margin:18px auto 0;text-align:center;font-size:13px;color:var(--wt3);line-height:1.9}
-.price-zero{max-width:640px;margin:26px auto 0;background:var(--yel);color:var(--n900);border-radius:14px;padding:18px 22px;text-align:center;font-family:'SUITE Variable',sans-serif;font-size:clamp(16px,2.2vw,19px);font-weight:800}
+/* 항목별 가격표 (수전교체·부품교체) */
+.svc-price-table{display:flex;flex-direction:column;gap:6px}
+.svc-price-row{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
+.svc-price-row-lbl{color:var(--t2)}
+.svc-price-row-num{font-family:'Nanum Gothic',sans-serif;font-weight:800;color:var(--navy2)}
+/* 전화 버튼 */
+.svc-call-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--red);color:#fff;padding:16px;border-radius:14px;width:100%;font-size:16px;font-weight:700;box-shadow:0 4px 16px rgba(232,32,32,.3);transition:all .2s}
+.svc-call-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,32,32,.45)}
+
+@media(max-width:640px){
+  .svc-tabs-row{grid-template-columns:repeat(2,1fr)}
+  .svc-panel-mid{grid-template-columns:1fr}
+  .svc-panel{padding:20px 16px}
+}
+
+/* ── 모달 팝업 ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.65);
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:22px;
+  padding:32px;
+  max-width:620px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  position:relative;
+  animation:modalIn .3s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  background:var(--bgalt);width:32px;height:32px;
+  border-radius:50%;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.modal-close:hover{background:var(--bd)}
+
+/* ── 시공 사진 확대 라이트박스 ── */
+.photo-lightbox{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.88);
+  align-items:center;justify-content:center;
+  padding:40px 20px;
+}
+.photo-lightbox.open{display:flex}
+.photo-lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.lightbox-close{
+  position:absolute;top:18px;right:18px;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.15);color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.lightbox-close:hover{background:rgba(255,255,255,.28)}
+
+/* ── 경고/신뢰 섹션 ── */
+.warn-sec{background:var(--navy2);padding:70px 5%;text-align:center}
+.warn-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,214,0,.12);border:1px solid rgba(255,214,0,.35);
+  color:var(--yellow);padding:6px 16px;border-radius:50px;
+  font-size:13px;font-weight:700;margin-bottom:22px;
+}
+.warn-h2{font-family:'Nanum Gothic',sans-serif;font-size:clamp(28px,4.5vw,44px);font-weight:800;color:#fff;line-height:1.3;margin-bottom:28px}
+.warn-body{max-width:560px;margin:0 auto 20px;color:rgba(255,255,255,.7);font-size:clamp(14px,1.6vw,16px)}
+.warn-body b{color:var(--yellow);font-weight:700}
+.warn-hl{color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.warn-body:nth-of-type(2){margin-bottom:32px}
+.warn-guarantee{
+  max-width:480px;margin:0 auto 36px;
+  background:#fff;color:var(--navy);
+  border-radius:16px;padding:22px 24px;
+  font-size:clamp(17px,2.2vw,21px);font-weight:800;
+  line-height:1.5;
+}
+.warn-char{max-width:180px;margin:0 auto}
 
 /* ── 후기 ── */
-#reviews{padding:84px 5%;background:#fff}
+#reviews{padding:88px 5%;background:var(--bgalt)}
 .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.rv-card{background:var(--paper);border:1.5px solid var(--bd);border-radius:16px;padding:24px 20px;transition:border-color .2s,transform .2s}
-.rv-card:hover{border-color:var(--n800);transform:translateY(-3px)}
-.rv-stars{color:var(--yel);font-size:15px;margin-bottom:10px;letter-spacing:2px}
-.rv-text{font-size:14px;color:var(--t2);line-height:1.85;margin-bottom:14px}
+.rv-card{background:#fff;border:1.5px solid var(--bd);border-radius:18px;padding:24px 20px;transition:border-color .2s,transform .2s}
+.rv-card:hover{border-color:var(--navy2);transform:translateY(-3px)}
+.rv-stars{color:#f59e0b;font-size:16px;margin-bottom:10px}
+.rv-text{font-size:14px;color:var(--t2);line-height:1.8;margin-bottom:14px}
 .rv-meta{font-size:13px;color:var(--t3);font-weight:500}
 
 /* ── FAQ ── */
-#faq{padding:84px 5%;background:var(--paper)}
-.faq-wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+#faq{padding:88px 5%;background:#fff}
+.faq-wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .faq-item{background:#fff;border:1.5px solid var(--bd);border-radius:14px;overflow:hidden}
 .faq-q{width:100%;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px;font-weight:700;color:var(--t1);text-align:left;cursor:pointer}
-.faq-q span:first-child::before{content:'Q. ';color:var(--n800)}
+.faq-q span:first-child::before{content:'Q. ';color:var(--navy2)}
 .faq-arrow{font-size:12px;color:var(--t3);flex-shrink:0;transition:transform .2s}
 .faq-item.open .faq-arrow{transform:rotate(180deg)}
 .faq-a{max-height:0;overflow:hidden;padding:0 20px;font-size:14px;color:var(--t2);line-height:1.85;transition:max-height .3s ease,padding .3s ease}
-.faq-a::before{content:'A. ';color:#c39400;font-weight:800}
+.faq-a::before{content:'A. ';color:var(--red);font-weight:700}
 .faq-item.open .faq-a{max-height:600px;padding:0 20px 20px}
 @media(max-width:640px){.faq-wrap{grid-template-columns:1fr}}
 
-/* ── 0원 보장 ── */
-.zero-sec{padding:72px 5%;background:#fff;text-align:center}
-.zero-shield{width:52px;height:52px;margin:0 auto 18px;background:var(--n900);border-radius:16px;display:flex;align-items:center;justify-content:center}
-.zero-shield .ic{color:var(--yel);font-size:28px}
-.zero-h2{font-family:'SUITE Variable',sans-serif;font-size:clamp(24px,3.6vw,36px);font-weight:800;color:var(--n900);line-height:1.35;margin-bottom:18px;letter-spacing:-1px}
-.zero-h2 em{font-style:normal;background:linear-gradient(transparent 58%,rgba(255,196,0,.5) 58%)}
-.zero-body{max-width:520px;margin:0 auto 26px;color:var(--t2);font-size:clamp(14px,1.6vw,16px);line-height:2}
-.zero-body b{color:var(--n900)}
-.zero-char{max-width:150px;margin:0 auto}
-
-/* ── 블로그 배너 ── */
-.blog-band{background:#fff;padding:32px 5%;border-bottom:1px solid var(--bd)}
-.blog-band .inner{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;text-align:center}
-.blog-band-txt{font-family:'SUITE Variable',sans-serif;font-size:clamp(16px,2.2vw,20px);font-weight:800;color:var(--n900);letter-spacing:-.5px}
-.blog-band-btn{display:inline-flex;align-items:center;gap:9px;background:var(--n900);color:#fff;padding:13px 24px;border-radius:50px;font-size:14px;font-weight:700;transition:transform .2s}
-.blog-band-btn:hover{transform:translateY(-2px)}
-.blog-band-btn img{width:20px;height:20px;border-radius:5px}
-
 /* ── CTA ── */
-.cta-sec{background:linear-gradient(180deg,var(--n900),var(--n950));padding:80px 5%;text-align:center}
-.cta-tag{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,196,0,.7);margin-bottom:12px}
-.cta-h2{font-family:'SUITE Variable',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:800;line-height:1.25;color:#fff;margin-bottom:10px;letter-spacing:-1px}
-.cta-h2 em{color:var(--yel);font-style:normal}
-.cta-p{font-size:15px;color:var(--wt3);margin-bottom:26px}
-.cta-phone{font-family:'SUITE Variable',sans-serif;font-size:clamp(30px,5vw,56px);font-weight:800;color:var(--yel);letter-spacing:-1.5px;margin-bottom:6px}
-.cta-region{font-size:14px;color:var(--wt3);margin-bottom:30px}
-.cta-btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-bottom:38px}
-.cta-social-lbl{font-size:12px;color:var(--wt3);margin-bottom:12px}
+.cta-sec{background:var(--navy);padding:80px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,214,0,.05) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.cta-sec .inner{position:relative;z-index:1}
+.cta-tag{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,214,0,.7);margin-bottom:12px}
+.cta-h2{font-family:'Nanum Gothic',sans-serif;font-size:clamp(26px,4vw,50px);font-weight:800;line-height:1.15;color:#fff;margin-bottom:10px;letter-spacing:-1.5px}
+.cta-h2 em{color:var(--yellow);font-style:normal}
+.cta-p{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:28px}
+.cta-phone{font-family:'Nanum Gothic',sans-serif;font-size:clamp(30px,5vw,60px);font-weight:800;color:var(--yellow);letter-spacing:-2px;margin-bottom:6px}
+.cta-region{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:32px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-cta-call{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;padding:16px 34px;border-radius:50px;font-size:16px;font-weight:700;box-shadow:0 4px 22px rgba(232,32,32,.45);transition:transform .2s,box-shadow .2s}
+.btn-cta-call:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,32,32,.6)}
+.btn-cta-kakao{display:inline-flex;align-items:center;gap:9px;background:#f5c800;color:#3a2800;padding:16px 26px;border-radius:50px;font-size:15px;font-weight:700;transition:transform .2s}
+.btn-cta-kakao:hover{transform:translateY(-2px)}
+.cta-social-lbl{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:12px}
 .cta-social{display:flex;gap:12px;justify-content:center}
-.cta-s{width:42px;height:42px;border-radius:12px;overflow:hidden;transition:transform .2s,opacity .2s}
+.cta-s{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;transition:transform .2s,opacity .2s}
 .cta-s:hover{transform:translateY(-2px);opacity:.85}
-.cta-s img{width:100%;height:100%;object-fit:cover}
+.cs-blog{background:#03c75a;color:#fff}
+.cs-yt{background:#ff0000;color:#fff}
+.cs-ig{background:linear-gradient(135deg,#f09433,#dc2743);color:#fff}
 
 /* ── 푸터 ── */
-footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255,255,255,.05)}
+footer{background:#0d1e36;padding:28px 5% 18px;border-top:1px solid rgba(255,255,255,.05)}
 .foot-in{max-width:640px;margin:0 auto;text-align:center;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)}
-.foot-logo{font-family:'SUITE Variable',sans-serif;font-size:19px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:7px}
-.foot-logo em{color:var(--yel);font-style:normal}
-.foot-info{font-size:12px;color:var(--wt3);line-height:2}
-.foot-copy{max-width:1100px;margin:14px auto 0;text-align:center;font-size:11px;color:rgba(255,255,255,.16)}
+.foot-logo{font-family:'Nanum Gothic',sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:7px}
+.foot-logo em{color:var(--yellow);font-style:normal}
+.foot-info{font-size:12px;color:rgba(255,255,255,.3);line-height:2}
+.foot-copy{max-width:1100px;margin:14px auto 0;text-align:center;font-size:11px;color:rgba(255,255,255,.15)}
 
-/* ── 하단 고정 바 ── */
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1.6fr 1fr;height:58px;box-shadow:0 -4px 18px rgba(0,0,0,.22)}
-.bb-call{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--n950);color:#fff}
-.bb-call .ic{color:var(--yel);font-size:19px}
-.bb-call-txt{display:flex;flex-direction:column;line-height:1.25;text-align:left}
-.bb-call-lbl{font-size:10px;color:var(--wt3);font-weight:600;letter-spacing:.5px}
-.bb-call-num{font-family:'SUITE Variable',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.3px;animation:numblink 1.6s ease-in-out infinite}
-@keyframes numblink{0%,100%{color:#fff}50%{color:var(--yel)}}
-.bb-kakao{display:flex;align-items:center;justify-content:center;gap:8px;background:#FEE500;color:#191919;font-size:15px;font-weight:800}
-.bb-kakao .ic{font-size:18px}
-
-/* ── 모달 / 라이트박스 ── */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(10,22,40,.7);align-items:center;justify-content:center;padding:20px}
-.modal-overlay.open{display:flex}
-.modal-box{background:#fff;border-radius:20px;padding:32px;max-width:620px;width:100%;max-height:88vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}
-@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
-.modal-close{position:absolute;top:14px;right:14px;background:var(--paper);width:32px;height:32px;border-radius:50%;font-size:15px;display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:var(--bd)}
-.photo-lightbox{display:none;position:fixed;inset:0;z-index:450;background:rgba(6,12,24,.9);align-items:center;justify-content:center;padding:40px 20px}
-.photo-lightbox.open{display:flex}
-.photo-lightbox img{max-width:100%;max-height:88vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
-.lightbox-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center}
-.lightbox-close:hover{background:rgba(255,255,255,.28)}
+/* ── 서비스 섹션 reveal ── */
+.rv-svc{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rv-svc.on{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<!-- 라인 아이콘 스프라이트 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
-    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3.5v5.2c0 5-3.4 8.6-8 10.3-4.6-1.7-8-5.3-8-10.3V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></symbol>
-    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
-    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
-    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
-    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
-    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
-    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
-    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
-    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
-    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
-    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
-  </defs>
-</svg>
+<!-- 플로팅 -->
+<div class="floating">
+  <a href="tel:010-6872-8284" class="fl fl-call">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    지금 전화
+  </a>
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="fl fl-kakao">💬 카카오</a>
+</div>
 
-<!-- 모달 -->
+<!-- 모달 팝업 -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -339,7 +416,7 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   </div>
 </div>
 
-<!-- 라이트박스 -->
+<!-- 시공 사진 확대 라이트박스 -->
 <div class="photo-lightbox" id="photo-lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <img id="lightbox-img" src="" alt="">
@@ -356,33 +433,25 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   </div>
   <div class="mm-body">
     <div class="mm-lbl">서비스</div>
-    <div class="mm-item" onclick="openModal(0);closeMM()"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</div>
-    <div class="mm-item" onclick="openModal(1);closeMM()"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</div>
-    <div class="mm-item" onclick="openModal(2);closeMM()"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</div>
-    <div class="mm-item" onclick="openModal(3);closeMM()"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</div>
-    <div class="mm-item" onclick="openModal(4);closeMM()"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비 공사</div>
-    <div class="mm-item" onclick="openModal(5);closeMM()"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</div>
-    <div class="mm-lbl">안내</div>
-    <div class="mm-item" onclick="location.href='#price';closeMM()"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</div>
+    <div class="mm-item" onclick="openModal(0);closeMM()"><em>🚽</em> 변기 막힘</div>
+    <div class="mm-item" onclick="openModal(1);closeMM()"><em>🍳</em> 싱크대 막힘</div>
+    <div class="mm-item" onclick="openModal(2);closeMM()"><em>🕳️</em> 하수구 막힘</div>
+    <div class="mm-item" onclick="openModal(3);closeMM()"><em>💨</em> 고압 세척</div>
+    <div class="mm-item" onclick="openModal(4);closeMM()"><em>🔧</em> 배관 설비 공사</div>
+    <div class="mm-item" onclick="openModal(5);closeMM()"><em>🚰</em> 수전교체·부품교체</div>
   </div>
   <div class="mm-foot">
-    <button class="mm-cta" onclick="location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <div class="mm-social-row">
+      <a href="https://blog.naver.com/tturobro" class="mm-s s-blog"><img src="naverblog.png" alt="네이버 블로그"></a>
+      <a href="#" class="mm-s s-yt"><img src="youtube.png" alt="유튜브"></a>
+      <a href="https://www.instagram.com/drain365pro" class="mm-s s-ig"><img src="instagram.png" alt="인스타그램"></a>
+    </div>
+    <button class="mm-cta" onclick="location.href='tel:010-6872-8284'">📞 010-6872-8284</button>
   </div>
-</div>
-
-<!-- 상단 고정 묶음: 상단 띠 + 헤더 -->
-<div class="site-head">
-<div class="topbar">
-  <div class="tpb-social">
-    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
-    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
-    <a href="https://www.instagram.com/drain365pro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
-  </div>
-  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
 </div>
 
 <!-- 헤더 -->
-<header>
+<header id="hdr">
   <a class="hdr-brand" href="#">
     <img class="hdr-char" src="캐릭터로고_배경제거.png" alt="" onerror="this.style.display='none'">
     <div>
@@ -391,37 +460,159 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
     </div>
   </a>
   <nav class="hdr-nav">
-    <a onclick="openModal(0)">변기막힘</a>
-    <a onclick="openModal(1)">싱크대막힘</a>
-    <a onclick="openModal(2)">하수구막힘</a>
-    <a onclick="openModal(3)">고압세척</a>
-    <a onclick="openModal(4)">배관설비</a>
-    <a onclick="openModal(5)">수전교체</a>
-    <a href="#price">가격안내</a>
+    <a onclick="openModal(0)">🚽 변기막힘</a>
+    <a onclick="openModal(1)">🍳 싱크대막힘</a>
+    <a onclick="openModal(2)">🕳️ 하수구막힘</a>
+    <a onclick="openModal(3)">💨 고압세척</a>
+    <a onclick="openModal(4)">🔧 배관설비공사</a>
+    <a onclick="openModal(5)">🚰 수전교체</a>
   </nav>
   <div class="hdr-right">
-    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+    <div class="hdr-social">
+      <a href="https://blog.naver.com/tturobro" class="s-ico s-blog"><img src="naverblog.png" alt="네이버 블로그"></a>
+      <a href="#" class="s-ico s-yt"><img src="youtube.png" alt="유튜브"></a>
+      <a href="https://www.instagram.com/drain365pro" class="s-ico s-ig"><img src="instagram.png" alt="인스타그램"></a>
+    </div>
+    <button class="hdr-cta" onclick="location.href='tel:010-6872-8284'">즉시 상담</button>
+    <button class="hdr-ham" onclick="openMM()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
-</div>
 
 <!-- 히어로 -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge"><span class="bdot"></span> 지금 이 순간도 출동 중 · 24시간 365일</div>
-    <h1>광주·전라 배관 문제<br><em>당일 방문 · 당일 해결</em></h1>
-    <p class="hero-sub">
-      <span class="nb">변기·싱크대·하수구 막힘 ·</span> <span class="nb">고압세척 · 배관설비 · 수전교체</span><br>
-      <span class="nb">광주·전남·전북 전지역 출동</span> <span class="nb">(목포·여수·순천·전주·군산·익산)</span>
-    </p>
-    <div class="hero-btns">
-      <a href="tel:010-6872-8284" class="btn-call"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</a>
-      <a href="https://open.kakao.com/me/youngclean77" class="btn-kakao"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <!-- 텍스트 -->
+    <div>
+      <div class="hero-badge"><span class="bdot"></span> 지금 이 순간도 출동 중 · 24시간 365일</div>
+      <h1>또 막혔나요?<br>시원하게 뚫어드립니다!<em>청년배관</em></h1>
+      <div class="red-bar"></div>
+      <p class="hero-sub">
+        <b>광주·전라 전지역</b> 출동 (목포·여수·순천·전주·군산·익산 등)<br>
+        변기·싱크대·하수구 막힘 · 고압세척 · 배관설비<br>
+        당일 해결 · 미해결 시 요금 0원 보장
+      </p>
+      <div class="hero-btns">
+        <a href="tel:010-6872-8284" class="btn-call">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          지금 바로 전화
+        </a>
+        <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao">💬 카카오 상담</a>
+      </div>
     </div>
-
+    <!-- 슬라이드쇼 -->
     <div class="hero-slideshow">
-      <div class="slide-track" id="slide-track"></div>
-      <div class="slide-dots" id="slide-dots"></div>
+      <div class="slide-track" id="slide-track">
+        <!-- 슬라이드 1: 변기막힘 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="변기막힘1_전.jpg" alt="변기막힘 전" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="변기막힘1_후.jpg" alt="변기막힘 후" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">🚽 변기 막힘</div>
+        </div>
+        <!-- 슬라이드 2: 싱크대막힘 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="싱크막힘1_전.jpg" alt="싱크대막힘 전" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="싱크막힘1_후.jpg" alt="싱크대막힘 후" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">🍳 싱크대 막힘</div>
+        </div>
+        <!-- 슬라이드 3: 하수구막힘 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="하수구막힘_전.jpg" alt="하수구막힘 전" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="하수구막힘_후.jpg" alt="하수구막힘 후" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">🕳️ 하수구 막힘</div>
+        </div>
+        <!-- 슬라이드 4: 고압세척 (합성 이미지) -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="고압세척3_전.jpg" alt="고압세척 전" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="고압세척3_후.jpg" alt="고압세척 후" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">💨 고압 세척 · 작업 전·후</div>
+        </div>
+        <!-- 슬라이드 5: 배관설비 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="배관설비공사_전_1.jpg" alt="배관설비 문제 진단 1" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo before">
+              <img src="배관설비공사_전_2.jpg" alt="배관설비 문제 진단 2" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+          </div>
+          <div class="slide-caption">🔧 배관 설비 공사 · 문제 진단</div>
+        </div>
+        <!-- 슬라이드 6: 배관설비공사 보수완료 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo after">
+              <img src="배관설비공사_후_1.jpg" alt="배관설비 보수 완료 1" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="배관설비공사_후_2.jpg" alt="배관설비 보수 완료 2" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">🔧 배관 설비 공사 · 보수 완료</div>
+        </div>
+        <!-- 슬라이드 7: 수전교체·부품교체 -->
+        <div class="slide">
+          <div class="slide-photos">
+            <div class="slide-photo before">
+              <img src="수전교체_1_전.jpg" alt="수전교체 전" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-b">작업 전</span>
+            </div>
+            <div class="slide-photo after">
+              <img src="수전교체_2_후.jpg" alt="수전교체 후" onerror="this.style.opacity=0">
+              <span class="slide-lbl lbl-a">작업 후</span>
+            </div>
+          </div>
+          <div class="slide-caption">🚰 수전 교체 · 부품 교체</div>
+        </div>
+      </div>
+      <!-- 도트 -->
+      <div class="slide-dots" id="slide-dots">
+        <span class="sdot act" onclick="goSlide(0)"></span>
+        <span class="sdot" onclick="goSlide(1)"></span>
+        <span class="sdot" onclick="goSlide(2)"></span>
+        <span class="sdot" onclick="goSlide(3)"></span>
+        <span class="sdot" onclick="goSlide(4)"></span>
+        <span class="sdot" onclick="goSlide(5)"></span>
+        <span class="sdot" onclick="goSlide(6)"></span>
+      </div>
       <button class="slide-btn slide-prev" onclick="goSlide(curSlide-1)">‹</button>
       <button class="slide-btn slide-next" onclick="goSlide(curSlide+1)">›</button>
     </div>
@@ -437,48 +628,28 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   </div>
 </div>
 
-<!-- 블로그 배너 -->
-<div class="blog-band">
-  <div class="inner rv">
-    <span class="blog-band-txt">실제 작업 현장이 궁금하다면?</span>
-    <a href="https://blog.naver.com/tturobro" class="blog-band-btn">
-      <img src="naverblog.png" alt="">
-      청년배관 블로그 바로가기
-      <svg class="ic"><use href="#i-arrow"/></svg>
-    </a>
-  </div>
-</div>
-
 <!-- 서비스 탭 -->
 <section id="services">
   <div class="inner">
-    <div class="rv"><div class="sec-tag">Services</div>
-    <div class="sec-ttl">어떤 배관 문제든 해결합니다</div></div>
-    <div class="svc-tabs-row rv" id="svc-tabs"></div>
+    <div class="rv-svc"><div class="sec-tag">Services</div>
+    <div class="sec-ttl">어떤 문제든<em>해결합니다</em></div></div>
+    <div class="svc-tabs-row rv-svc">
+      <div class="svc-tab act" onclick="switchTab(0)"><span class="te">🚽</span> 변기 막힘</div>
+      <div class="svc-tab"     onclick="switchTab(1)"><span class="te">🍳</span> 싱크대 막힘</div>
+      <div class="svc-tab"     onclick="switchTab(2)"><span class="te">🕳️</span> 하수구 막힘</div>
+      <div class="svc-tab"     onclick="switchTab(3)"><span class="te">💨</span> 고압 세척</div>
+      <div class="svc-tab"     onclick="switchTab(4)"><span class="te">🔧</span> 배관 설비 공사</div>
+      <div class="svc-tab"     onclick="switchTab(5)"><span class="te">🚰</span> 수전교체·부품교체</div>
+    </div>
     <div id="svc-panel"></div>
   </div>
 </section>
 
-<!-- 가격 안내 -->
-<section id="price" class="on-dark">
-  <div class="inner">
-    <div class="rv"><div class="sec-tag">Price</div>
-    <div class="sec-ttl">서비스 가격 안내</div></div>
-    <p class="price-sub rv">작업 전에 정확한 금액을 먼저 안내드립니다</p>
-    <div class="price-list rv" id="price-list"></div>
-    <p class="price-note rv">
-      단순 막힘 기준 가격이며, 막힘의 위치·깊이·이물질 종류에 따라 현장 진단 후 확정됩니다.<br>
-      현장 상황이 달라지는 경우 반드시 설명드리고 동의를 받은 뒤 진행합니다.
-    </p>
-    <div class="price-zero rv">현장 방문 후 해결하지 못하면, 요금은 0원입니다.</div>
-  </div>
-</section>
-
 <!-- 후기 -->
-<section id="reviews">
+<section id="reviews" style="padding:88px 5%;background:var(--bgalt)">
   <div class="inner">
     <div class="rv"><div class="sec-tag">Reviews</div>
-    <div class="sec-ttl">직접 겪은 고객님들의 후기</div></div>
+    <div class="sec-ttl" style="margin-bottom:36px">직접 겪은<br><em>고객님들의 후기</em></div></div>
     <div class="rv-grid">
       <div class="rv-card rv d1">
         <div class="rv-stars">★★★★★</div>
@@ -500,31 +671,43 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" style="padding:88px 5%;background:#fff">
   <div class="inner">
     <div class="rv"><div class="sec-tag">FAQ</div>
-    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="sec-ttl" style="margin-bottom:36px">자주 묻는<em> 질문</em></div></div>
     <div class="faq-wrap">
       <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>방문 가능 지역이 어딘가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">광주광역시 전 지역과 전라남도(목포, 여수, 순천, 나주, 광양, 담양, 화순, 해남, 무안 등), 전라북도(전주, 군산, 익산 등) 전 지역 출동 가능합니다.</div></div>
       <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>해결 못 하면 정말 0원인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 맞습니다. 현장에서 해결하지 못한 경우 비용을 청구하지 않습니다. 단, 내시경 탐지 후 배관 교체 등 별도 공사가 필요한 경우 견적 안내 후 진행 여부를 결정하시면 됩니다.</div></div>
       <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용은 어떻게 결정되나요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">막힘의 위치, 깊이, 이물질 종류, 건물 유형 등을 종합해 현장 진단 후 확정됩니다. 방문 전 상황을 말씀해 주시면 예상 비용을 미리 안내해드립니다.</div></div>
-      <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>새벽이나 공휴일에도 출동 가능한가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 24시간 365일 연중무휴로 운영합니다. 새벽, 명절, 공휴일 관계없이 언제든지 연락 주시면 신속하게 출동합니다.</div></div>
-      <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>1년 무상 A/S는 어떤 범위인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">작업한 부위에서 동일한 문제가 재발하는 경우 1년 이내 무상으로 재작업해드립니다. 단, 새로운 이물질 투입 등 외부 요인에 의한 재발은 제외됩니다.</div></div>
-      <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>시간은 얼마나 소요될까요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">일반적인 변기·싱크대 막힘은 30분에서 1시간 이내에 해결되는 경우가 많습니다. 하수구나 배관 깊숙한 곳의 막힘, 고압 세척이 필요한 경우에는 최대 2시간 정도 소요될 수 있습니다. 방문 후 현장 상황을 먼저 진단하고 예상 소요 시간을 미리 안내해드립니다.</div></div>
+      <div class="faq-item rv d4 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>새벽이나 공휴일에도 출동 가능한가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 24시간 365일 연중무휴로 운영합니다. 새벽, 명절, 공휴일 관계없이 언제든지 연락 주시면 신속하게 출동합니다.</div></div>
+      <div class="faq-item rv d5 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>1년 무상 A/S는 어떤 범위인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">작업한 부위에서 동일한 문제가 재발하는 경우 1년 이내 무상으로 재작업해드립니다. 단, 새로운 이물질 투입 등 외부 요인에 의한 재발은 제외됩니다.</div></div>
+      <div class="faq-item rv d6 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>시간은 얼마나 소요될까요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">막힘의 원인과 정도에 따라 다르지만, 일반적인 변기·싱크대 막힘은 30분에서 1시간 이내에 해결되는 경우가 많습니다. 하수구나 배관 깊숙한 곳의 막힘, 고압 세척이 필요한 경우에는 최대 2시간 정도 소요될 수 있습니다. 방문 후 현장 상황을 먼저 진단하고 예상 소요 시간을 미리 안내해드립니다.</div></div>
     </div>
   </div>
 </section>
 
-<!-- 0원 보장 -->
-<section class="zero-sec">
-  <div class="zero-shield rv"><svg class="ic"><use href="#i-shield"/></svg></div>
-  <h2 class="zero-h2 rv">해결하지 못하면,<br>요금은 <em>0원</em>입니다</h2>
-  <p class="zero-body rv">
+<!-- 경고/신뢰 섹션 -->
+<section class="warn-sec">
+  <div class="warn-badge">⚠ 이런 업체는 피하세요</div>
+
+  <h2 class="warn-h2">아무 업체나<br>부르지 마세요!</h2>
+
+  <p class="warn-body">
+     <span class="warn-hl">단순 막힘</span> 기준, <br> <b>변기 막힘은 5만원부터</b>, <b>싱크대·하수구 막힘은 7만원부터</b>,<br>
+    있는 그대로 안내드립니다.
+  </p>
+
+  <p class="warn-body">
     청년배관은 작업 전 정확한 금액을 먼저 안내드리고,<br>
-    현장 상황이 달라지는 경우에도 충분히 설명드린 후<br>
+    현장 상황이 달라지는 경우에도 반드시 충분히 설명드린 후<br>
     고객님의 <b>동의를 받고</b> 진행합니다.
   </p>
-  <div class="zero-char rv">
+
+  <div class="warn-guarantee">
+    현장 방문 후 해결하지 못하면,<br>요금은 0원입니다.
+  </div>
+
+  <div class="warn-char">
     <img src="캐릭터로고_배경제거.png" alt="청년배관 캐릭터" onerror="this.style.display='none'">
   </div>
 </section>
@@ -533,19 +716,22 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 <section class="cta-sec" id="contact">
   <div class="inner">
     <div class="cta-tag rv">24시간 긴급출동</div>
-    <div class="cta-h2 rv">지금 바로 <em>연락하세요</em></div>
+    <div class="cta-h2 rv">지금 바로<br><em>연락하세요</em></div>
     <p class="cta-p rv">막힘·누수 문제는 빨리 해결할수록 피해가 줄어듭니다.</p>
     <div class="cta-phone rv">010-6872-8284</div>
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
-      <a href="tel:010-6872-8284" class="btn-call"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="https://open.kakao.com/me/youngclean77" class="btn-kakao"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:010-6872-8284" class="btn-cta-call">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        전화하기
+      </a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-cta-kakao">💬 카카오톡 상담</a>
     </div>
     <div class="cta-social-lbl rv">SNS · 블로그</div>
     <div class="cta-social rv">
-      <a href="https://blog.naver.com/tturobro" class="cta-s"><img src="naverblog.png" alt="네이버 블로그"></a>
-      <a href="#" class="cta-s"><img src="youtube.png" alt="유튜브"></a>
-      <a href="https://www.instagram.com/drain365pro" class="cta-s"><img src="instagram.png" alt="인스타그램"></a>
+      <a href="https://blog.naver.com/tturobro" class="cta-s cs-blog"><img src="naverblog.png" alt="네이버 블로그"></a>
+      <a href="#" class="cta-s cs-yt"><img src="youtube.png" alt="유튜브"></a>
+      <a href="https://www.instagram.com/drain365pro" class="cta-s cs-ig"><img src="instagram.png" alt="인스타그램"></a>
     </div>
   </div>
 </section>
@@ -559,164 +745,151 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
 </footer>
 
-<!-- 하단 고정 바 -->
-<div class="bottom-bar">
-  <a href="tel:010-6872-8284" class="bb-call">
-    <svg class="ic"><use href="#i-phone"/></svg>
-    <span class="bb-call-txt">
-      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
-      <span class="bb-call-num">010-6872-8284</span>
-    </span>
-  </a>
-  <a href="https://open.kakao.com/me/youngclean77" class="bb-kakao">
-    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
-  </a>
-</div>
-
 <script>
-/* ── 공통 상수 ── */
-const IMG = '';
-
 /* ── 서비스 데이터 ── */
 const SVCS = [
   {
-    name:'변기 막힘', icon:'i-toilet',
+    name:'변기 막힘', emoji:'🚽',
     pairs:[{before:'변기막힘1_전.jpg', after:'변기막힘1_후.jpg'}],
     symptoms:['물이 올라올 것 같아요','내려가긴 하는데 느려요','아예 안 내려가요','이물질을 빠뜨렸어요'],
-    price:'50,000원~', priceNote:'단순 막힘 기준 · 막힘 정도에 따라 현장 확인 후 확정'
+    price:'5만원~', priceNote:'막힘 정도에 따라 현장 확인 후 확정'
   },
   {
-    name:'싱크대 막힘', icon:'i-sink',
+    name:'싱크대 막힘', emoji:'🍳',
     pairs:[{before:'싱크막힘1_전.jpg', after:'싱크막힘1_후.jpg'}],
     symptoms:['물이 잘 안 내려가요','역류해서 올라와요','악취가 계속 나요','배수가 완전히 막혔어요'],
-    price:'70,000원~', priceNote:'단순 막힘 기준 · 트랩 구조에 따라 현장 확인 후 확정'
+    price:'7만원~', priceNote:'트랩 구조에 따라 현장 확인 후 확정'
   },
   {
-    name:'하수구 막힘', icon:'i-drain',
+    name:'하수구 막힘', emoji:'🕳️',
     pairs:[{before:'하수구막힘_전.jpg', after:'하수구막힘_후.jpg'}],
     symptoms:['욕실 바닥 물이 안 빠져요','냄새가 계속 올라와요','역류하고 있어요','배수구 주변이 항상 젖어있어요'],
-    price:'70,000원~', priceNote:'단순 막힘 기준 · 막힘 위치에 따라 현장 확인 후 확정'
+    price:'단순 7만원~', priceNote:'막힘 위치에 따라 현장 확인 후 확정'
   },
   {
-    name:'고압 세척', icon:'i-jet',
+    name:'고압 세척', emoji:'💨',
     pairs:[{before:'고압세척3_전.jpg', after:'고압세척3_후.jpg'}],
     symptoms:['배관이 자주 막혀요','냄새가 지속적으로 나요','물 빠짐이 점점 느려져요','정기 관리가 필요해요'],
-    price:'현장 견적', priceNote:'배관 길이에 따라 현장 확인 후 확정'
+    price:'별도 견적', priceNote:'배관 길이에 따라 현장 확인 후 확정'
   },
   {
-    name:'배관 설비 공사', icon:'i-wrench',
+    name:'배관 설비 공사', emoji:'🔧',
     pairs:[
       {before:'배관설비공사_전_1.jpg', after:'배관설비공사_후_1.jpg'},
       {before:'배관설비공사_전_2.jpg', after:'배관설비공사_후_2.jpg'}
     ],
     symptoms:['배관이 낡아 자주 막혀요','누수가 반복돼요','배관 전체 교체가 필요해요','신규 배관 설치가 필요해요'],
-    price:'무료 방문 견적', priceNote:'공사 범위에 따라 협의'
+    price:'별도 견적', priceNote:'공사 범위에 따라 협의 · 무료 방문 견적'
   },
   {
-    name:'수전교체·부품교체', icon:'i-faucet',
+    name:'수전교체·부품교체', emoji:'🚰',
     pairs:[
       {before:'수전교체_1_전.jpg', after:'수전교체_1_후.jpg'},
       {before:'수전교체_2_전.jpg', after:'수전교체_2_후.jpg'}
     ],
     symptoms:['수전에서 물이 새거나 헐거워요','변기가 금가거나 고장났어요','세면대가 깨지거나 노후됐어요','변기+세면대 한번에 교체하고 싶어요'],
     priceList:[
-      {label:'수전 교체', price:'120,000원~'},
-      {label:'변기 교체', price:'280,000원~'},
-      {label:'세면대 교체', price:'250,000원~'},
-      {label:'변기 + 세면대 교체', price:'500,000원~'}
+      {label:'수전교체', price:'12만원~'},
+      {label:'변기교체', price:'28만원~'},
+      {label:'세면대교체', price:'25만원~'},
+      {label:'변기+세면대', price:'50만원~'}
     ]
   }
 ];
 
-/* ── 가격 데이터 ── */
-const PRICES = [
-  {icon:'i-toilet', label:'변기 막힘 (단순)',    num:'50,000원~'},
-  {icon:'i-sink',   label:'싱크대 막힘 (단순)',  num:'70,000원~'},
-  {icon:'i-drain',  label:'하수구 막힘 (단순)',  num:'70,000원~'},
-  {icon:'i-faucet', label:'수전 교체',           num:'120,000원~'},
-  {icon:'i-toilet', label:'변기 교체',           num:'280,000원~'},
-  {icon:'i-sink',   label:'세면대 교체',         num:'250,000원~'},
-  {icon:'i-faucet', label:'변기 + 세면대 교체',  num:'500,000원~'},
-  {icon:'i-jet',    label:'고압 세척',           num:'현장 견적', quote:true},
-  {icon:'i-wrench', label:'배관 설비 공사',      num:'무료 방문 견적', quote:true}
-];
+let svcSlideUid = 0; // buildContent 호출마다 슬라이드 인스턴스를 구분하기 위한 카운터
+const SVC_SLIDE_INTERVAL = 3500; // 서비스 탭/모달 사진 슬라이드 자동전환 간격(ms) — 여기 숫자만 바꾸면 됨
+let svcAutoTimer = null; // 현재 떠있는 서비스 슬라이드의 자동재생 타이머 (탭/모달 전환 시 정리용)
 
-function svgIcon(id, cls) {
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', cls || 'ic');
-  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-  use.setAttribute('href', '#' + id);
-  svg.appendChild(use);
-  return svg;
-}
-
-/* ── 가격표 렌더 ── */
-(function renderPrices() {
-  const list = document.getElementById('price-list');
-  PRICES.forEach(p => {
-    const row = document.createElement('div');
-    row.className = 'price-row' + (p.quote ? ' quote' : '');
-    const lbl = document.createElement('span');
-    lbl.className = 'price-row-lbl';
-    lbl.appendChild(svgIcon(p.icon));
-    lbl.appendChild(document.createTextNode(p.label));
-    const num = document.createElement('span');
-    num.className = 'price-row-num';
-    num.textContent = p.num;
-    row.append(lbl, num);
-    list.appendChild(row);
-  });
-})();
-
-/* ── 서비스 탭 렌더 ── */
-(function renderTabs() {
-  const row = document.getElementById('svc-tabs');
-  SVCS.forEach((s, i) => {
-    const t = document.createElement('div');
-    t.className = 'svc-tab' + (i === 0 ? ' act' : '');
-    t.onclick = () => switchTab(i);
-    t.appendChild(svgIcon(s.icon));
-    t.appendChild(document.createTextNode(s.name));
-    row.appendChild(t);
-  });
-})();
-
-let svcAutoTimer = null;
-const SVC_SLIDE_INTERVAL = 3500;
-
-/* ── 패널/모달 공통 콘텐츠 빌더 ── */
+/* ── 패널/모달 공통 콘텐츠 빌더 (DOM 방식, 이스케이핑 버그 없음) ── */
 function buildContent(idx) {
   const s = SVCS[idx];
   const wrap = document.createElement('div');
 
+  // 서비스명
   const name = document.createElement('div');
   name.className = 'svc-panel-name';
-  name.appendChild(svgIcon(s.icon));
-  name.appendChild(document.createTextNode(s.name));
+  name.textContent = s.name;
   wrap.appendChild(name);
 
+  // 증상 + 가격 나란히
+  const mid = document.createElement('div');
+  mid.className = 'svc-panel-mid';
+
+  const symWrap = document.createElement('div');
   const symTitle = document.createElement('div');
   symTitle.className = 'svc-sym-title';
   symTitle.textContent = '이런 증상이면 연락하세요';
-  wrap.appendChild(symTitle);
+  symWrap.appendChild(symTitle);
   const ul = document.createElement('ul');
   ul.className = 'svc-symptoms';
   s.symptoms.forEach(t => {
     const li = document.createElement('li');
-    li.appendChild(svgIcon('i-check'));
-    li.appendChild(document.createTextNode(t));
+    li.textContent = t;
     ul.appendChild(li);
   });
-  wrap.appendChild(ul);
+  symWrap.appendChild(ul);
+  mid.appendChild(symWrap);
 
-  const mkPhoto = p => {
+  const priceBox = document.createElement('div');
+  priceBox.className = 'svc-price-box';
+  if(s.priceList) {
+    // 항목별 가격이 다른 서비스 — 4줄 가격표
+    const pLbl = document.createElement('div');
+    pLbl.className = 'svc-price-lbl';
+    pLbl.textContent = '예상 비용';
+    priceBox.appendChild(pLbl);
+    const table = document.createElement('div');
+    table.className = 'svc-price-table';
+    s.priceList.forEach(row => {
+      const r = document.createElement('div');
+      r.className = 'svc-price-row';
+      const l = document.createElement('span');
+      l.className = 'svc-price-row-lbl';
+      l.textContent = row.label;
+      const p = document.createElement('span');
+      p.className = 'svc-price-row-num';
+      p.textContent = row.price;
+      r.append(l, p);
+      table.appendChild(r);
+    });
+    priceBox.appendChild(table);
+  } else {
+    const pLbl = document.createElement('div');
+    pLbl.className = 'svc-price-lbl';
+    pLbl.textContent = '예상 비용';
+    const pNum = document.createElement('div');
+    pNum.className = 'svc-price-num';
+    pNum.style.fontSize = s.price === '별도 견적' ? '20px' : '';
+    pNum.textContent = s.price;
+    const pNote = document.createElement('div');
+    pNote.className = 'svc-price-note';
+    pNote.textContent = s.priceNote;
+    priceBox.append(pLbl, pNum, pNote);
+  }
+  mid.appendChild(priceBox);
+  wrap.appendChild(mid);
+
+  // 사진
+  if(s.combined) {
+    const single = document.createElement('div');
+    single.className = 'svc-panel-photo-single';
+    const img = document.createElement('img');
+    img.src = s.combined;
+    img.alt = s.name + ' 전후';
+    img.onerror = () => { img.style.opacity = '0'; };
+    single.appendChild(img);
+    wrap.appendChild(single);
+  } else if(s.pairs.length === 1) {
+    // 쌍이 1개면 화살표/도트 없이 정적으로 표시
+    const p = s.pairs[0];
     const photos = document.createElement('div');
     photos.className = 'svc-panel-photos';
     [['before', p.before, '작업 전', 'lbl-b'], ['after', p.after, '작업 후', 'lbl-a']].forEach(([cls, src, lbl, lblCls]) => {
       const ph = document.createElement('div');
       ph.className = 'svc-panel-photo ' + cls;
       const img = document.createElement('img');
-      img.src = IMG + src;
+      img.src = src;
       img.alt = lbl;
       img.onerror = () => { img.style.opacity = '0'; };
       const badge = document.createElement('span');
@@ -725,20 +898,33 @@ function buildContent(idx) {
       ph.append(img, badge);
       photos.appendChild(ph);
     });
-    return photos;
-  };
-
-  if(s.pairs.length === 1) {
-    wrap.appendChild(mkPhoto(s.pairs[0]));
+    wrap.appendChild(photos);
   } else {
+    // 쌍이 여러 개면 슬라이드(도트+화살표)로 전환
+    const uid = 'svcslide-' + (svcSlideUid++);
     let cur = 0;
+
     const slideWrap = document.createElement('div');
     slideWrap.className = 'svc-slide-wrap';
+
     const track = document.createElement('div');
     track.className = 'slide-track';
     s.pairs.forEach(p => {
-      const photos = mkPhoto(p);
-      photos.classList.add('svc-slide');
+      const photos = document.createElement('div');
+      photos.className = 'svc-panel-photos svc-slide';
+      [['before', p.before, '작업 전', 'lbl-b'], ['after', p.after, '작업 후', 'lbl-a']].forEach(([cls, src, lbl, lblCls]) => {
+        const ph = document.createElement('div');
+        ph.className = 'svc-panel-photo ' + cls;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = lbl;
+        img.onerror = () => { img.style.opacity = '0'; };
+        const badge = document.createElement('span');
+        badge.className = 'svc-panel-photo-lbl ' + lblCls;
+        badge.textContent = lbl;
+        ph.append(img, badge);
+        photos.appendChild(ph);
+      });
       track.appendChild(photos);
     });
     slideWrap.appendChild(track);
@@ -759,6 +945,7 @@ function buildContent(idx) {
       track.style.transform = `translateX(-${cur * 100}%)`;
       dotEls.forEach((d, i) => d.classList.toggle('act', i === cur));
     }
+
     if(svcAutoTimer) clearInterval(svcAutoTimer);
     svcAutoTimer = setInterval(() => go(cur + 1), SVC_SLIDE_INTERVAL);
 
@@ -771,57 +958,16 @@ function buildContent(idx) {
     nextBtn.textContent = '›';
     nextBtn.onclick = () => go(cur + 1);
     slideWrap.append(prevBtn, nextBtn);
+
     wrap.appendChild(slideWrap);
   }
 
-  // 사진 바로 아래 가격 표시
-  if(s.priceList) {
-    const rows = document.createElement('div');
-    rows.className = 'svc-price-rows';
-    s.priceList.forEach(p => {
-      const r = document.createElement('div');
-      r.className = 'r';
-      const l = document.createElement('span');
-      l.className = 'l';
-      l.textContent = p.label;
-      const n = document.createElement('span');
-      n.className = 'n';
-      n.textContent = p.price;
-      r.append(l, n);
-      rows.appendChild(r);
-    });
-    wrap.appendChild(rows);
-  } else {
-    const strip = document.createElement('div');
-    strip.className = 'svc-price-strip';
-    const lbl = document.createElement('span');
-    lbl.className = 'lbl';
-    lbl.textContent = '예상 비용';
-    const num = document.createElement('span');
-    num.className = 'num';
-    num.textContent = s.price;
-    const note = document.createElement('span');
-    note.className = 'note';
-    note.textContent = s.priceNote;
-    strip.append(lbl, num, note);
-    wrap.appendChild(strip);
-  }
-
-  const foot = document.createElement('div');
-  foot.className = 'svc-panel-foot';
+  // 전화 버튼
   const callBtn = document.createElement('button');
   callBtn.className = 'svc-call-btn';
-  callBtn.appendChild(svgIcon('i-phone'));
-  callBtn.appendChild(document.createTextNode(' 지금 바로 전화하기'));
+  callBtn.innerHTML = callBtn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 지금 바로 전화하기';
   callBtn.onclick = () => location.href = 'tel:010-6872-8284';
-  const priceLink = document.createElement('a');
-  priceLink.className = 'svc-price-link';
-  priceLink.href = '#price';
-  priceLink.onclick = () => closeModal();
-  priceLink.appendChild(document.createTextNode('전체 가격표 보기'));
-  priceLink.appendChild(svgIcon('i-arrow'));
-  foot.append(callBtn, priceLink);
-  wrap.appendChild(foot);
+  wrap.appendChild(callBtn);
 
   return wrap;
 }
@@ -853,7 +999,7 @@ function closeModal() {
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
-/* ── 라이트박스 ── */
+/* ── 시공 사진 확대 라이트박스 ── */
 function openLightbox(src, alt) {
   const img = document.getElementById('lightbox-img');
   img.src = src;
@@ -864,63 +1010,21 @@ function closeLightbox() {
   document.getElementById('photo-lightbox').classList.remove('open');
 }
 document.addEventListener('click', e => {
-  const img = e.target.closest('.svc-panel-photo img');
+  const img = e.target.closest('.svc-panel-photo img, .svc-panel-photo-single img');
   if(img && img.naturalWidth > 0) openLightbox(img.src, img.alt);
 });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
 
-/* ── 히어로 슬라이드쇼 (데이터 기반 렌더) ── */
-const HERO_SLIDES = [
-  {cap:'변기 막힘', a:[{src:'변기막힘1_전.jpg',t:'b'},{src:'변기막힘1_후.jpg',t:'a'}]},
-  {cap:'싱크대 막힘', a:[{src:'싱크막힘1_전.jpg',t:'b'},{src:'싱크막힘1_후.jpg',t:'a'}]},
-  {cap:'하수구 막힘', a:[{src:'하수구막힘_전.jpg',t:'b'},{src:'하수구막힘_후.jpg',t:'a'}]},
-  {cap:'고압 세척', a:[{src:'고압세척3_전.jpg',t:'b'},{src:'고압세척3_후.jpg',t:'a'}]},
-  {cap:'배관 설비 공사 · 문제 진단', a:[{src:'배관설비공사_전_1.jpg',t:'b'},{src:'배관설비공사_전_2.jpg',t:'b'}]},
-  {cap:'배관 설비 공사 · 보수 완료', a:[{src:'배관설비공사_후_1.jpg',t:'a'},{src:'배관설비공사_후_2.jpg',t:'a'}]},
-  {cap:'수전 교체 · 부품 교체', a:[{src:'수전교체_1_전.jpg',t:'b'},{src:'수전교체_2_후.jpg',t:'a'}]}
-];
-(function renderHeroSlides() {
-  const track = document.getElementById('slide-track');
-  const dots = document.getElementById('slide-dots');
-  HERO_SLIDES.forEach((sl, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'slide';
-    const photos = document.createElement('div');
-    photos.className = 'slide-photos';
-    sl.a.forEach(p => {
-      const ph = document.createElement('div');
-      ph.className = 'slide-photo ' + (p.t === 'a' ? 'after' : 'before');
-      const img = document.createElement('img');
-      img.src = IMG + p.src;
-      img.alt = sl.cap;
-      img.onerror = () => { img.style.opacity = '0'; };
-      const lbl = document.createElement('span');
-      lbl.className = 'slide-lbl ' + (p.t === 'a' ? 'lbl-a' : 'lbl-b');
-      lbl.textContent = p.t === 'a' ? '작업 후' : '작업 전';
-      ph.append(img, lbl);
-      photos.appendChild(ph);
-    });
-    const cap = document.createElement('div');
-    cap.className = 'slide-caption';
-    cap.textContent = sl.cap;
-    slide.append(photos, cap);
-    track.appendChild(slide);
-
-    const d = document.createElement('span');
-    d.className = 'sdot' + (i === 0 ? ' act' : '');
-    d.onclick = () => goSlide(i);
-    dots.appendChild(d);
-  });
-})();
-
+/* ── 슬라이드쇼 ── */
 let curSlide = 0;
-const TOTAL = HERO_SLIDES.length;
+const TOTAL = 7;
 function goSlide(n) {
   curSlide = ((n % TOTAL) + TOTAL) % TOTAL;
   document.getElementById('slide-track').style.transform = `translateX(-${curSlide * 100}%)`;
-  document.querySelectorAll('#slide-dots .sdot').forEach((d,i) => d.classList.toggle('act', i===curSlide));
+  document.querySelectorAll('.sdot').forEach((d,i) => d.classList.toggle('act', i===curSlide));
 }
-setInterval(() => goSlide(curSlide + 1), 3500);
+const slideTimer = setInterval(() => goSlide(curSlide + 1), 3500);
+
 
 /* ── 모바일 메뉴 ── */
 function openMM()  { document.getElementById('mm').classList.add('open');  document.body.style.overflow='hidden'; }
@@ -930,7 +1034,13 @@ function closeMM() { document.getElementById('mm').classList.remove('open'); doc
 const revObs = new IntersectionObserver(es => {
   es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
 }, {threshold:.1});
-document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+document.querySelectorAll('.rv, .rv-svc').forEach(el => revObs.observe(el));
+
+/* ── 헤더 스크롤 그림자 ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('hdr').style.boxShadow =
+    window.scrollY > 10 ? '0 2px 16px rgba(0,0,0,.1)' : '0 1px 6px rgba(0,0,0,.05)';
+}, {passive:true});
 </script>
 
 <!-- 네이버 애널리틱스 -->
