@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 청년배관 홈페이지 v10 (2026-07-17) — 전면 리디자인: 딥네이비+옐로우 / 라인 아이콘 / 상단 띠 / 탭 내 가격 + 가격표 섹션 / 블로그 배너 / 하단 고정 바 / 파비콘 -->
+<!-- 청년배관 홈페이지 v11 (2026-07-28) — CTA 클릭 이벤트 계측 / JSON-LD 추가 / 계좌번호 삭제 -->
 <html lang="ko">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -307,6 +307,40 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 .lightbox-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center}
 .lightbox-close:hover{background:rgba(255,255,255,.28)}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "청년배관",
+  "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+  "telephone": "+82-10-6872-8284",
+  "image": "https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png",
+  "description": "광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "상무대로 123, 4층 401호",
+    "addressLocality": "서구",
+    "addressRegion": "광주광역시",
+    "postalCode": "61949",
+    "addressCountry": "KR"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "광주광역시" },
+    { "@type": "AdministrativeArea", "name": "전라남도" },
+    { "@type": "AdministrativeArea", "name": "전라북도" }
+  ],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  }],
+  "sameAs": [
+    "https://blog.naver.com/tturobro",
+    "https://www.instagram.com/drain365pro"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -366,7 +400,7 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
     <div class="mm-item" onclick="location.href='#price';closeMM()"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</div>
   </div>
   <div class="mm-foot">
-    <button class="mm-cta" onclick="location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
   </div>
 </div>
 
@@ -415,8 +449,8 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
       <span class="nb">광주·전남·전북 전지역 출동</span> <span class="nb">(목포·여수·순천·전주·군산·익산)</span>
     </p>
     <div class="hero-btns">
-      <a href="tel:010-6872-8284" class="btn-call"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','hero')"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</a>
+      <a href="https://open.kakao.com/me/youngclean77" class="btn-kakao" onclick="trackCTA('kakao','hero')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
 
     <div class="hero-slideshow">
@@ -538,8 +572,8 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
     <div class="cta-phone rv">010-6872-8284</div>
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
-      <a href="tel:010-6872-8284" class="btn-call"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','contact')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="https://open.kakao.com/me/youngclean77" class="btn-kakao" onclick="trackCTA('kakao','contact')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
     <div class="cta-social-lbl rv">SNS · 블로그</div>
     <div class="cta-social rv">
@@ -554,21 +588,21 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 <footer>
   <div class="foot-in">
     <div class="foot-logo">청년<em>배관</em></div>
-    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>계좌: 국민은행 557337-04-007518 (예금주: 염진웅)<br>24시간 긴급출동 · 광주·전라 전지역</div>
+    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역</div>
   </div>
   <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
 </footer>
 
 <!-- 하단 고정 바 -->
 <div class="bottom-bar">
-  <a href="tel:010-6872-8284" class="bb-call">
+  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
     <svg class="ic"><use href="#i-phone"/></svg>
     <span class="bb-call-txt">
       <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
       <span class="bb-call-num">010-6872-8284</span>
     </span>
   </a>
-  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao">
+  <a href="https://open.kakao.com/me/youngclean77" class="bb-kakao" onclick="trackCTA('kakao','fixbar')">
     <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
   </a>
 </div>
@@ -813,7 +847,7 @@ function buildContent(idx) {
   callBtn.className = 'svc-call-btn';
   callBtn.appendChild(svgIcon('i-phone'));
   callBtn.appendChild(document.createTextNode(' 지금 바로 전화하기'));
-  callBtn.onclick = () => location.href = 'tel:010-6872-8284';
+  callBtn.onclick = () => { trackCTA('call','modal'); location.href = 'tel:010-6872-8284'; };
   const priceLink = document.createElement('a');
   priceLink.className = 'svc-price-link';
   priceLink.href = '#price';
@@ -931,6 +965,15 @@ const revObs = new IntersectionObserver(es => {
   es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
 }, {threshold:.1});
 document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+  }
+}
 </script>
 
 <!-- 네이버 애널리틱스 -->
