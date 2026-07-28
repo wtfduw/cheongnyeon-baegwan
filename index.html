@@ -404,7 +404,7 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   </div>
   <div class="mm-foot">
     <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
-    <a class="mm-cta mm-cta-kakao" href="https://open.kakao.com/me/youngclean77" onclick="trackCTA('kakao','menu')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="trackCTA('kakao','menu')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
   </div>
 </div>
 
@@ -860,7 +860,7 @@ function buildContent(idx) {
   priceLink.appendChild(svgIcon('i-arrow'));
   const kakaoBtn = document.createElement('a');
   kakaoBtn.className = 'svc-kakao-btn';
-  kakaoBtn.href = 'https://open.kakao.com/me/youngclean77';
+  kakaoBtn.href = 'http://pf.kakao.com/_gxgxmsX/chat';
   kakaoBtn.appendChild(svgIcon('i-chat'));
   kakaoBtn.appendChild(document.createTextNode(' 카카오톡 상담'));
   kakaoBtn.onclick = () => trackCTA('kakao','modal');
