@@ -1,0 +1,192 @@
+<!--
+  페이지 틀 — 머리말·메뉴·꼬리말만 담는다. 여기에 본문을 쓰지 않는다.
+  _tools/build_pages.py 가 이 파일을 읽어 지역 페이지를 만든다.
+  {{...}} 는 도구가 채우는 자리다.
+  사이트 머리말이나 꼬리말을 바꾸면 이 파일도 같이 고쳐야 한다.
+-->
+<!DOCTYPE html>
+<!-- {{COMMENT}} -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{URL}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:title" content="{{OG_TITLE}}">
+<meta property="og:description" content="{{OG_DESC}}">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+{{JSONLD}}
+
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="../캐릭터로고_배경제거.png" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="../index.html#services"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="../index.html#services"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비 공사</a>
+    <a class="mm-item" href="../index.html#services"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <div class="mm-lbl">안내</div>
+    <a class="mm-item" href="../index.html#price"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</a>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="trackCTA('kakao','menu')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<header>
+  <a class="hdr-brand" href="../index.html">
+    <img class="hdr-char" src="../캐릭터로고_배경제거.png" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="../toilet/">변기막힘</a>
+    <a href="../sink/">싱크대막힘</a>
+    <a href="../index.html#services">하수구막힘</a>
+    <a href="../jet/">고압세척</a>
+    <a href="../index.html#services">배관설비</a>
+    <a href="../index.html#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!--본문-->
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">{{CTA_H2}}</div>
+    <p class="cta-p rv">{{CTA_P}}</p>
+    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','{{SLUG}}')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="trackCTA('kakao','{{SLUG}}')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 서비스 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-ttl" style="font-size:clamp(20px,3vw,26px)">{{MORE_TITLE}}</div></div>
+    <div class="pg-more rv">
+{{MORE_LINKS}}
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역</div>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">010-6872-8284</span>
+    </span>
+  </a>
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="trackCTA('kakao','fixbar')">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 모바일 메뉴 ── */
+function openMM() { document.getElementById('mm').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+</body>
+</html>
