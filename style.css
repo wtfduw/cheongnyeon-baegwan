@@ -375,3 +375,7 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   .pg-step::before{width:30px;height:30px;font-size:14px;border-radius:9px}
   .pg-two-box,.pg-warn{padding:26px 22px}
 }
+
+/* 지역 페이지 — 작업 사례에 붙는 블로그 링크 */
+.pg-case-link{display:inline-block;margin-top:5px;font-size:13.5px;font-weight:700;color:var(--navy);border-bottom:1.5px solid var(--yel);padding-bottom:1px}
+.pg-case-link:hover{color:var(--n950)}
