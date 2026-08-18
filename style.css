@@ -379,3 +379,29 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 /* 지역 페이지 — 작업 사례에 붙는 블로그 링크 */
 .pg-case-link{display:inline-block;margin-top:5px;font-size:13.5px;font-weight:700;color:var(--navy);border-bottom:1.5px solid var(--yel);padding-bottom:1px}
 .pg-case-link:hover{color:var(--n950)}
+
+/* ══════════════════════════════════════════════════
+   출동 지역 — 홈 본문 섹션 + 모든 페이지 푸터
+   지역 페이지는 검색으로 직접 들어오는 착지점이지만,
+   홈과 푸터에서 링크를 걸어야 검색엔진이 "이 사이트가 다루는 지역"으로 인정한다.
+   ══════════════════════════════════════════════════ */
+
+/* ── 홈 본문 ── */
+.area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:11px}
+.area-grid a{display:flex;align-items:center;justify-content:center;gap:7px;
+  background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px 12px;
+  font-size:16px;font-weight:700;color:var(--t1);text-align:center;
+  transition:border-color .18s,transform .18s,box-shadow .18s}
+.area-grid a:hover{border-color:var(--yel);transform:translateY(-2px);box-shadow:0 6px 20px rgba(16,35,63,.08)}
+.area-grid a em{font-style:normal;font-size:12.5px;font-weight:600;color:var(--t3)}
+.area-more{margin-top:16px;font-size:15px;color:var(--t2);line-height:1.8;text-align:center}
+.area-more strong{color:var(--t1);font-weight:700}
+
+/* ── 푸터 ── */
+.foot-areas{max-width:1100px;margin:0 auto;padding:20px 5% 4px;
+  display:flex;align-items:baseline;gap:10px 14px;flex-wrap:wrap;justify-content:center;
+  border-top:1px solid rgba(255,255,255,.09)}
+.foot-areas-l{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--yel);white-space:nowrap}
+.foot-areas a{font-size:14px;font-weight:600;color:var(--wt2);white-space:nowrap}
+.foot-areas a:hover{color:#fff}
+.foot-areas span.sep{color:var(--wt3);font-size:12px}
