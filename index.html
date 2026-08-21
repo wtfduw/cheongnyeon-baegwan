@@ -113,12 +113,13 @@
   </div>
   <div class="mm-body">
     <div class="mm-lbl">서비스</div>
-    <div class="mm-item" onclick="openModal(0);closeMM()"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</div>
-    <div class="mm-item" onclick="openModal(1);closeMM()"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</div>
-    <div class="mm-item" onclick="openModal(2);closeMM()"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</div>
-    <div class="mm-item" onclick="openModal(3);closeMM()"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</div>
-    <div class="mm-item" onclick="openModal(4);closeMM()"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비 공사</div>
-    <div class="mm-item" onclick="openModal(5);closeMM()"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</div>
+    <a class="mm-item" href="toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
     <div class="mm-lbl">안내</div>
     <div class="mm-item" onclick="location.href='#price';closeMM()"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</div>
     <div class="mm-item" onclick="location.href='#area';closeMM()"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</div>
@@ -150,12 +151,13 @@
     </div>
   </a>
   <nav class="hdr-nav">
-    <a onclick="openModal(0)">변기막힘</a>
-    <a onclick="openModal(1)">싱크대막힘</a>
-    <a onclick="openModal(2)">하수구막힘</a>
-    <a onclick="openModal(3)">고압세척</a>
-    <a onclick="openModal(4)">배관설비</a>
-    <a onclick="openModal(5)">수전교체</a>
+    <a href="toilet/">변기</a>
+    <a href="sink/">싱크대</a>
+    <a href="drain/">하수구</a>
+    <a href="leak/">누수</a>
+    <a href="jet/">고압세척</a>
+    <a href="faucet/">수전교체</a>
+    <a href="pipe/">배관설비</a>
     <a href="#price">가격안내</a>
   </nav>
   <div class="hdr-right">
@@ -374,31 +376,31 @@ const IMG = '';
 /* ── 서비스 데이터 ── */
 const SVCS = [
   {
-    name:'변기 막힘', icon:'i-toilet',
+    name:'변기 막힘', page:'toilet/', pageLabel:'변기 막힘', icon:'i-toilet',
     pairs:[{before:'변기막힘1_전.jpg', after:'변기막힘1_후.jpg'}],
     symptoms:['물이 올라올 것 같아요','내려가긴 하는데 느려요','아예 안 내려가요','이물질을 빠뜨렸어요'],
     price:'50,000원~', priceNote:'단순 막힘 기준 · 막힘 정도에 따라 현장 확인 후 확정'
   },
   {
-    name:'싱크대 막힘', icon:'i-sink',
+    name:'싱크대 막힘', page:'sink/', pageLabel:'싱크대 막힘', icon:'i-sink',
     pairs:[{before:'싱크막힘1_전.jpg', after:'싱크막힘1_후.jpg'}],
     symptoms:['물이 잘 안 내려가요','역류해서 올라와요','악취가 계속 나요','배수가 완전히 막혔어요'],
     price:'70,000원~', priceNote:'단순 막힘 기준 · 트랩 구조에 따라 현장 확인 후 확정'
   },
   {
-    name:'하수구 막힘', icon:'i-drain',
+    name:'하수구 막힘', page:'drain/', pageLabel:'하수구 막힘', icon:'i-drain',
     pairs:[{before:'하수구막힘_전.jpg', after:'하수구막힘_후.jpg'}],
     symptoms:['욕실 바닥 물이 안 빠져요','냄새가 계속 올라와요','역류하고 있어요','배수구 주변이 항상 젖어있어요'],
     price:'70,000원~', priceNote:'단순 막힘 기준 · 막힘 위치에 따라 현장 확인 후 확정'
   },
   {
-    name:'고압 세척', icon:'i-jet',
+    name:'고압 세척', page:'jet/', pageLabel:'고압 세척', icon:'i-jet',
     pairs:[{before:'고압세척3_전.jpg', after:'고압세척3_후.jpg'}],
     symptoms:['배관이 자주 막혀요','냄새가 지속적으로 나요','물 빠짐이 점점 느려져요','정기 관리가 필요해요'],
     price:'현장 견적', priceNote:'배관 길이에 따라 현장 확인 후 확정'
   },
   {
-    name:'배관 설비 공사', icon:'i-wrench',
+    name:'배관 설비 공사', page:'pipe/', pageLabel:'배관 설비 공사', icon:'i-wrench',
     pairs:[
       {before:'배관설비공사_전_1.jpg', after:'배관설비공사_후_1.jpg'},
       {before:'배관설비공사_전_2.jpg', after:'배관설비공사_후_2.jpg'}
@@ -407,7 +409,7 @@ const SVCS = [
     price:'무료 방문 견적', priceNote:'공사 범위에 따라 협의'
   },
   {
-    name:'수전교체·부품교체', icon:'i-faucet',
+    name:'수전교체·부품교체', page:'faucet/', pageLabel:'수전·부품 교체', icon:'i-faucet',
     pairs:[
       {before:'수전교체_1_전.jpg', after:'수전교체_1_후.jpg'},
       {before:'수전교체_2_전.jpg', after:'수전교체_2_후.jpg'}
@@ -621,6 +623,14 @@ function buildContent(idx) {
   kakaoBtn.appendChild(document.createTextNode(' 카카오톡 상담'));
   kakaoBtn.onclick = () => trackCTA('kakao','modal');
   foot.append(callBtn, kakaoBtn, priceLink);
+  if(s.page) {
+    const more = document.createElement('a');
+    more.className = 'svc-more-link';
+    more.href = s.page;
+    more.appendChild(document.createTextNode(s.pageLabel + ' 자세히 보기'));
+    more.appendChild(svgIcon('i-arrow'));
+    foot.appendChild(more);
+  }
   wrap.appendChild(foot);
 
   return wrap;
