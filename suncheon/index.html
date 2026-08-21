@@ -103,7 +103,7 @@
   </div>
   <div class="mm-foot">
     <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
-    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="trackCTA('kakao','menu')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
   </div>
 </div>
 
@@ -259,7 +259,7 @@
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
       <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','suncheon')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="trackCTA('kakao','suncheon')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('suncheon', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
   </div>
 </section>
@@ -307,7 +307,7 @@
       <span class="bb-call-num">010-6872-8284</span>
     </span>
   </a>
-  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="trackCTA('kakao','fixbar')">
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
     <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
   </a>
 </div>
@@ -326,9 +326,24 @@ document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
 <!-- CTA 클릭 계측 -->
 <script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE',
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
 function trackCTA(type, loc) {
   if (typeof gtag === 'function') {
     gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
   }
 }
 </script>
