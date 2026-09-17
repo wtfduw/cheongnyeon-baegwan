@@ -29,3 +29,7 @@ desktop.ini
 .DS_Store
 *~
 .vscode/
+
+# 사장님이 보내준 원본 사진 (2026-09-13, 194MB, 54장에 GPS 위치정보 포함)
+# 이 PC에만 둔다. 홈페이지에 쓸 사진은 위치정보를 지우고 줄여서 따로 넣는다
+additional_images/
