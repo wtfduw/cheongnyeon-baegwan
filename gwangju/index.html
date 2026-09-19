@@ -10,7 +10,6 @@
   gtag('js', new Date());
 
   gtag('config', 'G-DS9TT9XPFZ');
-  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,7 +102,7 @@
   </div>
   <div class="mm-foot">
     <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
-    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="trackCTA('kakao','menu')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
   </div>
 </div>
 
@@ -190,6 +189,48 @@
         <div class="pg-facts-k">광산구 신가동</div>
         <div class="pg-facts-v">아파트 세탁실 배수 막힘 — 요구르트 병이 배관 끝에 걸려 있었습니다<br><a class="pg-case-link" href="https://blog.naver.com/tturobro/224334331578" target="_blank" rel="noopener">사진 보기 ›</a></div>
       </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">광산구 도산동</div>
+        <div class="pg-facts-v">단독주택 배관공사 — 변기가 안 내려가 갔는데, 정화조로 나가는 배관이 땅속에서 무너져 있었습니다. 8시간 걸렸습니다
+        <div class="pg-shots">
+          <figure>
+            <img src="../photos/pipe-dosan-01.webp" alt="변기 물이 내려가지 않았습니다" loading="lazy">
+            <figcaption><span class="tag tag-b">작업 전</span>변기 물이 내려가지 않았습니다</figcaption>
+          </figure>
+          <figure>
+            <img src="../photos/pipe-dosan-11.webp" alt="땅속에서 무너진 배관을 보수했습니다" loading="lazy">
+            <figcaption><span class="tag tag-a">고친 자리</span>땅속에서 무너진 배관을 보수했습니다</figcaption>
+          </figure>
+        </div></div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">광산구 첨단</div>
+        <div class="pg-facts-v">다세대빌라 배관 청소 — 싱크대 기름이 쌓여 막혔고, P트랩이 아랫층 천장에 있어 천장을 열고 작업했습니다
+        <div class="pg-shots">
+          <figure>
+            <img src="../photos/drain-cheomdan-01.webp" alt="바닥 배수구가 찌꺼기로 꽉 막혀 있었습니다" loading="lazy">
+            <figcaption><span class="tag tag-b">작업 전</span>바닥 배수구가 찌꺼기로 꽉 막혀 있었습니다</figcaption>
+          </figure>
+          <figure>
+            <img src="../photos/drain-cheomdan-06.webp" alt="물길이 다시 열렸습니다" loading="lazy">
+            <figcaption><span class="tag tag-a">작업 후</span>물길이 다시 열렸습니다</figcaption>
+          </figure>
+        </div></div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">서구 상무지구</div>
+        <div class="pg-facts-v">식당 주방 트렌치 막힘 — 기름때로 꽉 차 있었습니다. 한 시간 만에 끝냈습니다
+        <div class="pg-shots">
+          <figure>
+            <img src="../photos/drain-sangmu-01.webp" alt="트렌치가 기름때로 덮여 있었습니다" loading="lazy">
+            <figcaption><span class="tag tag-b">작업 전</span>트렌치가 기름때로 덮여 있었습니다</figcaption>
+          </figure>
+          <figure>
+            <img src="../photos/drain-sangmu-10.webp" alt="기름때를 걷어낸 트렌치입니다" loading="lazy">
+            <figcaption><span class="tag tag-a">작업 후</span>기름때를 걷어낸 트렌치입니다</figcaption>
+          </figure>
+        </div></div>
+      </div>
     </div>
     <div class="pg-note rv" style="margin-top:18px">
       <strong>북구 · 서구 · 남구 · 동구 · 광산구</strong> 어디든 갑니다.
@@ -220,9 +261,9 @@
       <a href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
       <a href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
       <a href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
+      <a href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+      <a href="../pipe/"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비</a>
+      <a href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
     </div>
   </div>
 </section>
@@ -271,7 +312,7 @@
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
       <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','gwangju')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('gwangju', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="trackCTA('kakao','gwangju')"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
   </div>
 </section>
@@ -319,7 +360,7 @@
       <span class="bb-call-num">010-6872-8284</span>
     </span>
   </a>
-  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="trackCTA('kakao','fixbar')">
     <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
   </a>
 </div>
@@ -338,24 +379,9 @@ document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
 
 <!-- CTA 클릭 계측 -->
 <script>
-/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
-   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
-function ctaKakao(loc, url) {
-  var moved = false;
-  var go = function () { if (!moved) { moved = true; window.location = url; } };
-  if (typeof gtag !== 'function') { go(); return false; }
-  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
-  gtag('event', 'conversion', {
-    'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE',
-    'event_callback': go,
-    'event_timeout': 800
-  });
-  return false;
-}
 function trackCTA(type, loc) {
   if (typeof gtag === 'function') {
     gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
-    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
   }
 }
 </script>

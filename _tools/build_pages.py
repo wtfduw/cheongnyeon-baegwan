@@ -58,6 +58,15 @@ REGIONS = [
             ("남구 방림동", "아파트 변기 막힘 — 어린이가 넣은 칫솔에 머리카락이 감겨 있었습니다", B + "224334280966"),
             ("동구 계림동", "아파트 싱크대 수전 교체 — 물이 안 나오던 문제를 해결했습니다", B + "224363064225"),
             ("광산구 신가동", "아파트 세탁실 배수 막힘 — 요구르트 병이 배관 끝에 걸려 있었습니다", B + "224334331578"),
+            ("광산구 도산동", "단독주택 배관공사 — 변기가 안 내려가 갔는데, 정화조로 나가는 배관이 땅속에서 무너져 있었습니다. 8시간 걸렸습니다",
+             "", [("pipe-dosan-01", "작업 전", "변기 물이 내려가지 않았습니다"),
+                  ("pipe-dosan-11", "고친 자리", "땅속에서 무너진 배관을 보수했습니다")]),
+            ("광산구 첨단", "다세대빌라 배관 청소 — 싱크대 기름이 쌓여 막혔고, P트랩이 아랫층 천장에 있어 천장을 열고 작업했습니다",
+             "", [("drain-cheomdan-01", "작업 전", "바닥 배수구가 찌꺼기로 꽉 막혀 있었습니다"),
+                  ("drain-cheomdan-06", "작업 후", "물길이 다시 열렸습니다")]),
+            ("서구 상무지구", "식당 주방 트렌치 막힘 — 기름때로 꽉 차 있었습니다. 한 시간 만에 끝냈습니다",
+             "", [("drain-sangmu-01", "작업 전", "트렌치가 기름때로 덮여 있었습니다"),
+                  ("drain-sangmu-10", "작업 후", "기름때를 걷어낸 트렌치입니다")]),
         ],
         "trait": "구도심의 오래된 건물에서 문제가 많습니다. 배관 기울기(구배)가 나빠져 물이 잘 안 빠지거나, 오래된 관에서 누수가 생기는 경우입니다.",
     },
@@ -148,6 +157,9 @@ REGIONS = [
         "areas": "청계읍을 비롯한 무안 전 지역",
         "cases": [
             ("청계읍", "원룸 변기 막힘 — 변기를 탈거해 진짜 원인을 찾았습니다", B + "224316329430"),
+            ("청계면", "원룸 빌라 변기 막힘 — 휴지를 한꺼번에 많이 내려보내 변기 끝에 꽉 껴 있었습니다. 고객님 동의를 받고 변기를 탈거해 꺼냈고 30분 걸렸습니다",
+             "", [("toilet-muan-01", "작업 전", "변기에 물이 가득 차 내려가지 않았습니다"),
+                  ("toilet-muan-04", "원인", "변기 끝에 휴지가 꽉 껴 있었습니다")]),
         ],
         "trait": "원룸과 소형 주택이 많습니다. 세대마다 배관이 짧고 좁아 이물질 하나에도 쉽게 막힙니다.",
     },
@@ -184,16 +196,32 @@ def service_ld(region: dict) -> str:
             + json.dumps(data, ensure_ascii=False, indent=2) + "\n</script>")
 
 
+def shots_html(shots) -> str:
+    """사례에 붙는 전/후 사진. (파일이름, 라벨, 한 줄 설명) 목록을 받는다."""
+    if not shots:
+        return ""
+    figs = []
+    for name, tag, cap in shots:
+        t = f'<span class="tag tag-{"a" if tag in ("작업 후", "고친 자리", "원인") else "b"}">{tag}</span>' if tag else ""
+        figs.append(f'          <figure>\n'
+                    f'            <img src="../photos/{name}.webp" alt="{cap}" loading="lazy">\n'
+                    f'            <figcaption>{t}{cap}</figcaption>\n'
+                    f'          </figure>')
+    return '\n        <div class="pg-shots">\n' + "\n".join(figs) + '\n        </div>'
+
+
 def body_html(region: dict) -> str:
     rows = []
-    for where, what, link in region["cases"]:
+    for case in region["cases"]:
+        where, what, link = case[0], case[1], case[2]
+        shots = case[3] if len(case) > 3 else None
         # 블로그 글이 있으면 링크만 단다. 글을 옮겨 적으면 같은 내용이 두 곳에 있는 것으로
         # 취급돼 홈페이지 쪽이 검색에서 밀린다. 링크는 그런 문제가 없고 사진도 보여줄 수 있다.
         more = (f'<br><a class="pg-case-link" href="{link}" target="_blank" rel="noopener">사진 보기 ›</a>'
                 if link else "")
         rows.append(f'      <div class="pg-facts-row">\n'
                     f'        <div class="pg-facts-k">{where}</div>\n'
-                    f'        <div class="pg-facts-v">{what}{more}</div>\n'
+                    f'        <div class="pg-facts-v">{what}{more}{shots_html(shots)}</div>\n'
                     f'      </div>')
     cases = "\n".join(rows)
     name = region["name"]
@@ -252,9 +280,9 @@ def body_html(region: dict) -> str:
       <a href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
       <a href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
       <a href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비</a>
-      <a href="../index.html#services"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
+      <a href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+      <a href="../pipe/"><svg class="ic"><use href="#i-wrench"/></svg> 배관 설비</a>
+      <a href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
     </div>
   </div>
 </section>

@@ -437,3 +437,13 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
   .case-shots{grid-template-columns:1fr 1fr}
   .case-shots figcaption{padding:9px 11px 12px;font-size:12.5px}
 }
+
+/* ── 지역 페이지 사례 사진 — 2026-09-19 ── */
+.pg-shots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;max-width:420px}
+.pg-shots figure{margin:0;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff}
+.pg-shots img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;display:block;background:var(--paper)}
+.pg-shots figcaption{padding:8px 10px 11px;font-size:12.5px;line-height:1.55;color:var(--t2)}
+.pg-shots .tag{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:4px;margin-bottom:5px}
+.pg-shots .tag-b{background:#EDEFF3;color:var(--t2)}
+.pg-shots .tag-a{background:var(--yel);color:#3D2E00}
+@media(max-width:480px){.pg-shots{max-width:none}}
