@@ -447,3 +447,8 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
 .pg-shots .tag-b{background:#EDEFF3;color:var(--t2)}
 .pg-shots .tag-a{background:var(--yel);color:#3D2E00}
 @media(max-width:480px){.pg-shots{max-width:none}}
+
+/* 가로 사진이 섞인 사례 (2026-09-21 싱크대). 기본 .case-shots img 는 3:4 세로로 잘라서
+   가로 사진을 넣으면 가운데만 남고 내시경 거리 표시가 잘린다. 이 사례는 4:3 가로 틀을 쓴다. */
+.case-land .case-shots img{aspect-ratio:4/3}
+.case-land .case-shots img.tall{object-position:center 40%}
