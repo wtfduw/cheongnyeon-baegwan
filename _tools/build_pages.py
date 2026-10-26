@@ -3,7 +3,8 @@
 
 실행:
     cd C:\\projects\\cheongnyeon-baegwan\\_tools
-    python build_pages.py
+    python build_pages.py            먼저 이것. 무엇이 바뀌는지 보여 주기만 하고 파일은 안 쓴다
+    python build_pages.py --write    보여 준 내용이 맞을 때만. 바뀌는 파일만 쓴다
 
 이 폴더(`_tools`)는 이름이 밑줄로 시작해서 GitHub Pages가 웹에 올리지 않는다.
 그러면서 git에는 들어가므로 백업되고 다른 컴퓨터에서도 받아 쓸 수 있다.
@@ -24,17 +25,33 @@
 ────────────────────────────────────────────────────────
 
 새 지역을 추가하려면:
-  1. 아래 REGIONS 목록에 덩어리를 하나 더 넣는다
-  2. 이 파일을 실행한다
-  3. sitemap.xml 도 같이 갱신된다
+  1. 아래 REGIONS 목록 맨 끝에 덩어리를 하나 더 넣는다
+     (중간에 넣으면 "다른 지역도 갑니다" 링크가 바뀌어 기존 9장이 다 "바뀜"으로 나온다)
+  2. 이 파일을 실행해서 바뀌는 곳이 새 지역과 sitemap.xml 뿐인지 본다
+  3. --write 를 붙여 다시 실행한다. sitemap.xml 도 같이 갱신된다
+  4. 꼬리말 "출동 지역"에도 넣으려면 page-template.html 과 손으로 쓴 8장(홈·서비스 7장)을
+     같이 고친다. 이때 지역 9장이 다 "바뀜"으로 나오는 것은 정상이다(생기는 줄이 그 한 줄인지 본다)
 
 ⚠️ 지역 페이지 내용을 고칠 때는 만들어진 HTML이 아니라 이 파일을 고친다.
-   이 도구를 돌리면 기존 페이지도 다시 만들어져 덮어쓰기 때문이다.
+   머리말·꼬리말·로고처럼 9장에 똑같이 들어가는 것은 page-template.html 을 고친다.
+   --write 하면 기존 페이지도 다시 만들어져 덮어쓰기 때문이다.
+
+⚠️ 2026-09-22~23 에 HTML 만 직접 고친 적이 있다(로고 webp, 사례 사진 26장, 상무지구 사례 합침).
+   이 파일에는 반영이 안 돼서, 그때 돌렸다면 사진 26장이 페이지에서 사라졌을 것이다.
+   2026-10-23 에 그 내용을 이 파일과 틀로 옮겼고, 그래서 그냥 돌리면 차이만 보여 주게 바꿨다.
+   바뀌는 파일마다 "없어지는 줄"과 "생기는 줄"을 보여 준다. 다음 중 하나라도 보이면
+   --write 하지 말고, HTML 에 있는 것을 이 파일(또는 틀)에 먼저 옮긴 뒤 다시 돌린다.
+     - "[주의] 빠지는 사진"
+     - 내가 고치지 않은 "없어지는 줄"이나 "생기는 줄"
+     - "확인필요"
+   --write 한 뒤에도 커밋 전에 git diff 로 한 번 더 보고, 아니면 git checkout -- <파일> 로 되돌린다.
 """
 
+import difflib
 import json
 import pathlib
 import re
+import sys
 import xml.etree.ElementTree as ET
 
 SITE = pathlib.Path(__file__).resolve().parent.parent
@@ -52,20 +69,29 @@ REGIONS = [
         "sub": "북구·서구·남구·동구·광산구 어디든 갑니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "북구 · 서구 · 남구 · 동구 · 광산구",
         "cases": [
-            ("북구 일곡동", "아파트 화장실 배수구 역류 — 머리카락이 대량으로 쌓여 있었습니다", B + "224357415004"),
-            ("북구 각화동", "아파트 싱크대 역류 — 8년 묵은 기름이 배관을 막고 있었습니다", B + "224314712946"),
-            ("서구 상무지구", "식당 하수구 막힘 — 그리스트랩 기름을 마감시간에 맞춰 청소했습니다", B + "224363058471"),
-            ("남구 방림동", "아파트 변기 막힘 — 어린이가 넣은 칫솔에 머리카락이 감겨 있었습니다", B + "224334280966"),
-            ("동구 계림동", "아파트 싱크대 수전 교체 — 물이 안 나오던 문제를 해결했습니다", B + "224363064225"),
-            ("광산구 신가동", "아파트 세탁실 배수 막힘 — 요구르트 병이 배관 끝에 걸려 있었습니다", B + "224334331578"),
+            ("북구 일곡동", "아파트 화장실 배수구 역류 — 머리카락이 대량으로 쌓여 있었습니다", B + "224357415004",
+             [("gj-ilgok-01", "작업 전", "욕실 배수구를 열고 작업을 시작했습니다."),
+              ("gj-ilgok-02", "원인", "낚싯줄로 꺼낸 머리카락입니다.")]),
+            ("북구 각화동", "아파트 싱크대 역류 — 8년 묵은 기름이 배관을 막고 있었습니다", B + "224314712946",
+             [("gj-gakhwa-01", "작업 전", "싱크대 아래 배관을 확인했습니다."),
+              ("gj-gakhwa-02", "원인", "내시경으로 본 배관 안입니다. 기름이 벽처럼 굳어 있었습니다.")]),
+            ("남구 방림동", "아파트 변기 막힘 — 어린이가 넣은 칫솔에 머리카락이 감겨 있었습니다", B + "224334280966",
+             [("gj-bangnim-01", "작업 전", "변기 안을 확인하고 있습니다."),
+              ("gj-bangnim-02", "원인", "변기에서 꺼낸 칫솔입니다.")]),
+            ("동구 계림동", "아파트 싱크대 수전 교체 — 물이 안 나오던 문제를 해결했습니다", B + "224363064225",
+             [("gj-gyerim-01", "작업 전", "물이 제대로 나오지 않던 기존 수전입니다."),
+              ("gj-gyerim-02", "작업 후", "새 수전으로 교체했습니다.")]),
+            ("광산구 신가동", "아파트 세탁실 배수 막힘 — 요구르트 병이 배관 끝에 걸려 있었습니다", B + "224334331578",
+             [("gj-singa-01", "", "내시경을 넣어 배관 안을 확인했습니다."),
+              ("gj-singa-02", "원인", "배관 끝에 요구르트 병이 걸려 있었습니다.")]),
             ("광산구 도산동", "단독주택 배관공사 — 변기가 안 내려가 갔는데, 정화조로 나가는 배관이 땅속에서 무너져 있었습니다. 8시간 걸렸습니다",
              "", [("pipe-dosan-01", "작업 전", "변기 물이 내려가지 않았습니다"),
                   ("pipe-dosan-11", "고친 자리", "땅속에서 무너진 배관을 보수했습니다")]),
             ("광산구 첨단", "다세대빌라 배관 청소 — 싱크대 기름이 쌓여 막혔고, P트랩이 아랫층 천장에 있어 천장을 열고 작업했습니다",
              "", [("drain-cheomdan-01", "작업 전", "바닥 배수구가 찌꺼기로 꽉 막혀 있었습니다"),
                   ("drain-cheomdan-06", "작업 후", "물길이 다시 열렸습니다")]),
-            ("서구 상무지구", "식당 주방 트렌치 막힘 — 기름때로 꽉 차 있었습니다. 한 시간 만에 끝냈습니다",
-             "", [("drain-sangmu-01", "작업 전", "트렌치가 기름때로 덮여 있었습니다"),
+            ("서구 상무지구", "식당 주방 트렌치 막힘 — 그리스트랩에 기름이 꽉 차 있었습니다. 마감시간에 맞춰 가서 한 시간 만에 끝냈습니다",
+             B + "224363058471", [("drain-sangmu-01", "작업 전", "트렌치가 기름때로 덮여 있었습니다"),
                   ("drain-sangmu-10", "작업 후", "기름때를 걷어낸 트렌치입니다")]),
         ],
         "trait": "구도심의 오래된 건물에서 문제가 많습니다. 배관 기울기(구배)가 나빠져 물이 잘 안 빠지거나, 오래된 관에서 누수가 생기는 경우입니다.",
@@ -76,9 +102,15 @@ REGIONS = [
         "sub": "아파트부터 관공서까지 작업합니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "용강리 · 중동 등 광양 전 지역",
         "cases": [
-            ("용강리", "아파트 변기 막힘 — 아이가 넣은 아이스크림 팩을 변기 탈거로 찾았습니다", B + "224369838544"),
-            ("중동", "아파트 싱크대 역류 — 청소 후 배관 관리법까지 알려드렸습니다", B + "224369811975"),
-            ("관공서", "남자화장실 변기 3개가 동시에 막혔는데, 나무뿌리가 원인이었습니다", B + "224300004422"),
+            ("용강리", "아파트 변기 막힘 — 아이가 넣은 아이스크림 팩을 변기 탈거로 찾았습니다", B + "224369838544",
+             [("gy-yonggang-01", "", "변기를 탈거해 안을 확인했습니다."),
+              ("gy-yonggang-02", "원인", "변기 안에서 나온 아이스크림 팩입니다.")]),
+            ("중동", "아파트 싱크대 역류 — 청소 후 배관 관리법까지 알려드렸습니다", B + "224369811975",
+             [("gy-jungdong-01", "작업 전", "싱크대 아래 배관을 확인했습니다."),
+              ("gy-jungdong-02", "원인", "내시경으로 본 배관 안입니다. 기름때가 쌓여 있었습니다.")]),
+            ("관공서", "남자화장실 변기 3개가 동시에 막혔는데, 나무뿌리가 원인이었습니다", B + "224300004422",
+             [("gy-gwangongseo-01", "원인", "내시경으로 본 배관 안입니다. 나무뿌리가 자라 들어와 있었습니다."),
+              ("gy-gwangongseo-02", "", "꺼낸 나무뿌리입니다.")]),
         ],
         "trait": "아파트 단지와 관공서·상가가 섞여 있어 작업 규모가 다양합니다. 나무뿌리가 배관으로 파고드는 경우처럼 원인을 찾아야 풀리는 현장이 많습니다.",
     },
@@ -112,9 +144,15 @@ REGIONS = [
         "sub": "식당 주방과 가정집 배관 모두 작업합니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "하당 · 용해동 등 목포 전 지역",
         "cases": [
-            ("하당", "아파트 해바라기 수전 교체 — 쓰기 불편하던 것을 일반 샤워수전으로 바꿔드렸습니다", B + "224353347039"),
-            ("용해동", "빌라 싱크대 역류 — 걸레받이가 변형될 만큼 진행된 상태였습니다", B + "224310468564"),
-            ("시내 상가", "햄버거집 주방 배수구 역류 — 기름으로 가득한 배관을 청소했습니다", B + "224339640810"),
+            ("하당", "아파트 해바라기 수전 교체 — 쓰기 불편하던 것을 일반 샤워수전으로 바꿔드렸습니다", B + "224353347039",
+             [("mp-haedang-01", "작업 전", "천장에 설치된 해바라기 수전이 오래된 상태였습니다."),
+              ("mp-haedang-02", "작업 후", "새 샤워수전을 설치했습니다.")]),
+            ("용해동", "빌라 싱크대 역류 — 걸레받이가 변형될 만큼 진행된 상태였습니다", B + "224310468564",
+             [("mp-yonghae-01", "작업 전", "물이 넘쳐 싱크대 걸레받이가 변형된 상태였습니다."),
+              ("mp-yonghae-02", "원인", "내시경으로 본 배관 안입니다.")]),
+            ("시내 상가", "햄버거집 주방 배수구 역류 — 기름으로 가득한 배관을 청소했습니다", B + "224339640810",
+             [("mp-hamburger-01", "", "주방 배수구에 고압세척 호스를 넣었습니다."),
+              ("mp-hamburger-02", "원인", "내시경으로 본 배관 안입니다. 기름때가 쌓여 있었습니다.")]),
         ],
         "trait": "식당이 많은 상권이라 주방 배관 작업이 잦습니다. 기름이 쌓여 역류하는 경우가 대부분입니다.",
     },
@@ -136,7 +174,9 @@ REGIONS = [
         "sub": "집 안 배관뿐 아니라 농수로처럼 굵은 관도 작업합니다.",
         "areas": "담양읍을 비롯한 담양 전 지역",
         "cases": [
-            ("농수로", "고압세척 — 배관 안에서 비료포대가 나왔습니다", B + "224310453744"),
+            ("농수로", "고압세척 — 배관 안에서 비료포대가 나왔습니다", B + "224310453744",
+             [("dy-nongsuro-01", "", "배관을 찾아 고압세척을 시작했습니다."),
+              ("dy-nongsuro-02", "원인", "배관 안에서 나온 비료포대입니다.")]),
         ],
         "trait": "농지와 주거지가 함께 있어 일반 가정 배관 외에 농수로처럼 굵은 관을 다루는 일도 있습니다. 이런 곳은 고압세척 장비가 있어야 합니다.",
     },
@@ -146,7 +186,9 @@ REGIONS = [
         "sub": "이른 아침이든 늦은 밤이든 연락 주시면 갑니다.",
         "areas": "화순읍을 비롯한 화순 전 지역",
         "cases": [
-            ("화순", "싱크대 역류 — 아침 7시에 긴급 출동했고, 잡채가 배관을 막고 있었습니다", B + "224301717737"),
+            ("화순", "싱크대 역류 — 아침 7시에 긴급 출동했고, 잡채가 배관을 막고 있었습니다", B + "224301717737",
+             [("hs-hwasun-01", "", "싱크대 아래 배관을 열고 작업했습니다."),
+              ("hs-hwasun-02", "", "내시경으로 배관 안을 확인했습니다.")]),
         ],
         "trait": "광주에서 가까워 이른 아침이나 밤에도 출동합니다. 음식물이 그대로 배관에 들어가 막히는 경우가 많습니다.",
     },
@@ -351,7 +393,7 @@ def build(region: dict, template: str) -> str:
     return page.replace("<!--본문-->\n", body_html(region))
 
 
-def write_sitemap() -> None:
+def sitemap_xml() -> str:
     rows = []
     for path, priority in HANDMADE + [(r["slug"] + "/", r["priority"]) for r in REGIONS]:
         rows.append(
@@ -361,19 +403,56 @@ def write_sitemap() -> None:
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            + "\n".join(rows) + "\n</urlset>\n")
     ET.fromstring(xml)
-    (SITE / "sitemap.xml").write_text(xml, encoding="utf-8")
-    print(f"\nsitemap.xml · 주소 {len(rows)}개")
+    return xml
+
+
+PHOTO = re.compile(r'<img\b[^>]*?\ssrc="(?:\.\./)?([^"]+)"')
+SHOW = 10   # 파일마다 보여 줄 줄 수 (없어지는 줄·생기는 줄 각각)
+
+
+def lines_note(title: str, lines: list) -> str:
+    rows = [s.strip() for s in lines if s.strip()]
+    if not rows:
+        return ""
+    shown = "".join(f"\n        {s[:120]}{'…' if len(s) > 120 else ''}" for s in rows[:SHOW])
+    more = f"\n        … 외 {len(rows) - SHOW}줄" if len(rows) > SHOW else ""
+    return f"\n      {title} {len(rows)}줄:{shown}{more}"
+
+
+def compare(path: pathlib.Path, new: str) -> str:
+    """지금 파일과 새로 만든 내용을 견줘 알려준다. 같으면 빈 문자열."""
+    if not path.exists():
+        return "새 파일"
+    old = path.read_text(encoding="utf-8")
+    if old == new:
+        return ""
+    gone, came = [], []
+    a, b = old.splitlines(), new.splitlines()
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if tag != "equal":
+            gone += a[i1:i2]
+            came += b[j1:j2]
+    note = f"바뀜 +{len(came)}줄 / -{len(gone)}줄"
+    # 9/22~23 처럼 HTML 에만 넣은 사진이 있으면 덮어쓸 때 조용히 사라진다. 그래서 이름까지 보여준다.
+    lost = sorted(set(PHOTO.findall(old)) - set(PHOTO.findall(new)))
+    added = sorted(set(PHOTO.findall(new)) - set(PHOTO.findall(old)))
+    if lost:
+        note += f"\n      [주의] 빠지는 사진 {len(lost)}장: {', '.join(lost)}"
+    if added:
+        note += f"\n      들어가는 사진 {len(added)}장: {', '.join(added)}"
+    # 사진이 아닌 글·링크도 HTML 에만 있던 것이면 같이 사라진다. 줄을 그대로 보여 준다.
+    return note + lines_note("없어지는 줄", gone) + lines_note("생기는 줄", came)
 
 
 def main() -> None:
-    template = TEMPLATE.read_text(encoding="utf-8")
+    sys.stdout.reconfigure(encoding="utf-8")   # 클로드 도구처럼 출력을 받아 읽을 때 한글이 깨지지 않게
+    write = "--write" in sys.argv[1:]
+    template = TEMPLATE.read_text(encoding="utf-8-sig")   # 틀이 BOM 붙어 저장돼도 설명 주석이 지워지게
     template = re.sub(r"^<!--.*?-->\n", "", template, count=1, flags=re.S)   # 틀 파일 설명 주석 제거
 
+    outputs = []
     for region in REGIONS:
         page = build(region, template)
-        out = SITE / region["slug"]
-        out.mkdir(exist_ok=True)
-        (out / "index.html").write_text(page, encoding="utf-8")
 
         left = re.findall(r"\{\{(\w+)\}\}", page)
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S):
@@ -381,9 +460,31 @@ def main() -> None:
         bad = [t for t in ("div", "section", "nav", "footer", "header", "html", "body")
                if len(re.findall(f"<{t}[ >]", page)) != len(re.findall(f"</{t}>", page))]
         note = "정상" if not bad and not left else f"확인필요 {bad}{left}"
-        print(f"  /{region['slug']}/  {page.count(chr(10))+1}줄  {note}")
+        outputs.append((f"/{region['slug']}/", SITE / region["slug"] / "index.html", page,
+                        f"{page.count(chr(10))+1}줄  {note}"))
+    xml = sitemap_xml()
+    outputs.append(("sitemap.xml", SITE / "sitemap.xml", xml, f"주소 {xml.count('<url>')}개"))
 
-    write_sitemap()
+    changed = []
+    for label, path, text, info in outputs:
+        diff = compare(path, text)
+        print(f"  {label}  {info}  · {diff or '같음'}")
+        if diff:
+            changed.append((path, text))
+
+    if not changed:
+        print("\n지금 파일과 모두 같습니다. 쓸 것이 없습니다.")
+        return
+    if not write:
+        print(f"\n바뀌는 파일 {len(changed)}개. 아직 아무 파일도 쓰지 않았습니다.")
+        print("[주의] 빠지는 사진, 내가 고치지 않은 없어지는 줄·생기는 줄, 확인필요 중 하나라도 있으면 쓰지 마세요.")
+        print("위 내용이 고친 의도와 맞을 때만 다시 실행: python build_pages.py --write")
+        sys.exit(1)
+    for path, text in changed:
+        path.parent.mkdir(exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        print(f"  썼음: {path.relative_to(SITE).as_posix()}")
+    print(f"\n{len(changed)}개 파일을 썼습니다.")
 
 
 if __name__ == "__main__":
