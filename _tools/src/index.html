@@ -1,0 +1,814 @@
+<!--
+  원본 틀 — _tools/build_content.py 가 이 파일을 읽어 index.html 을 만든다.
+  index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
+  {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
+  {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
+-->
+<!DOCTYPE html>
+<!-- 청년배관 홈페이지 v13 (2026-08-12) — CSS를 style.css로 분리 / 팝업 안 사진 확대 안 되던 버그 수정 -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
+</script>
+<meta charset="UTF-8">
+<meta name="naver-site-verification" content="9f769b01e157d45d22086ae439a56a22cb4ec123" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>청년배관 | 광주·전라 전지역 출동 배관 전문</title>
+<meta name="description" content="광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/">
+<meta property="og:title" content="청년배관 | 광주·전라 전지역 출동 배관 전문">
+<meta property="og:description" content="광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "청년배관",
+  "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+  "telephone": "+82-10-6872-8284",
+  "image": "https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png",
+  "description": "광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "동운로201번길 20",
+    "addressLocality": "북구",
+    "addressRegion": "전남광주통합특별시",
+    "postalCode": "61258",
+    "addressCountry": "KR"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "전남광주통합특별시" },
+    { "@type": "AdministrativeArea", "name": "전북특별자치도" }
+  ],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  }],
+  "sameAs": [
+    "https://map.naver.com/p/entry/place/2043397832",
+    "https://blog.naver.com/tturobro",
+    "https://www.instagram.com/ddurobro"
+  ],
+  "hasMap": "https://map.naver.com/p/entry/place/2043397832"
+}
+</script>
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3.5v5.2c0 5-3.4 8.6-8 10.3-4.6-1.7-8-5.3-8-10.3V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.2a7 7 0 10-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모달 -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- 라이트박스 -->
+<div class="photo-lightbox" id="photo-lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
+    <div class="mm-lbl">안내</div>
+    <div class="mm-item" onclick="location.href='#price';closeMM()"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</div>
+    <div class="mm-item" onclick="location.href='#area';closeMM()"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</div>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음: 상단 띠 + 헤더 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<!-- 헤더 -->
+<header>
+  <a class="hdr-brand" href="#">
+    <img class="hdr-char" src="캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="toilet/">변기</a>
+    <a href="sink/">싱크대</a>
+    <a href="drain/">하수구</a>
+    <a href="leak/">누수</a>
+    <a href="jet/">고압세척</a>
+    <a href="faucet/">수전교체</a>
+    <a href="pipe/">배관설비</a>
+    <a href="#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!-- 히어로 -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="bdot"></span> 지금 이 순간도 출동 중 · 24시간 365일</div>
+    <h1>광주·전라 배관 문제<br><em>당일 방문 · 당일 해결</em></h1>
+    <p class="hero-sub">
+      <span class="nb">변기·싱크대·하수구 막힘 ·</span> <span class="nb">고압세척 · 배관설비 · 수전교체</span><br>
+      <span class="nb">광주·전남·전북 전지역 출동</span> <span class="nb">(목포·여수·순천·전주·군산·익산)</span>
+    </p>
+    <div class="hero-btns">
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','hero')"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('hero', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+
+    <div class="hero-slideshow">
+      <div class="slide-track" id="slide-track"></div>
+      <div class="slide-dots" id="slide-dots"></div>
+      <button class="slide-btn slide-prev" onclick="goSlide(curSlide-1)">‹</button>
+      <button class="slide-btn slide-next" onclick="goSlide(curSlide+1)">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 신뢰 띠 -->
+<div class="trust-bar">
+  <div class="inner">
+    <div class="tb-item rv d1"><div class="tb-num">24시간</div><div class="tb-lbl">연중무휴 긴급출동</div></div>
+    <div class="tb-item rv d2"><div class="tb-num">30분</div><div class="tb-lbl">평균 도착 시간</div></div>
+    <div class="tb-item rv d3"><div class="tb-num">0원</div><div class="tb-lbl">미해결 시 청구 비용</div></div>
+  </div>
+</div>
+
+<!-- 블로그 배너 -->
+<div class="blog-band">
+  <div class="inner rv">
+    <span class="blog-band-txt">실제 작업 현장이 궁금하다면?</span>
+    <a href="https://blog.naver.com/tturobro" class="blog-band-btn">
+      <img src="naverblog.webp" alt="">
+      청년배관 블로그 바로가기
+      <svg class="ic"><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- 서비스 탭 -->
+<section id="services">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Services</div>
+    <div class="sec-ttl">어떤 배관 문제든 해결합니다</div></div>
+    <div class="svc-tabs-row rv" id="svc-tabs"></div>
+    <div id="svc-panel"></div>
+  </div>
+</section>
+
+<!-- 가격 안내 -->
+<section id="price" class="on-dark">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Price</div>
+    <div class="sec-ttl">서비스 가격 안내</div></div>
+    <p class="price-sub rv">작업 전에 정확한 금액을 먼저 안내드립니다</p>
+    <div class="price-list rv" id="price-list"></div>
+    <p class="price-note rv">
+      단순 막힘 기준 가격이며, 막힘의 위치·깊이·이물질 종류에 따라 현장 진단 후 확정됩니다.<br>
+      현장 상황이 달라지는 경우 반드시 설명드리고 동의를 받은 뒤 진행합니다.
+    </p>
+    <div class="price-zero rv">현장 방문 후 해결하지 못하면, 요금은 0원입니다.</div>
+  </div>
+</section>
+
+<!-- 출동 지역 -->
+<section class="sec" id="area" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Area</div>
+    <div class="sec-ttl">출동 지역</div></div>
+    <div class="area-grid rv">
+      <a href="/gwangju/">광주 <em>30분 이내</em></a>
+      <a href="/gwangyang/">광양 <em>1시간 내외</em></a>
+      <a href="/yeosu/">여수 <em>30분~1시간</em></a>
+      <a href="/suncheon/">순천 <em>30분~1시간</em></a>
+      <a href="/mokpo/">목포 <em>30분~1시간</em></a>
+      <a href="/jeonju/">전주 <em>30분~1시간</em></a>
+      <a href="/damyang/">담양 <em>40분 내외</em></a>
+      <a href="/hwasun/">화순 <em>40분 내외</em></a>
+      <a href="/muan/">무안 <em>1시간 내외</em></a>
+    </div>
+    <p class="area-more rv">
+      <strong>장성 · 함평 · 나주 · 보성 · 순창 · 남원</strong> 등에도 다녀왔습니다.<br class="nb">
+      목록에 없는 곳이라도 전화 주시면 알려드리겠습니다.
+    </p>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section id="reviews">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Reviews</div>
+    <div class="sec-ttl">직접 겪은 고객님들의 후기</div></div>
+    <div class="rv-grid">
+      <div class="rv-card rv d1">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">새벽 2시에 변기가 막혔는데 30분 만에 오셔서 깔끔하게 해결해주셨어요. 가격도 합리적이고 뒷정리까지 완벽했습니다.</p>
+        <div class="rv-meta">김○○ 고객님 · 광주 서구 · 변기 막힘</div>
+      </div>
+      <div class="rv-card rv d2">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">싱크대가 계속 역류해서 고민이었는데, 원인을 정확히 찾아서 재발 없이 완전히 해결해주셨어요. 설명도 자세히 해주셔서 믿음이 갔습니다.</p>
+        <div class="rv-meta">박○○ 고객님 · 전남 목포시 · 싱크대 막힘</div>
+      </div>
+      <div class="rv-card rv d3">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">다른 업체에서 공사를 크게 해야 한다고 했는데, 청년배관에서 정밀 탐지로 최소 공사로 해결했어요. 정직하게 진행해주셔서 감사했습니다.</p>
+        <div class="rv-meta">이○○ 고객님 · 광주 남구 · 하수구 막힘</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">FAQ</div>
+    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="faq-wrap">
+      <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>방문 가능 지역이 어딘가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">전남광주통합특별시 전 지역(광주 시내와 목포·여수·순천·나주·광양·담양·화순·해남·무안 등)과 전북특별자치도(전주·군산·익산 등) 전 지역 출동 가능합니다.</div></div>
+      <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>해결 못 하면 정말 0원인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 맞습니다. 현장에서 해결하지 못한 경우 비용을 청구하지 않습니다. 단, 내시경 탐지 후 배관 교체 등 별도 공사가 필요한 경우 견적 안내 후 진행 여부를 결정하시면 됩니다.</div></div>
+      <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용은 어떻게 결정되나요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">막힘의 위치, 깊이, 이물질 종류, 건물 유형 등을 종합해 현장 진단 후 확정됩니다. 방문 전 상황을 말씀해 주시면 예상 비용을 미리 안내해드립니다.</div></div>
+      <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>새벽이나 공휴일에도 출동 가능한가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 24시간 365일 연중무휴로 운영합니다. 새벽, 명절, 공휴일 관계없이 언제든지 연락 주시면 신속하게 출동합니다.</div></div>
+      <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>1년 무상 A/S는 어떤 범위인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">작업한 부위에서 동일한 문제가 재발하는 경우 1년 이내 무상으로 재작업해드립니다. 단, 새로운 이물질 투입 등 외부 요인에 의한 재발은 제외됩니다.</div></div>
+      <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>시간은 얼마나 소요될까요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">일반적인 변기·싱크대 막힘은 30분에서 1시간 이내에 해결되는 경우가 많습니다. 하수구나 배관 깊숙한 곳의 막힘, 고압 세척이 필요한 경우에는 최대 2시간 정도 소요될 수 있습니다. 방문 후 현장 상황을 먼저 진단하고 예상 소요 시간을 미리 안내해드립니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 0원 보장 -->
+<section class="zero-sec">
+  <div class="zero-shield rv"><svg class="ic"><use href="#i-shield"/></svg></div>
+  <h2 class="zero-h2 rv">해결하지 못하면,<br>요금은 <em>0원</em>입니다</h2>
+  <p class="zero-body rv">
+    청년배관은 작업 전 정확한 금액을 먼저 안내드리고,<br>
+    현장 상황이 달라지는 경우에도 충분히 설명드린 후<br>
+    고객님의 <b>동의를 받고</b> 진행합니다.
+  </p>
+  <div class="zero-char rv">
+    <img src="캐릭터로고_배경제거.webp" alt="청년배관 캐릭터" onerror="this.style.display='none'">
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">지금 바로 <em>연락하세요</em></div>
+    <p class="cta-p rv">막힘·누수 문제는 빨리 해결할수록 피해가 줄어듭니다.</p>
+    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','contact')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('contact', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+    <div class="cta-social-lbl rv">SNS · 블로그</div>
+    <div class="cta-social rv">
+      <a href="https://blog.naver.com/tturobro" class="cta-s"><img src="naverblog.webp" alt="네이버 블로그"></a>
+      <a href="#" class="cta-s"><img src="youtube.webp" alt="유튜브"></a>
+      <a href="https://www.instagram.com/ddurobro" class="cta-s"><img src="instagram.webp" alt="인스타그램"></a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+  </div>
+  <div class="foot-areas">
+    <span class="foot-areas-l">출동 지역</span>
+    <a href="/gwangju/">광주</a>
+    <a href="/gwangyang/">광양</a>
+    <a href="/yeosu/">여수</a>
+    <a href="/suncheon/">순천</a>
+    <a href="/mokpo/">목포</a>
+    <a href="/jeonju/">전주</a>
+    <a href="/damyang/">담양</a>
+    <a href="/hwasun/">화순</a>
+    <a href="/muan/">무안</a>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">010-6872-8284</span>
+    </span>
+  </a>
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 공통 상수 ── */
+const IMG = '';
+
+/* ── 서비스 데이터 ── */
+const SVCS = [
+  {
+    name:'변기 막힘', page:'toilet/', pageLabel:'변기 막힘', icon:'i-toilet',
+    pairs:[{before:'변기막힘1_전.webp', after:'변기막힘1_후.webp'}],
+    symptoms:['물이 올라올 것 같아요','내려가긴 하는데 느려요','아예 안 내려가요','이물질을 빠뜨렸어요'],
+    price:'{{p.toilet.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 막힘 정도에 따라 현장 확인 후 확정'
+  },
+  {
+    name:'싱크대 막힘', page:'sink/', pageLabel:'싱크대 막힘', icon:'i-sink',
+    pairs:[{before:'싱크막힘1_전.webp', after:'싱크막힘1_후.webp'}],
+    symptoms:['물이 잘 안 내려가요','역류해서 올라와요','악취가 계속 나요','배수가 완전히 막혔어요'],
+    price:'{{p.sink.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 트랩 구조에 따라 현장 확인 후 확정'
+  },
+  {
+    name:'하수구 막힘', page:'drain/', pageLabel:'하수구 막힘', icon:'i-drain',
+    pairs:[{before:'하수구막힘_전.webp', after:'하수구막힘_후.webp'}],
+    symptoms:['욕실 바닥 물이 안 빠져요','냄새가 계속 올라와요','역류하고 있어요','배수구 주변이 항상 젖어있어요'],
+    price:'{{p.drain.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 막힘 위치에 따라 현장 확인 후 확정'
+  },
+  {
+    name:'누수 탐지', page:'leak/', pageLabel:'누수 탐지', icon:'i-wrench',
+    pairs:[{before:'누수1_전.jpg', after:'누수1_후.jpg'}],
+    symptoms:['물을 안 쓰는데 계량기가 돌아요','수도요금이 갑자기 늘었어요','천장이나 벽에서 물이 새요','바닥이 늘 축축해요'],
+    price:'{{p.leak.detect_min:won}}원~', priceNote:'기본 탐지 기준 · 위치와 난이도에 따라 현장 확인 후 확정'
+  },
+  {
+    name:'고압 세척', page:'jet/', pageLabel:'고압 세척', icon:'i-jet',
+    pairs:[{before:'고압세척3_전.webp', after:'고압세척3_후.webp'}],
+    symptoms:['배관이 자주 막혀요','냄새가 지속적으로 나요','물 빠짐이 점점 느려져요','정기 관리가 필요해요'],
+    price:'현장 견적', priceNote:'배관 길이에 따라 현장 확인 후 확정'
+  },
+  {
+    name:'배관 설비 공사', page:'pipe/', pageLabel:'배관 설비 공사', icon:'i-wrench',
+    pairs:[
+      {before:'배관설비공사_전_1.webp', after:'배관설비공사_후_1.webp'},
+      {before:'배관설비공사_전_2.jpg', after:'배관설비공사_후_2.webp'}
+    ],
+    symptoms:['배관이 낡아 자주 막혀요','누수가 반복돼요','배관 전체 교체가 필요해요','신규 배관 설치가 필요해요'],
+    price:'현장 견적', priceNote:'공사 범위에 따라 협의'
+  },
+  {
+    name:'수전교체·부품교체', page:'faucet/', pageLabel:'수전·부품 교체', icon:'i-faucet',
+    pairs:[
+      {before:'수전교체_1_전.webp', after:'수전교체_1_후.jpg'},
+      {before:'수전교체_2_전.jpg', after:'수전교체_2_후.webp'}
+    ],
+    symptoms:['수전에서 물이 새거나 헐거워요','변기가 금가거나 고장났어요','세면대가 깨지거나 노후됐어요','변기+세면대 한번에 교체하고 싶어요'],
+    priceList:[
+      {label:'수전 교체', price:'{{p.faucet.home_from:won}}원~'},
+      {label:'변기 교체', price:'{{p.toilet.replace_min:won}}원~'},
+      {label:'세면대 교체', price:'{{p.toilet.basin_min:won}}원~'},
+      {label:'변기 + 세면대 교체', price:'{{p.faucet.combo:won}}원'}
+    ]
+  }
+];
+
+/* ── 가격 데이터 ── */
+const PRICES = [
+  {icon:'i-toilet', label:'변기 막힘 (단순)',    num:'{{p.toilet.simple_min:won}}원~'},
+  {icon:'i-sink',   label:'싱크대 막힘 (단순)',  num:'{{p.sink.simple_min:won}}원~'},
+  {icon:'i-drain',  label:'하수구 막힘 (단순)',  num:'{{p.drain.simple_min:won}}원~'},
+  {icon:'i-faucet', label:'수전 교체',           num:'{{p.faucet.home_from:won}}원~'},
+  {icon:'i-toilet', label:'변기 교체',           num:'{{p.toilet.replace_min:won}}원~'},
+  {icon:'i-sink',   label:'세면대 교체',         num:'{{p.toilet.basin_min:won}}원~'},
+  {icon:'i-faucet', label:'변기 + 세면대 교체',  num:'{{p.faucet.combo:won}}원'},
+  {icon:'i-jet',    label:'고압 세척',           num:'현장 견적', quote:true},
+  {icon:'i-wrench', label:'배관 설비 공사',      num:'현장 견적', quote:true}
+];
+
+function svgIcon(id, cls) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', cls || 'ic');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', '#' + id);
+  svg.appendChild(use);
+  return svg;
+}
+
+/* ── 가격표 렌더 ── */
+(function renderPrices() {
+  const list = document.getElementById('price-list');
+  PRICES.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'price-row' + (p.quote ? ' quote' : '');
+    const lbl = document.createElement('span');
+    lbl.className = 'price-row-lbl';
+    lbl.appendChild(svgIcon(p.icon));
+    lbl.appendChild(document.createTextNode(p.label));
+    const num = document.createElement('span');
+    num.className = 'price-row-num';
+    num.textContent = p.num;
+    row.append(lbl, num);
+    list.appendChild(row);
+  });
+})();
+
+/* ── 서비스 탭 렌더 ── */
+(function renderTabs() {
+  const row = document.getElementById('svc-tabs');
+  SVCS.forEach((s, i) => {
+    const t = document.createElement('div');
+    t.className = 'svc-tab' + (i === 0 ? ' act' : '');
+    t.onclick = () => switchTab(i);
+    t.appendChild(svgIcon(s.icon));
+    t.appendChild(document.createTextNode(s.name));
+    row.appendChild(t);
+  });
+})();
+
+let svcAutoTimer = null;
+const SVC_SLIDE_INTERVAL = 3500;
+
+/* ── 패널/모달 공통 콘텐츠 빌더 ── */
+function buildContent(idx) {
+  const s = SVCS[idx];
+  const wrap = document.createElement('div');
+
+  const name = document.createElement('div');
+  name.className = 'svc-panel-name';
+  name.appendChild(svgIcon(s.icon));
+  name.appendChild(document.createTextNode(s.name));
+  wrap.appendChild(name);
+
+  const symTitle = document.createElement('div');
+  symTitle.className = 'svc-sym-title';
+  symTitle.textContent = '이런 증상이면 연락하세요';
+  wrap.appendChild(symTitle);
+  const ul = document.createElement('ul');
+  ul.className = 'svc-symptoms';
+  s.symptoms.forEach(t => {
+    const li = document.createElement('li');
+    li.appendChild(svgIcon('i-check'));
+    li.appendChild(document.createTextNode(t));
+    ul.appendChild(li);
+  });
+  wrap.appendChild(ul);
+
+  const mkPhoto = p => {
+    const photos = document.createElement('div');
+    photos.className = 'svc-panel-photos';
+    [['before', p.before, '작업 전', 'lbl-b'], ['after', p.after, '작업 후', 'lbl-a']].forEach(([cls, src, lbl, lblCls]) => {
+      const ph = document.createElement('div');
+      ph.className = 'svc-panel-photo ' + cls;
+      const img = document.createElement('img');
+      img.src = IMG + src;
+      img.alt = lbl;
+      img.onerror = () => { img.style.opacity = '0'; };
+      const badge = document.createElement('span');
+      badge.className = 'svc-panel-photo-lbl ' + lblCls;
+      badge.textContent = lbl;
+      ph.append(img, badge);
+      photos.appendChild(ph);
+    });
+    return photos;
+  };
+
+  if(s.pairs.length === 1) {
+    wrap.appendChild(mkPhoto(s.pairs[0]));
+  } else {
+    let cur = 0;
+    const slideWrap = document.createElement('div');
+    slideWrap.className = 'svc-slide-wrap';
+    const track = document.createElement('div');
+    track.className = 'slide-track';
+    s.pairs.forEach(p => {
+      const photos = mkPhoto(p);
+      photos.classList.add('svc-slide');
+      track.appendChild(photos);
+    });
+    slideWrap.appendChild(track);
+
+    const dots = document.createElement('div');
+    dots.className = 'slide-dots';
+    const dotEls = s.pairs.map((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'sdot' + (i === 0 ? ' act' : '');
+      d.onclick = () => go(i);
+      dots.appendChild(d);
+      return d;
+    });
+    slideWrap.appendChild(dots);
+
+    function go(n) {
+      cur = ((n % s.pairs.length) + s.pairs.length) % s.pairs.length;
+      track.style.transform = `translateX(-${cur * 100}%)`;
+      dotEls.forEach((d, i) => d.classList.toggle('act', i === cur));
+    }
+    if(svcAutoTimer) clearInterval(svcAutoTimer);
+    svcAutoTimer = setInterval(() => go(cur + 1), SVC_SLIDE_INTERVAL);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'slide-btn slide-prev';
+    prevBtn.textContent = '‹';
+    prevBtn.onclick = () => go(cur - 1);
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'slide-btn slide-next';
+    nextBtn.textContent = '›';
+    nextBtn.onclick = () => go(cur + 1);
+    slideWrap.append(prevBtn, nextBtn);
+    wrap.appendChild(slideWrap);
+  }
+
+  // 사진 바로 아래 가격 표시
+  if(s.priceList) {
+    const rows = document.createElement('div');
+    rows.className = 'svc-price-rows';
+    s.priceList.forEach(p => {
+      const r = document.createElement('div');
+      r.className = 'r';
+      const l = document.createElement('span');
+      l.className = 'l';
+      l.textContent = p.label;
+      const n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = p.price;
+      r.append(l, n);
+      rows.appendChild(r);
+    });
+    wrap.appendChild(rows);
+  } else {
+    const strip = document.createElement('div');
+    strip.className = 'svc-price-strip';
+    const lbl = document.createElement('span');
+    lbl.className = 'lbl';
+    lbl.textContent = '예상 비용';
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = s.price;
+    const note = document.createElement('span');
+    note.className = 'note';
+    note.textContent = s.priceNote;
+    strip.append(lbl, num, note);
+    wrap.appendChild(strip);
+  }
+
+  const foot = document.createElement('div');
+  foot.className = 'svc-panel-foot';
+  const callBtn = document.createElement('button');
+  callBtn.className = 'svc-call-btn';
+  callBtn.appendChild(svgIcon('i-phone'));
+  callBtn.appendChild(document.createTextNode(' 지금 바로 전화하기'));
+  callBtn.onclick = () => { trackCTA('call','modal'); location.href = 'tel:010-6872-8284'; };
+  const priceLink = document.createElement('a');
+  priceLink.className = 'svc-price-link';
+  priceLink.href = '#price';
+  priceLink.onclick = () => closeModal();
+  priceLink.appendChild(document.createTextNode('전체 가격표 보기'));
+  priceLink.appendChild(svgIcon('i-arrow'));
+  const kakaoBtn = document.createElement('a');
+  kakaoBtn.className = 'svc-kakao-btn';
+  kakaoBtn.href = 'http://pf.kakao.com/_gxgxmsX/chat';
+  kakaoBtn.appendChild(svgIcon('i-chat'));
+  kakaoBtn.appendChild(document.createTextNode(' 카카오톡 상담'));
+  kakaoBtn.onclick = function(){ return ctaKakao('modal', this.href); };
+  foot.append(callBtn, kakaoBtn, priceLink);
+  if(s.page) {
+    const more = document.createElement('a');
+    more.className = 'svc-more-link';
+    more.href = s.page;
+    more.appendChild(document.createTextNode(s.pageLabel + ' 자세히 보기'));
+    more.appendChild(svgIcon('i-arrow'));
+    foot.appendChild(more);
+  }
+  wrap.appendChild(foot);
+
+  return wrap;
+}
+
+/* ── 탭 전환 ── */
+function switchTab(idx) {
+  document.querySelectorAll('.svc-tab').forEach((t,i) => t.classList.toggle('act', i===idx));
+  const panel = document.getElementById('svc-panel');
+  panel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'svc-panel';
+  wrap.appendChild(buildContent(idx));
+  panel.appendChild(wrap);
+}
+switchTab(0);
+
+/* ── 모달 ── */
+function openModal(idx) {
+  const box = document.getElementById('modal-content');
+  box.innerHTML = '';
+  box.appendChild(buildContent(idx));
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if(svcAutoTimer) clearInterval(svcAutoTimer);
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* ── 라이트박스 ── */
+function openLightbox(src, alt) {
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = alt || '';
+  document.getElementById('photo-lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('photo-lightbox').classList.remove('open');
+}
+/* 세 번째 인자 true = "캡처 단계"에서 클릭을 잡는다는 뜻.
+   팝업(.modal-box)이 event.stopPropagation()으로 클릭 신호를 막고 있어서,
+   신호가 되돌아 나오기를 기다리면 팝업 안 사진은 확대되지 않는다. */
+document.addEventListener('click', e => {
+  const img = e.target.closest('.svc-panel-photo img');
+  if(img && img.naturalWidth > 0) openLightbox(img.src, img.alt);
+}, true);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+/* ── 히어로 슬라이드쇼 (데이터 기반 렌더) ── */
+const HERO_SLIDES = [
+  {cap:'변기 막힘', a:[{src:'변기막힘1_전.webp',t:'b'},{src:'변기막힘1_후.webp',t:'a'}]},
+  {cap:'싱크대 막힘', a:[{src:'싱크막힘1_전.webp',t:'b'},{src:'싱크막힘1_후.webp',t:'a'}]},
+  {cap:'하수구 막힘', a:[{src:'하수구막힘_전.webp',t:'b'},{src:'하수구막힘_후.webp',t:'a'}]},
+  {cap:'고압 세척', a:[{src:'고압세척3_전.webp',t:'b'},{src:'고압세척3_후.webp',t:'a'}]},
+  {cap:'배관 설비 공사 · 문제 진단', a:[{src:'배관설비공사_전_1.webp',t:'b'},{src:'배관설비공사_전_2.jpg',t:'b'}]},
+  {cap:'배관 설비 공사 · 보수 완료', a:[{src:'배관설비공사_후_1.webp',t:'a'},{src:'배관설비공사_후_2.webp',t:'a'}]},
+  {cap:'수전 교체 · 부품 교체', a:[{src:'수전교체_1_전.webp',t:'b'},{src:'수전교체_2_후.webp',t:'a'}]}
+];
+(function renderHeroSlides() {
+  const track = document.getElementById('slide-track');
+  const dots = document.getElementById('slide-dots');
+  HERO_SLIDES.forEach((sl, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    const photos = document.createElement('div');
+    photos.className = 'slide-photos';
+    sl.a.forEach(p => {
+      const ph = document.createElement('div');
+      ph.className = 'slide-photo ' + (p.t === 'a' ? 'after' : 'before');
+      const img = document.createElement('img');
+      /* 첫 장만 바로 받는다. 나머지 12장은 페이지가 다 뜬 뒤에 받는다 —
+         2026-09-22: 홈을 열 때 사진 14장 2.4MB 를 한꺼번에 받고 있었다. */
+      if (i === 0) { img.src = IMG + p.src; }
+      else { img.dataset.src = IMG + p.src; img.loading = 'lazy'; }
+      img.alt = sl.cap;
+      img.onerror = () => { img.style.opacity = '0'; };
+      const lbl = document.createElement('span');
+      lbl.className = 'slide-lbl ' + (p.t === 'a' ? 'lbl-a' : 'lbl-b');
+      lbl.textContent = p.t === 'a' ? '작업 후' : '작업 전';
+      ph.append(img, lbl);
+      photos.appendChild(ph);
+    });
+    const cap = document.createElement('div');
+    cap.className = 'slide-caption';
+    cap.textContent = sl.cap;
+    slide.append(photos, cap);
+    track.appendChild(slide);
+
+    const d = document.createElement('span');
+    d.className = 'sdot' + (i === 0 ? ' act' : '');
+    d.onclick = () => goSlide(i);
+    dots.appendChild(d);
+  });
+})();
+
+let curSlide = 0;
+const TOTAL = HERO_SLIDES.length;
+function goSlide(n) {
+  curSlide = ((n % TOTAL) + TOTAL) % TOTAL;
+  document.getElementById('slide-track').style.transform = `translateX(-${curSlide * 100}%)`;
+  document.querySelectorAll('#slide-dots .sdot').forEach((d,i) => d.classList.toggle('act', i===curSlide));
+}
+/* 나머지 슬라이드 사진 받기 — 페이지가 다 뜨면, 늦어도 1.5초 뒤에는.
+   3.5초마다 넘어가므로 그 전에 받아 두어야 빈 칸이 보이지 않는다. */
+var heroRestDone = false;
+function loadRestSlides() {
+  if (heroRestDone) return;
+  heroRestDone = true;
+  document.querySelectorAll('#slide-track img[data-src]').forEach(function (im) {
+    im.src = im.getAttribute('data-src');
+    im.removeAttribute('data-src');
+  });
+}
+window.addEventListener('load', loadRestSlides);
+setTimeout(loadRestSlides, 1500);
+
+setInterval(() => goSlide(curSlide + 1), 3500);
+
+/* ── 모바일 메뉴 ── */
+function openMM()  { document.getElementById('mm').classList.add('open');  document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/IXbWCKDGzYAdEL_x27xE',   /* 카카오 전용 라벨 — 2026-09-22 전화와 분리 */
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "1ae20f9ea7a3ce0";
+if(window.wcs) {
+wcs_do();
+}
+</script>
+</body>
+</html>

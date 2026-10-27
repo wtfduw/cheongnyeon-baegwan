@@ -1,0 +1,142 @@
+[
+  {
+    "date": "2026-08-03",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경을 넣어 보니 배관 속에 **칫솔**이 걸려 있었습니다. 칫솔에 찌꺼기가 엉겨 붙으면서 물길을 막고 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-13-01.webp",
+        "caption": "내시경 1.5m 지점. 배관 안에 칫솔이 걸려 있습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-13-03.webp",
+        "caption": "꺼낸 칫솔입니다. 주변에 찌꺼기가 엉겨 붙어 있었습니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "2026-07-18",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경을 5m 넘게 넣자 배관 안이 **기름때 덩어리**로 거의 차 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-12-01.webp",
+        "caption": "싱크대와 아래 수납장입니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/sink-12-02.webp",
+        "caption": "싱크대 아래로 들어가 배관을 확인하고 있습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-12-06.webp",
+        "caption": "내시경 5.1m 지점. 덩어리가 배관을 거의 채우고 있습니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "2026-08-04",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경을 4.6m 넣자 배관 속에 **덩어리**가 걸려 물을 막고 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-09-02.webp",
+        "caption": "싱크대 아래 수납장을 열었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/sink-09-07.webp",
+        "caption": "내시경 4.6m 지점. 덩어리와 이물질이 배관을 막고 있습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-09-09.webp",
+        "caption": "싱크대 밑 바닥 배관까지 확인했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-09-10.webp",
+        "caption": "작업한 싱크대입니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "2026-07-27",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "배관 입구가 **음식물 찌꺼기**로 꽉 차 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-14-01.webp",
+        "caption": "싱크대 아래 수납장을 열었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/sink-14-02.webp",
+        "caption": "내시경 1.3m 지점. 음식물 찌꺼기가 관을 막고 있습니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "2026-07-29",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경을 넣자 1m 지점부터 **누런 덩어리**가 배관 벽에 엉겨 붙어 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-11-01.webp",
+        "caption": "내시경 장비를 펼쳐 놓고 작업을 시작했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-11-02.webp",
+        "caption": "내시경 1m 지점. 누런 덩어리가 배관 벽에 붙어 있습니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "2026-07-31",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경으로 3m 가까이 들어가 배관 벽에 붙은 **찌꺼기**를 확인했습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-10-01.webp",
+        "caption": "싱크대 아래 수납장을 열었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/sink-10-04.webp",
+        "caption": "배관 내시경 장비입니다. 화면으로 배관 속을 보면서 작업합니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-10-06.webp",
+        "caption": "내시경 2.9m 지점. 배관 벽에 찌꺼기가 붙어 있습니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  }
+]

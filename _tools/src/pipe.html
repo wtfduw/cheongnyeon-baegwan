@@ -1,0 +1,566 @@
+<!--
+  원본 틀 — _tools/build_content.py 가 이 파일을 읽어 pipe/index.html 을 만든다.
+  pipe/index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
+  {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
+  {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  {{CASES}} 줄에는 content/cases/pipe.json 의 시공 사례가 들어간다.
+  이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
+-->
+<!DOCTYPE html>
+<!-- 배관설비 상세 페이지 v1 (2026-08-17) — 사장님 답변 46~50번 기반 -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광주 배관설비 공사 | 노후·파손 배관 교체, 구배 개선 | 청년배관</title>
+<meta name="description" content="뚫어도 자꾸 막힌다면 배관 자체의 문제일 수 있습니다. 내시경과 관로탐지로 확인해 청소로 될지 교체가 필요할지 판단합니다. 노후 배관 교체, 구배 개선, 신축·인테리어 배관 신설. 광주 시내 30분 출동.">
+<link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/pipe/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/pipe/">
+<meta property="og:title" content="광주 배관설비 공사 | 청소로 될 일인지부터 봅니다">
+<meta property="og:description" content="뚫어도 얼마 못 가 다시 막힌다면 배관 자체의 문제일 수 있습니다.">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "배관 설비 공사 · 배관 교체",
+  "name": "광주 배관설비 공사",
+  "description": "내시경 카메라와 관로탐지로 배관 상태를 확인해 청소로 될지 교체·보수가 필요할지 판단합니다. 노후·파손 배관 교체, 구배 불량 개선, 신축·인테리어 배관 신설.",
+  "provider": {
+    "@type": "Plumber",
+    "name": "청년배관",
+    "telephone": "+82-10-6872-8284",
+    "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "동운로201번길 20",
+      "addressLocality": "북구",
+      "addressRegion": "전남광주통합특별시",
+      "postalCode": "61258",
+      "addressCountry": "KR"
+    }
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "전남광주통합특별시"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "전북특별자치도"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "청소로 될 줄 알았는데 공사라고 하면 믿어도 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "짐작으로 말씀드리지 않습니다. 내시경 카메라와 관로탐지 장비로 배관 상태를 확인한 뒤 판단합니다. 기름이나 이물질로 막힌 것이면 청소로 끝냅니다. 배관이 파손·침하·붕괴됐거나 구배가 심하게 불량한 경우에만 공사를 말씀드립니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "배관설비 공사 비용은 어떻게 정해지나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "배관 길이만으로 정해지지 않습니다. 굵기, 자재, 파고 뜯어야 하는 범위, 난이도, 인력, 장비, 작업 시간, 현장 여건을 함께 봅니다. 현장을 확인한 뒤 필요한 작업만을 기준으로 견적을 드립니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "공사는 얼마나 걸리나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "배관 일부만 교체하면 반나절에 끝나기도 합니다. 바닥이나 벽을 철거하거나 외부 오수관을 굴착해야 하면 하루 이상 걸립니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "욕실 인테리어를 하는데 배관만 맡길 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "가능합니다. 타일·도배·목공 같은 인테리어 전체를 직접 하지는 않고 배관·설비 부분만 맡아 진행합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "뚫어도 자꾸 막히는데 공사해야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "같은 자리가 반복해서 막힌다면 배관 자체를 의심해야 합니다. 구배가 무너졌거나 관이 내려앉은 경우입니다. 카메라로 확인한 뒤 말씀드립니다."
+      }
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.2a7 7 0 10-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="../leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="/pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
+    <div class="mm-lbl">안내</div>
+    <a class="mm-item" href="../index.html#price"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</a>
+    <a class="mm-item" href="../index.html#area"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</a>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<header>
+  <a class="hdr-brand" href="../index.html">
+    <img class="hdr-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="../toilet/">변기</a>
+    <a href="../sink/">싱크대</a>
+    <a href="../drain/">하수구</a>
+    <a href="../leak/">누수</a>
+    <a href="../jet/">고압세척</a>
+    <a href="../faucet/">수전교체</a>
+    <a href="/pipe/">배관설비</a>
+    <a href="../index.html#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!-- 상단 -->
+<section class="pg-hero">
+  <div class="inner">
+    <nav class="pg-crumb" aria-label="현재 위치">
+      <a href="../index.html">홈</a> <span>›</span> <span>배관 설비 공사</span>
+    </nav>
+    <div class="pg-hero-body">
+      <h1>청소로 될 일인지,<br><em>공사여야 하는지</em>부터 봅니다</h1>
+      <p class="pg-hero-sub">
+        뚫어도 얼마 못 가 다시 막힌다면 배관 자체의 문제일 수 있습니다.<br class="nb">
+        카메라로 확인하고, 필요한 작업만 말씀드립니다.
+      </p>
+      <div class="pg-hero-facts">
+        <span class="pg-fact">내시경 · <em>관로탐지</em></span>
+        <span class="pg-fact">현장 확인 후 <em>견적</em></span>
+        <span class="pg-fact">7년 <em>4,000건</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 청소 vs 공사 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Judgement</div>
+    <div class="sec-ttl">청소로 되는 경우와<br class="nb"> 공사여야 하는 경우</div></div>
+    <div class="pg-two rv">
+      <div class="pg-two-box is-light">
+        <div class="pg-two-h"><span class="pg-two-mark">✓</span> 청소로 됩니다</div>
+        <ul>
+          <li>기름·슬러지가 쌓여 막힌 경우</li>
+          <li>이물질이 걸려 막힌 경우</li>
+          <li>이런 경우는 <strong>청소나 통수 작업</strong>으로 해결됩니다</li>
+        </ul>
+      </div>
+      <div class="pg-two-box is-dark">
+        <div class="pg-two-h"><span class="pg-two-mark">!</span> 공사가 필요합니다</div>
+        <ul>
+          <li>배관이 <strong>파손·침하·붕괴</strong>된 경우</li>
+          <li><strong>구배(배관 기울기)</strong>가 심하게 불량한 경우</li>
+          <li><strong>같은 자리가 반복해서</strong> 막히는 경우</li>
+          <li>이런 경우는 청소만으로 <strong>근본 해결이 어렵습니다</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:18px">
+      <strong>어느 쪽인지는 짐작하지 않고 장비로 확인합니다.</strong>
+      내시경 카메라와 관로탐지 장비로 배관 상태를 본 뒤,
+      청소로 될지 교체·보수가 필요할지 말씀드립니다.
+    </div>
+  </div>
+</section>
+
+<!-- 이럴 때 공사 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Case</div>
+    <div class="sec-ttl">이런 경우에 공사합니다</div></div>
+    <div class="pg-cause rv">
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">1</div>
+        <div>
+          <div class="pg-cause-t">배관이 오래돼 낡거나 파손된 경우</div>
+          <div class="pg-cause-d">관 자체가 삭아서 새거나 부서진 상태입니다. 한 곳을 손봐도 옆이 또 터집니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">2</div>
+        <div>
+          <div class="pg-cause-t">구배가 나빠 반복해서 문제가 생기는 경우</div>
+          <div class="pg-cause-d">배관은 기울기가 있어야 물이 흘러갑니다. 그게 무너지면 뚫어도 같은 자리에 다시 고입니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">3</div>
+        <div>
+          <div class="pg-cause-t">배관이 무너졌거나 이물질이 들어간 경우</div>
+          <div class="pg-cause-d">관이 내려앉아 물길이 막힌 상태입니다. 청소 장비가 지나갈 수 없습니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">4</div>
+        <div>
+          <div class="pg-cause-t">신축·증축·인테리어로 배관을 새로 놓는 경우</div>
+          <div class="pg-cause-d">문제가 있어서가 아니라 새로 만들거나 옮기는 공사입니다. 배관 신설·이전·교체 모두 가능합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 실제로 다녀온 곳 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Cases</div>
+    <div class="sec-ttl">실제로 다녀온 곳</div></div>
+    <div class="cases">
+{{CASES}}
+      <div class="case-old rv">
+        <p class="case-old-t">그 밖의 작업 사진</p>
+        <div class="svc-panel-photos">
+          <div class="svc-panel-photo">
+        <img src="../배관설비공사_전_1.webp" alt="배관 설비 공사 전" loading="lazy">
+        <span class="svc-panel-photo-lbl lbl-b">공사 전</span>
+          </div>
+          <div class="svc-panel-photo after">
+        <img src="../배관설비공사_후_1.webp" alt="배관 설비 공사 후" loading="lazy">
+        <span class="svc-panel-photo-lbl lbl-a">공사 후</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 범위와 기간 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Scope</div>
+    <div class="sec-ttl">공사 범위와 기간</div></div>
+    <div class="pg-note rv">
+      <strong>현장에 따라 차이가 큽니다.</strong>
+      배관 일부만 갈면 되는 경우는 <strong>반나절</strong>에 끝나기도 합니다.
+    </div>
+    <div class="pg-note rv d1">
+      바닥이나 벽을 철거해 배관을 갈아야 하거나, 밖에서 오수관을 파야 하는 공사는
+      <strong>하루 이상</strong> 걸립니다.
+    </div>
+    <div class="pg-note rv d2">
+      <strong>배관 길이, 묻힌 깊이, 파야 하는지 여부, 배관 상태, 작업할 공간</strong>에 따라
+      달라집니다. 현장을 보고 범위와 기간을 안내드립니다.
+    </div>
+  </div>
+</section>
+
+<!-- 비용 -->
+<section class="sec on-dark" style="background:var(--n900)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Price</div>
+    <div class="sec-ttl">비용이 정해지는 방식</div></div>
+    <div class="pg-note rv">
+      <strong>배관 길이만으로 정해지지 않습니다.</strong>
+      그래서 전화로 금액을 먼저 말씀드리기 어렵습니다. 현장을 봐야 알 수 있습니다.
+    </div>
+    <div class="pg-note rv d1">
+      금액을 가르는 것은 이런 것들입니다 —
+      <strong>배관 길이와 굵기, 쓰는 자재, 파고 뜯어야 하는 범위, 작업 난이도,
+      들어가는 사람 수, 장비 사용 여부, 작업 시간, 현장 여건.</strong>
+    </div>
+    <div class="pg-note rv d2">
+      같은 배관 교체라도 <strong>바닥이나 벽을 철거해야 하는 경우</strong>,
+      <strong>깊은 곳까지 파야 하는 경우</strong>에는 금액이 달라집니다.
+    </div>
+    <div class="pg-note rv d3">
+      <strong>현장을 확인한 뒤 필요한 작업만을 기준으로 견적을 드립니다.</strong>
+      안 해도 되는 것을 넣지 않습니다.
+    </div>
+  </div>
+</section>
+
+<!-- 어디까지 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Range</div>
+    <div class="sec-ttl">어디까지 하나요</div></div>
+    <div class="pg-two rv">
+      <div class="pg-two-box is-light">
+        <div class="pg-two-h"><span class="pg-two-mark">✓</span> 합니다</div>
+        <ul>
+          <li><strong>변기 · 세면대</strong> 교체 및 설치</li>
+          <li><strong>수전 · 샤워수전 · 싱크대 수전</strong> 교체</li>
+          <li><strong>배수·급수 배관 공사</strong></li>
+          <li>욕실·주방 인테리어에 따르는 <strong>배관 이전 · 신설 · 교체</strong></li>
+        </ul>
+      </div>
+      <div class="pg-two-box is-dark">
+        <div class="pg-two-h"><span class="pg-two-mark">✕</span> 직접 하지 않습니다</div>
+        <ul>
+          <li>타일 · 도배 · 목공 등 <strong>인테리어 전체 공사</strong></li>
+          <li>이런 현장에서는 <strong>배관·설비 부분만 맡아</strong> 진행합니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:18px">
+      욕실이나 주방을 손보실 계획이라면 <strong>배관 쪽만 저희가 맡는 방식</strong>으로도 됩니다.
+      인테리어 업체와 일정을 맞춰 진행한 경험이 많습니다.
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Info</div>
+    <div class="sec-ttl">출동·결제 안내</div></div>
+    <div class="pg-facts rv">
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">출동 시간</div>
+        <div class="pg-facts-v">광주 시내 <em>30분</em> · 시외 <em>1시간</em> 내외</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">견적</div>
+        <div class="pg-facts-v">현장 확인 후 <em>필요한 작업만</em> 기준으로 안내</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">결제</div>
+        <div class="pg-facts-v">카드 · 계좌이체 · 간편결제 / 세금계산서 · 현금영수증 발행 가능</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">경력</div>
+        <div class="pg-facts-v">7년 · 약 4,000건</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">정화조</div>
+        <div class="pg-facts-v"><em>설치만</em> 합니다. 정화조 <em>청소는 하지 않습니다.</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">FAQ</div>
+    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="faq-wrap rv">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>청소로 될 줄 알았는데 공사라고 하시면 믿어도 되나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">짐작으로 말씀드리지 않습니다. <b>내시경 카메라와 관로탐지 장비로 배관 상태를 확인한 뒤</b> 판단합니다. 기름이나 이물질로 막힌 것이면 청소로 끝냅니다. 배관이 파손·침하·붕괴됐거나 구배가 심하게 불량한 경우에만 공사를 말씀드립니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>전화로 대략 얼마인지 알 수 없나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">배관 길이만으로 정해지는 것이 아니라 어렵습니다. 굵기, 자재, 파고 뜯어야 하는 범위, 난이도, 인력, 장비, 시간, 현장 여건을 함께 봐야 합니다. 현장을 확인한 뒤 필요한 작업만을 기준으로 견적을 드립니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>공사는 얼마나 걸리나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">배관 일부만 갈면 반나절에 끝나기도 합니다. 바닥이나 벽을 철거하거나 밖에서 오수관을 파야 하면 하루 이상 걸립니다. 현장을 보고 안내드립니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>욕실 인테리어를 하는데 배관만 맡길 수 있나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">가능합니다. 타일·도배·목공 같은 인테리어 전체를 저희가 하지는 않고, <b>배관·설비 부분만 맡아</b> 진행합니다. 인테리어 업체와 일정을 맞춰 작업한 경험이 많습니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>뚫어도 자꾸 막히는데 공사해야 하나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">같은 자리가 반복해서 막힌다면 배관 자체를 의심해야 합니다. 구배가 무너졌거나 관이 내려앉은 경우입니다. 다만 확인해야 알 수 있으니 <b>먼저 카메라로 보고</b> 말씀드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">배관 공사, <em>먼저 확인부터</em></div>
+    <p class="cta-p rv">공사여야 하는지 청소로 되는지, 보고 말씀드립니다.</p>
+    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','pipe')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('pipe', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 서비스 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-ttl" style="font-size:clamp(20px,3vw,26px)">다른 문제도 있으신가요?</div></div>
+    <div class="pg-more rv">
+      <a href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+      <a href="../leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+      <a href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
+      <a href="../gwangju/"><svg class="ic"><use href="#i-pin"/></svg> 광주 출동</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+  </div>
+  <div class="foot-areas">
+    <span class="foot-areas-l">출동 지역</span>
+    <a href="/gwangju/">광주</a>
+    <a href="/gwangyang/">광양</a>
+    <a href="/yeosu/">여수</a>
+    <a href="/suncheon/">순천</a>
+    <a href="/mokpo/">목포</a>
+    <a href="/jeonju/">전주</a>
+    <a href="/damyang/">담양</a>
+    <a href="/hwasun/">화순</a>
+    <a href="/muan/">무안</a>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">010-6872-8284</span>
+    </span>
+  </a>
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 모바일 메뉴 ── */
+function openMM() { document.getElementById('mm').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/IXbWCKDGzYAdEL_x27xE',   /* 카카오 전용 라벨 — 2026-09-22 전화와 분리 */
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "1ae20f9ea7a3ce0";
+if(window.wcs) {
+wcs_do();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+[
+  {
+    "date": "2026-06-27",
+    "place": "광산구 신가동 차량정비소",
+    "title": "무엇이 문제였나",
+    "summary": "세면대 배수구에 **반지**를 빠뜨리셨습니다. 배관 깊숙이 들어가 손으로는 닿지 않는 자리였습니다. 내시경으로 위치를 확인하고 전용 집게로 꺼냈습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/dr-singa-01.webp",
+        "caption": "내시경 화면입니다. 배관 안에 반지가 보입니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/dr-singa-02.webp",
+        "caption": "전용 집게로 꺼낸 반지입니다.",
+        "tag": ""
+      }
+    ],
+    "blog": "https://blog.naver.com/tturobro/224328739552"
+  },
+  {
+    "date": "2026-07-30",
+    "place": "서구 유촌동 아파트",
+    "title": "무엇이 문제였나",
+    "summary": "화장실 배수구에서 물이 역류했습니다. 원인은 **욕실용품 침전물과 머리카락**이었습니다. 오래 쌓이면서 뭉쳐 물길을 막고 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/dr-yuchon-01.webp",
+        "caption": "배수구에서 꺼낸 머리카락과 침전물입니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/dr-yuchon-02.webp",
+        "caption": "작업 후 배수구입니다.",
+        "tag": ""
+      }
+    ],
+    "blog": "https://blog.naver.com/tturobro/224363034835"
+  },
+  {
+    "date": "2026-05-30",
+    "place": "서구 쌍촌동 원룸",
+    "title": "무엇이 문제였나",
+    "summary": "세탁실 배수구가 역류했습니다. 세탁기를 옮기고 내시경을 넣어 배관 안을 보고 원인을 찾았습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/dr-ssangchon-01.webp",
+        "caption": "세탁실 상태를 확인했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/dr-ssangchon-02.webp",
+        "caption": "내시경으로 본 배관 안입니다.",
+        "tag": ""
+      }
+    ],
+    "blog": "https://blog.naver.com/tturobro/224300898047"
+  },
+  {
+    "date": "",
+    "place": "광주 첨단 · 다세대빌라",
+    "title": "무엇이 문제였나",
+    "summary": "싱크대에서 내려간 기름과 이물질이 배관 안에 쌓여 물을 막고 있었습니다. 하필 P트랩이 아랫층 천장에 있어, 천장을 열고 작업해야 했습니다.",
+    "facts": [
+      {
+        "name": "걸린 시간",
+        "value": "약 2시간"
+      },
+      {
+        "name": "쓴 장비",
+        "value": "내시경카메라 · 플렉스샤프트"
+      }
+    ],
+    "photos": [
+      {
+        "file": "/photos/drain-cheomdan-01.webp",
+        "caption": "바닥 배수구가 잿빛 찌꺼기로 꽉 막혀 있었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/drain-cheomdan-02.webp",
+        "caption": "트랩을 꺼내 보니 안쪽까지 굳어 있었습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/drain-cheomdan-12.webp",
+        "caption": "내시경으로 3.53m 지점까지 배관 안을 확인했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/drain-cheomdan-11.webp",
+        "caption": "아랫층 천장을 열고 P트랩에 플렉스샤프트를 넣었습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/drain-cheomdan-06.webp",
+        "caption": "막고 있던 것을 걷어내 물길이 다시 열렸습니다.",
+        "tag": "작업 후"
+      }
+    ],
+    "blog": ""
+  },
+  {
+    "date": "",
+    "place": "광주 상무지구 · 상가건물 · 식당",
+    "title": "무엇이 문제였나",
+    "summary": "기름을 많이 쓰는 식당이라 주방 트렌치와 하수배관이 기름때로 꽉 막혀 있었습니다.",
+    "facts": [
+      {
+        "name": "걸린 시간",
+        "value": "1시간"
+      },
+      {
+        "name": "쓴 장비",
+        "value": "내시경카메라 · 플렉스샤프트"
+      }
+    ],
+    "photos": [
+      {
+        "file": "/photos/drain-sangmu-01.webp",
+        "caption": "주방 트렌치가 기름때로 덮여 있었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/drain-sangmu-05.webp",
+        "caption": "내시경을 넣어 보니 기름때가 배관 안쪽을 감싸고 있었습니다.",
+        "tag": "",
+        "width": 554,
+        "height": 1200
+      },
+      {
+        "file": "/photos/drain-sangmu-03.webp",
+        "caption": "플렉스샤프트를 들여 트렌치부터 훑었습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/drain-sangmu-04.webp",
+        "caption": "이어서 하수배관까지 작업했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/drain-sangmu-10.webp",
+        "caption": "기름때를 걷어낸 트렌치입니다. 한 시간 걸렸습니다.",
+        "tag": "작업 후"
+      }
+    ],
+    "blog": ""
+  }
+]

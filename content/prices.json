@@ -1,0 +1,45 @@
+{
+  "toilet": {
+    "simple_min": 50000,
+    "simple_max": 100000,
+    "object_front_min": 100000,
+    "object_front_max": 150000,
+    "object_remove_min": 200000,
+    "replace_min": 260000,
+    "basin_min": 230000
+  },
+  "sink": {
+    "simple_min": 70000,
+    "shaft_min": 200000,
+    "spring_min": 400000
+  },
+  "drain": {
+    "simple_min": 70000,
+    "shaft_min": 300000,
+    "spring_min": 500000
+  },
+  "jet": {
+    "shaft_min": 200000,
+    "spring_min": 400000
+  },
+  "faucet": {
+    "basin_min": 100000,
+    "basin_max": 150000,
+    "shower_min": 100000,
+    "shower_max": 200000,
+    "combo": 480000,
+    "home_from": 120000
+  },
+  "leak": {
+    "detect_min": 100000,
+    "detect_max": 300000,
+    "hard_min": 300000,
+    "hard_max": 500000,
+    "repair_min": 100000,
+    "repair_max": 300000,
+    "partial_min": 200000,
+    "partial_max": 500000,
+    "open_min": 300000,
+    "open_max": 1000000
+  }
+}

@@ -1,0 +1,659 @@
+<!--
+  원본 틀 — _tools/build_content.py 가 이 파일을 읽어 drain/index.html 을 만든다.
+  drain/index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
+  {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
+  {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  {{CASES}} 줄에는 content/cases/drain.json 의 시공 사례가 들어간다.
+  이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
+-->
+<!DOCTYPE html>
+<!-- 하수구막힘 상세 페이지 v1 (2026-08-15) — 사장님 답변 23~26번 기반 -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광주 하수구 막힘·역류 | 메인배관 청소 · 30분 출동 | 청년배관</title>
+<meta name="description" content="하수구가 역류하거나 악취가 올라올 때. 먼저 물 사용을 멈추고 금액을 확인한 뒤 부르세요. 내시경으로 메인배관을 확인해 청소로 될 일인지 배관을 손봐야 할 일인지 알려드립니다. 공용배관이면 관리사무소 부담입니다.">
+<link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/drain/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/drain/">
+<meta property="og:title" content="광주 하수구 막힘·역류 | 급하다고 아무나 부르지 마세요">
+<meta property="og:description" content="먼저 물 사용을 멈추시고, 금액을 확인한 뒤에 부르셔도 늦지 않습니다.">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "하수구 막힘 · 역류 · 악취",
+  "name": "광주 하수구 막힘·역류 출동",
+  "description": "메인배관 막힘과 역류, 악취를 내시경 카메라로 확인한 뒤 샤프트·스프링·고압세척으로 해결합니다. 공용배관이 원인이면 관리사무소 부담입니다.",
+  "provider": {
+    "@type": "Plumber",
+    "name": "청년배관",
+    "telephone": "+82-10-6872-8284",
+    "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "동운로201번길 20",
+      "addressLocality": "북구",
+      "addressRegion": "전남광주통합특별시",
+      "postalCode": "61258",
+      "addressCountry": "KR"
+    }
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "전남광주통합특별시"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "전북특별자치도"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "하수구가 역류하는데 지금 뭘 해야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "먼저 물 사용을 멈추세요. 세탁기, 설거지, 샤워 전부입니다. 그다음 차분히 업체를 알아보시면 됩니다. 급하다고 먼저 눈에 띈 곳을 부르면 금액 이야기 없이 작업부터 시작되는 경우가 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "하수구를 직접 뚫어봐도 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "장비 사용법을 확실히 아신다면 가능합니다. 다만 전동스프링이 배관 안에서 말려 빠지지 않으면 배관을 뜯는 공사가 되고 비용이 3~4배까지 올라갑니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "공용배관이 원인이면 비용은 누가 부담하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "공용배관은 건물이 함께 쓰는 배관이라 관리사무소에서 부담합니다. 세대 배관 문제인지 공용배관 문제인지부터 카메라로 확인해야 합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "뚫었는데 얼마 안 가 또 막힙니다",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "배관이 오래돼 무너졌거나 처음부터 배관 구조가 잘못 시공된 경우일 수 있습니다. 이런 경우는 뚫는 것만으로 해결되지 않습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "비가 올 때만 냄새가 올라옵니다",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "자주 있는 일입니다. 메인배관에서 올라오는 것일 수도, 가지관에서 올라오는 것일 수도 있어 악취 차단과 배관 청소를 함께 해야 하는 경우가 많습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "하수구 막힘 비용은 얼마인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "샤프트 작업 {{p.drain.shaft_min:man}}만원부터, 스프링 {{p.drain.spring_min:man}}만원부터이고, 고압세척은 현장 확인 후 견적입니다. 배관이 길고 복잡해 막힌 곳을 찾기 어려우면 금액이 올라갑니다."
+      }
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.2a7 7 0 10-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="/drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="../leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="../pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
+    <div class="mm-lbl">안내</div>
+    <a class="mm-item" href="../index.html#price"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</a>
+    <a class="mm-item" href="../index.html#area"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</a>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
+    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<header>
+  <a class="hdr-brand" href="../index.html">
+    <img class="hdr-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="../toilet/">변기</a>
+    <a href="../sink/">싱크대</a>
+    <a href="/drain/">하수구</a>
+    <a href="../leak/">누수</a>
+    <a href="../jet/">고압세척</a>
+    <a href="../faucet/">수전교체</a>
+    <a href="../pipe/">배관설비</a>
+    <a href="../index.html#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!-- 상단 -->
+<section class="pg-hero">
+  <div class="inner">
+    <nav class="pg-crumb" aria-label="현재 위치">
+      <a href="../index.html">홈</a> <span>›</span> <span>하수구 막힘</span>
+    </nav>
+    <div class="pg-hero-body">
+      <h1>하수구가 역류하시나요?<br><em>급하다고 아무나</em> 부르지 마세요</h1>
+      <p class="pg-hero-sub">
+        먼저 물 사용을 멈추시고, 금액을 확인한 뒤에 부르셔도 늦지 않습니다.<br class="nb">
+        급한 마음에 부르면 비용 협의 없이 진행되는 경우가 있습니다.
+      </p>
+      <div class="pg-hero-facts">
+        <span class="pg-fact">광주 시내 <em>30분</em> 출동</span>
+        <span class="pg-fact">내시경 <em>카메라</em> 확인</span>
+        <span class="pg-fact">7년 <em>4,000건</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 역류하면 지금 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">First</div>
+    <div class="sec-ttl">역류하면 지금 이것부터</div></div>
+    <div class="pg-warn rv">
+      <h3>물 사용을 멈추세요</h3>
+      <p>
+        세탁기, 설거지, 샤워 모두 멈추셔야 합니다. 물을 계속 쓰면 <strong>넘칩니다.</strong>
+        이미 나온 물은 닦아내시되, 배수구를 도구로 쑤시지는 마세요.<br><br>
+        그다음에 <strong>차분히 업체를 알아보세요.</strong> 하수구 막힘은 몇 시간 늦는다고
+        크게 달라지지 않습니다. 급한 마음에 먼저 눈에 띈 곳을 부르면
+        <strong>금액 이야기 없이 작업부터 시작되는 경우</strong>가 있습니다.
+      </p>
+    </div>
+    <div class="pg-note rv" style="margin-top:14px">
+      저희를 부르실 때도 마찬가지입니다. <strong>카메라로 상태를 함께 보고, 어떤 작업이
+      얼마인지 말씀드린 뒤에</strong> 진행합니다.
+    </div>
+  </div>
+</section>
+
+<!-- 손님이 하는 말 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Symptom</div>
+    <div class="sec-ttl">혹시 이런 상태인가요?</div></div>
+    <div class="pg-sym rv">
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">배수구에서 물이 올라와요</div>
+        <div class="pg-sym-a">메인배관이 막혀 갈 곳을 잃은 물이 되돌아 나오는 것입니다. 물 사용을 멈추셔야 합니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">하수구에서 악취가 심해요</div>
+        <div class="pg-sym-a">배관 안에 기름과 찌꺼기가 쌓여 썩고 있는 상태입니다. 아직 물이 내려가더라도 청소할 때가 된 것입니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">비가 오면 냄새가 올라와요</div>
+        <div class="pg-sym-a">실제로 자주 있는 일입니다. 메인배관에서 올라오는 것일 수도, 가지관에서 올라오는 것일 수도 있어 확인이 필요합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 하수구는 다릅니다 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Difference</div>
+    <div class="sec-ttl">하수구 막힘은 성격이 다릅니다</div></div>
+    <div class="pg-two rv">
+      <div class="pg-two-box is-light">
+        <div class="pg-two-h"><span class="pg-two-mark">1</span> 변기 · 싱크대</div>
+        <ul>
+          <li>우리 <strong>세대 안</strong>의 문제입니다</li>
+          <li>이물질을 꺼내거나 주름관을 손보면 끝나는 경우가 많습니다</li>
+        </ul>
+      </div>
+      <div class="pg-two-box is-dark">
+        <div class="pg-two-h"><span class="pg-two-mark">2</span> 하수구</div>
+        <ul>
+          <li>대개 <strong>메인배관</strong> 쪽이 막힙니다</li>
+          <li>건물 전체가 함께 쓰는 관이라 <strong>범위가 넓습니다</strong></li>
+          <li>어디가 막혔는지 <strong>찾는 것부터</strong>가 일입니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:18px">
+      <strong>아파트나 상가에서 공용배관이 원인이면 비용은 관리사무소가 부담합니다.</strong>
+      우리 집 문제인지 건물 문제인지부터 가려야 하는 이유입니다.
+      카메라로 확인하면 어디까지가 세대 배관이고 어디부터가 공용인지 분명해집니다.
+    </div>
+  </div>
+</section>
+
+<!-- 원인 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Cause</div>
+    <div class="sec-ttl">하수구가 막히는 원인</div></div>
+    <div class="pg-cause rv">
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">1</div>
+        <div>
+          <div class="pg-cause-t">큰 이물질이나 굳은 기름</div>
+          <div class="pg-cause-d">기름이 굳어 배관을 꽉 막는 경우가 가장 흔합니다. 청소로 해결됩니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">2</div>
+        <div>
+          <div class="pg-cause-t">배관이 오래돼 무너진 경우</div>
+          <div class="pg-cause-d">관 자체가 내려앉아 물길을 막고 있는 상태입니다. 이건 청소로 해결되지 않고 손을 봐야 합니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">3</div>
+        <div>
+          <div class="pg-cause-t">처음부터 잘못 시공된 경우</div>
+          <div class="pg-cause-d">지을 때 배관 구조가 잘못돼 막힐 수밖에 없는 집이 있습니다. 손님 잘못이 아닙니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:16px">
+      <strong>2번과 3번은 뚫는다고 끝나지 않습니다.</strong> 뚫어도 얼마 안 가 다시 막힙니다.
+      그래서 카메라로 안을 보고 <strong>어느 경우인지부터 판단</strong>합니다.
+      청소로 될 일인지, 손을 봐야 할 일인지 말씀드립니다.
+    </div>
+  </div>
+</section>
+
+<!-- 하지 마세요 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Warning</div>
+    <div class="sec-ttl">이것만은 하지 마세요</div></div>
+    <div class="pg-warn rv">
+      <h3>전동스프링을 사서 직접 넣지 마세요</h3>
+      <p>
+        하수구는 배관이 굵고 길어서 시중 장비로는 잘 안 뚫립니다. 그래서 더 센 것을
+        찾게 되는데, <strong>전동스프링이 배관 안에서 말려 빠지지 않으면</strong>
+        배관을 뜯어내는 공사가 됩니다.<br><br>
+        그때는 <strong>비용이 3~4배까지</strong> 올라갑니다. 장비 사용법을 확실히 아시는 게 아니라면
+        손대지 않는 편이 낫습니다.
+      </p>
+    </div>
+    <div class="pg-note rv" style="margin-top:14px">
+      <strong>미룰수록 어려워집니다.</strong> 배관을 막고 있던 기름과 찌꺼기는
+      시간이 지나면 굳어 딱딱해집니다. 그때는 제거도 어렵고 비용도 올라갑니다.
+    </div>
+  </div>
+</section>
+
+<!-- 작업 방법 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Process</div>
+    <div class="sec-ttl">이렇게 작업합니다</div></div>
+    <div class="pg-steps rv">
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">내시경 카메라로 배관 안을 봅니다</div>
+          <div class="pg-step-p">어디가 막혔는지, 청소로 될 일인지 배관을 손봐야 할 일인지 눈으로 확인합니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">필요한 작업과 비용을 말씀드립니다</div>
+          <div class="pg-step-p">화면을 함께 보면서 설명드리고, 동의하신 뒤에 진행합니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">샤프트로 배관 안을 청소합니다</div>
+          <div class="pg-step-p">기름때와 이물질을 긁어냅니다. 대부분 여기서 해결됩니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">안 되면 스프링, 그래도 안 되면 고압세척</div>
+          <div class="pg-step-p">배관이 굵거나 기름이 심하게 굳었을 때 단계를 올립니다. 왜 올려야 하는지 먼저 말씀드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 실제로 다녀온 곳 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Cases</div>
+    <div class="sec-ttl">실제로 다녀온 곳</div></div>
+    <div class="cases">
+{{CASES}}
+      <div class="case-old rv">
+        <p class="case-old-t">그 밖의 작업 사진</p>
+        <div class="svc-panel-photos">
+          <div class="svc-panel-photo">
+        <img src="../하수구막힘_전.webp" alt="하수구 막힘 작업 전" loading="lazy">
+        <span class="svc-panel-photo-lbl lbl-b">작업 전</span>
+          </div>
+          <div class="svc-panel-photo after">
+        <img src="../하수구막힘_후.webp" alt="하수구 막힘 작업 후" loading="lazy">
+        <span class="svc-panel-photo-lbl lbl-a">작업 후</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 비 오면 냄새 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Odor</div>
+    <div class="sec-ttl">비가 오면 냄새가 올라온다면</div></div>
+    <div class="pg-note rv">
+      <strong>흔히 있는 일입니다.</strong> 비가 오면 배관 안의 공기 흐름이 달라지면서
+      평소에 안 나던 냄새가 올라옵니다.
+    </div>
+    <div class="pg-note rv d1">
+      냄새가 <strong>메인배관에서 올라오는 것</strong>일 수도 있고,
+      <strong>가지관에서 올라오는 것</strong>일 수도 있습니다. 어느 쪽인지에 따라 손볼 곳이 달라집니다.
+    </div>
+    <div class="pg-note rv d2">
+      그래서 <strong>악취를 막는 작업과 배관 청소를 함께</strong> 해야 하는 경우가 많습니다.
+      냄새만 막으면 원인은 그대로 남아 다시 올라오고, 청소만 하면 냄새가 들어오는 길은
+      그대로이기 때문입니다.
+    </div>
+  </div>
+</section>
+
+<!-- 비용 -->
+<section class="sec on-dark" style="background:var(--n900)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Price</div>
+    <div class="sec-ttl">비용</div></div>
+    <div class="price-list rv">
+      <div class="price-row">
+        <div class="price-row-lbl">단순 막힘 뚫기</div>
+        <div class="price-row-num">{{p.drain.simple_min:won}}원 ~</div>
+      </div>
+      <div class="price-row">
+        <div class="price-row-lbl">배관 청소 · 샤프트</div>
+        <div class="price-row-num">{{p.drain.shaft_min:won}}원 ~</div>
+      </div>
+      <div class="price-row">
+        <div class="price-row-lbl">배관 청소 · 스프링</div>
+        <div class="price-row-num">{{p.drain.spring_min:won}}원 ~</div>
+      </div>
+      <div class="price-row">
+        <div class="price-row-lbl">고압 세척</div>
+        <div class="price-row-num">견적 문의</div>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:22px">
+      <strong>금액이 올라가는 경우</strong>는 배관이 길고 복잡해서 나가는 배관을 찾아
+      막힌 곳을 집중적으로 청소해야 할 때입니다. 물길조차 나지 않아 나가는 배관을 못 찾으면
+      시간이 오래 걸리고, 샤프트로 불가능해 스프링이나 고압세척으로 올라갑니다.
+    </div>
+    <div class="pg-note rv d1">
+      <strong>공용배관이 원인이면 관리사무소가 부담합니다.</strong>
+      우리 집 문제인지부터 확인해 드립니다.
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Info</div>
+    <div class="sec-ttl">출동·결제 안내</div></div>
+    <div class="pg-facts rv">
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">출동 시간</div>
+        <div class="pg-facts-v">광주 시내 <em>30분</em> · 시외 <em>1시간</em> 내외</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">운영 시간</div>
+        <div class="pg-facts-v">24시간 연중무휴 · 야간 추가요금 없음</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">결제</div>
+        <div class="pg-facts-v">카드 · 계좌이체 · 간편결제 / 세금계산서 · 현금영수증 발행 가능</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">보증</div>
+        <div class="pg-facts-v">배관 청소 <em>1년</em> · 기름을 많이 쓰거나 배관 기울기가 좋지 않은 곳은 <em>6개월</em></div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">경력</div>
+        <div class="pg-facts-v">7년 · 약 4,000건</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">정화조</div>
+        <div class="pg-facts-v"><em>설치만</em> 합니다. 정화조 <em>청소는 하지 않습니다.</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">FAQ</div>
+    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="faq-wrap rv">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>지금 역류하는데 뭘 해야 하나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">먼저 <b>물 사용을 멈추세요.</b> 세탁기, 설거지, 샤워 전부입니다. 그다음 차분히 업체를 알아보시면 됩니다. 급하다고 먼저 눈에 띈 곳을 부르면 금액 이야기 없이 작업부터 시작되는 경우가 있습니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>직접 뚫어봐도 되나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">장비 사용법을 확실히 아신다면 직접 하셔도 됩니다. 다만 <b>전동스프링이 배관 안에서 말려 빠지지 않으면 배관을 뜯는 공사</b>가 되고 비용이 3~4배까지 올라갑니다. 해보셨는데 안 되면 그때 부르시는 것을 권합니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>공용배관이면 비용은 누가 내나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">공용배관은 건물이 함께 쓰는 배관이라 <b>관리사무소에서 비용을 부담합니다.</b> 우리 집 배관 문제인지 공용배관 문제인지부터 확인해야 하는 이유입니다. 카메라로 보면 어디까지가 세대 배관인지 분명해집니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>뚫었는데 얼마 안 가 또 막혀요</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">배관이 오래돼 무너졌거나, 처음부터 배관 구조가 잘못 시공된 경우일 수 있습니다. 이런 경우는 뚫는 것만으로는 해결되지 않습니다. 카메라로 안을 보면 어느 경우인지 알 수 있습니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비 올 때만 냄새가 나요</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">자주 있는 일입니다. 메인배관에서 올라오는 것일 수도, 가지관에서 올라오는 것일 수도 있습니다. 냄새를 막는 작업과 배관 청소를 함께 해야 하는 경우가 많습니다.</div>
+      </div>
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용이 얼마나 나오나요?</span><span class="faq-arrow">▾</span></div>
+        <div class="faq-a">샤프트 작업 {{p.drain.shaft_min:man}}만원부터, 스프링 {{p.drain.spring_min:man}}만원부터이고, 고압세척은 현장 확인 후 견적입니다. 배관이 길고 복잡해 막힌 곳을 찾기 어려우면 금액이 올라갑니다. 카메라로 확인한 뒤 말씀드리고 진행합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">하수구 막힘, <em>지금 바로</em></div>
+    <p class="cta-p rv">물 사용을 멈추시고 연락 주세요. 카메라로 함께 보고 금액을 말씀드립니다.</p>
+    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','drain')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('drain', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 서비스 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-ttl" style="font-size:clamp(20px,3vw,26px)">다른 문제도 있으신가요?</div></div>
+    <div class="pg-more rv">
+      <a href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+      <a href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+      <a href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+      <a href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전 교체</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+  </div>
+  <div class="foot-areas">
+    <span class="foot-areas-l">출동 지역</span>
+    <a href="/gwangju/">광주</a>
+    <a href="/gwangyang/">광양</a>
+    <a href="/yeosu/">여수</a>
+    <a href="/suncheon/">순천</a>
+    <a href="/mokpo/">목포</a>
+    <a href="/jeonju/">전주</a>
+    <a href="/damyang/">담양</a>
+    <a href="/hwasun/">화순</a>
+    <a href="/muan/">무안</a>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">010-6872-8284</span>
+    </span>
+  </a>
+  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 모바일 메뉴 ── */
+function openMM() { document.getElementById('mm').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/IXbWCKDGzYAdEL_x27xE',   /* 카카오 전용 라벨 — 2026-09-22 전화와 분리 */
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "1ae20f9ea7a3ce0";
+if(window.wcs) {
+wcs_do();
+}
+</script>
+</body>
+</html>

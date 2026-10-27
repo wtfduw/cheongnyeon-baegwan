@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2026-08-04",
+    "place": "광산구 첨단 오피스텔",
+    "title": "무엇이 문제였나",
+    "summary": "아랫층 화장실 **천장에서 물이 떨어진다**는 연락이었습니다. 확인해 보니 새는 곳은 아랫층이 아니라 **윗층 배수구**였습니다. 배수구와 배관 안에 **시멘트**가 굳어 물길을 막고 있었고, 빠지지 못한 물이 아랫층 천장으로 넘어가고 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/leak-cheomdan-01.webp",
+        "caption": "윗층 배수구입니다. 시멘트가 굳어 물길을 막고 있었습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/leak-cheomdan-02.webp",
+        "caption": "아랫층 P트랩입니다. 시멘트가 여기까지 내려왔는지 확인했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/leak-cheomdan-03.webp",
+        "caption": "P트랩을 열고 안에 굳은 시멘트를 꺼냈습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/leak-cheomdan-04.webp",
+        "caption": "내시경으로 3.53m 지점까지 확인했습니다. P트랩 너머는 바닥에만 깔려 있었습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/leak-cheomdan-05.webp",
+        "caption": "시멘트를 모두 걷어낸 뒤입니다. 물이 그대로 내려갑니다.",
+        "tag": ""
+      }
+    ],
+    "blog": "https://blog.naver.com/tturobro/224367616384"
+  }
+]
