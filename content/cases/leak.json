@@ -1,25 +1,5 @@
 [
   {
-    "date": "2026-10-28",
-    "place": "시험(곧 지움)",
-    "title": "무엇이 문제였나",
-    "summary": "TEST",
-    "facts": [],
-    "photos": [
-      {
-        "file": "/photos/leak-20261028-01.webp",
-        "caption": "",
-        "tag": ""
-      },
-      {
-        "file": "/photos/leak-20261028-02.webp",
-        "caption": "",
-        "tag": ""
-      }
-    ],
-    "blog": ""
-  },
-  {
     "date": "2026-08-04",
     "place": "광산구 첨단 오피스텔",
     "title": "무엇이 문제였나",
