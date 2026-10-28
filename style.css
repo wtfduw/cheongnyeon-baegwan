@@ -452,3 +452,23 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
    가로 사진을 넣으면 가운데만 남고 내시경 거리 표시가 잘린다. 이 사례는 4:3 가로 틀을 쓴다. */
 .case-land .case-shots img{aspect-ratio:4/3}
 .case-land .case-shots img.tall{object-position:center 40%}
+
+/* ── 한글 줄바꿈 정리 (2026-10-28) ──
+   폰(390px)에서 문장 중간이 끊기거나, 끝줄에 낱말 하나만 남거나, 전화번호가 010- 뒤에서 끊기던 곳을 고친다.
+   글자는 그대로이고 끊기는 자리만 바뀐다. 넓은 화면(PC)은 한 줄에 다 들어가므로 지금과 같다.
+   - text-wrap:pretty : 끝줄에 낱말 하나만 남지 않게 브라우저가 마지막 몇 줄을 다시 나눈다.
+     (balance 는 쓰지 않는다 — 한글 제목이 문장 중간에서 끊긴 것처럼 보인다)
+   - .sent : 문장 하나 덩어리. 자리가 있으면 앞 문장과 같은 줄에, 모자라면 문장째 다음 줄로 간다.
+     가운데 정렬 글은 생성기(_tools/build_content.py center_text)가, 첫 페이지 상담 칸 알림 글은 그 페이지 스크립트가 넣는다.
+   - .nb(위 공통) : 전화번호처럼 가운데에서 끊기면 안 되는 묶음 */
+body{text-wrap:pretty}
+/* 단, 긴 본문(자주 묻는 질문 답·개인정보처리방침 본문)은 기본 줄바꿈 — pretty 가 '목포 / ·여수', '등) / 과' 처럼
+   가운뎃점 앞이나 괄호 뒤 조사에서 끊는 것이 폰 검사에서 보였다 */
+.faq-a,.pv p,.pv li{text-wrap:wrap}
+.sent{display:inline-block}
+/* 가격표 한 줄: 이름과 금액이 한 줄에 안 들어가면 이름을 서너 줄로 쪼개지 말고 금액을 다음 줄 오른쪽으로
+   (틈 4px — 지금 한 줄에 들어가는 줄은 그대로 두려고 작게. 원래 가장 좁은 줄이 5px) */
+.price-row{flex-wrap:wrap;gap:4px}
+.price-row-num{margin-left:auto}
+/* 사례 아래 둥근 표시('쓴 장비' 등): 이름 칸이 두 줄로 쪼개지지 않게 */
+.case-facts dt{white-space:nowrap}

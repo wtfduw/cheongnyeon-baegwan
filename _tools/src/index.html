@@ -394,7 +394,7 @@
       <div class="af-done" id="apply-done" hidden>
         <div class="af-done-ic">✓</div>
         <p class="af-done-t">접수되었습니다</p>
-        <p>확인하는 대로 <b id="apply-done-phone"></b>(으)로 전화드릴게요.<br>급하시면 010-6872-8284로 바로 전화 주세요.</p>
+        <p>확인하는 대로 <span class="nb"><b id="apply-done-phone"></b>(으)로</span> 전화드릴게요.<br>급하시면 <span class="nb">010-6872-8284로</span> 바로 전화 주세요.</p>
       </div>
     </form>
     <noscript><p class="apply-sub" style="margin-top:16px">이 칸은 자바스크립트가 켜져 있어야 보낼 수 있습니다. 전화나 카카오톡으로 연락 주세요.</p></noscript>
@@ -530,6 +530,33 @@ const PRICES = [
   {icon:'i-jet',    label:'고압 세척',           num:'현장 견적', quote:true},
   {icon:'i-wrench', label:'배관 설비 공사',      num:'현장 견적', quote:true}
 ];
+
+/* ── 글을 문장(또는 ' · ' 마디)마다 덩어리로 넣기 (2026-10-28 줄바꿈 정리) ──
+   폰에서 문장 가운데가 끊기지 않고 문장째 다음 줄로 넘어가게 한다(.sent 는 style.css 에서 inline-block).
+   글자는 그대로이고, 전화번호는 .nb 로 묶어 010- 뒤에서 끊기지 않게 한다. 생성기(build_content.py center_text)와 같은 규칙 */
+function putUnits(el, text, bySep) {
+  var cut = bySep ? /([.?!]| ·)(\s+)(?=\S)/g : /([.?!])(\s+)(?=\S)/g;
+  var units = [], gaps = [], from = 0, m;
+  text = String(text || '');
+  while ((m = cut.exec(text))) {
+    units.push(text.slice(from, m.index + m[1].length));
+    gaps.push(m[2]);
+    from = m.index + m[0].length;
+  }
+  units.push(text.slice(from));
+  el.textContent = '';
+  units.forEach(function (u, i) {
+    var box = el;
+    if (units.length > 1) { box = document.createElement('span'); box.className = 'sent'; }
+    u.split(/(0\d{1,2}-\d{3,4}-\d{4}\S*)/).forEach(function (piece, j) {
+      if (!piece) return;
+      if (j % 2) { var nb = document.createElement('span'); nb.className = 'nb'; nb.textContent = piece; box.appendChild(nb); }
+      else box.appendChild(document.createTextNode(piece));
+    });
+    if (box !== el) el.appendChild(box);
+    if (i < gaps.length) el.appendChild(document.createTextNode(gaps[i]));
+  });
+}
 
 function svgIcon(id, cls) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -692,7 +719,7 @@ function buildContent(idx) {
     num.textContent = s.price;
     const note = document.createElement('span');
     note.className = 'note';
-    note.textContent = s.priceNote;
+    putUnits(note, s.priceNote, true);   // ' · ' 마디가 줄 가운데에서 쪼개지지 않게
     strip.append(lbl, num, note);
     wrap.appendChild(strip);
   }
@@ -888,7 +915,7 @@ function cfCheck(d) {
   var shownAt = Date.now(), sendId = null, busy = false;
   var CALL = ' 급하시면 010-6872-8284로 전화 주세요.';
 
-  function say(text, bad) { msg.textContent = text; msg.className = 'af-msg' + (bad ? ' bad' : ''); }
+  function say(text, bad) { putUnits(msg, text); msg.className = 'af-msg' + (bad ? ' bad' : ''); }   // 문장마다 덩어리(줄바꿈 정리)
   function newId() {
     var a = new Uint8Array(8);
     window.crypto.getRandomValues(a);

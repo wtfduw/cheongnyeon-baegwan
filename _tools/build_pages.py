@@ -49,6 +49,10 @@
 공지 띠(2026-10-28): content/notice.json 이 켜져 있으면 9장 머리 바로 아래에 홈·서비스 페이지와 같은 띠를 넣는다.
    띠 HTML 은 build_content.py 의 notice_block · insert_notice 를 그대로 빌려 쓴다(모양이 한 곳에서만 정해지게).
    꺼져 있으면 아무것도 넣지 않는다 = 지금 HTML 과 같다.
+
+줄바꿈(2026-10-28): 맨 위 제목·소개 글·아래 연락 문구처럼 가운데 정렬 글은 build_content.py 의 center_text 로
+   문장마다 <span class="sent"> 를 씌운다(폰에서 문장 중간이 끊기지 않게). 글자는 그대로다. 그래서 위 lead·sub 에
+   문장을 둘 이상 써도 따로 손댈 것이 없다.
 """
 
 import difflib
@@ -392,7 +396,9 @@ def build(region: dict, template: str) -> str:
     page = template
     for key, value in filled.items():
         page = page.replace("{{" + key + "}}", value)
-    return page.replace("<!--본문-->\n", body_html(region))
+    page = page.replace("<!--본문-->\n", body_html(region))
+    # 가운데 정렬 글(맨 위 제목·소개 글·아래 연락 문구)이 폰에서 문장 중간에 끊기지 않게 — build_content.py 와 같은 처리 (2026-10-28)
+    return content_tool().center_text(page)
 
 
 def sitemap_xml() -> str:
@@ -446,8 +452,14 @@ def compare(path: pathlib.Path, new: str) -> str:
     return note + lines_note("없어지는 줄", gone) + lines_note("생기는 줄", came)
 
 
+_CONTENT_TOOL = None
+
+
 def content_tool():
-    """build_content.py 를 파일 위치로 불러온다 (python -I 로 돌리면 같은 폴더라도 import 로는 못 찾는다)"""
+    """build_content.py 를 파일 위치로 불러온다 (python -I 로 돌리면 같은 폴더라도 import 로는 못 찾는다). 한 번만 불러 둔다"""
+    global _CONTENT_TOOL
+    if _CONTENT_TOOL is not None:
+        return _CONTENT_TOOL
     spec = importlib.util.spec_from_file_location("build_content", pathlib.Path(__file__).with_name("build_content.py"))
     mod = importlib.util.module_from_spec(spec)
     keep, sys.dont_write_bytecode = sys.dont_write_bytecode, True   # _tools/__pycache__ 를 만들지 않게
@@ -455,6 +467,7 @@ def content_tool():
         spec.loader.exec_module(mod)
     finally:
         sys.dont_write_bytecode = keep
+    _CONTENT_TOOL = mod
     return mod
 
 

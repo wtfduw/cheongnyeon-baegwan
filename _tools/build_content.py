@@ -49,6 +49,13 @@ GitHub 에서는 .github/workflows/site.yml 이 main 에 push 될 때마다 --wr
     지역 9장은 build_pages.py 가 이 파일의 notice_block · insert_notice 를 불러 같은 띠를 넣는다.
     개인정보처리방침은 손으로 쓰는 파일이라, 이 파일은 그 안의 공지 띠 묶음(<!-- 공지 띠 … --> ~ <!-- /공지 띠 -->)만 넣고 뺀다.
 
+  가운데 정렬 글의 줄바꿈 (2026-10-28): 폰(390px)에서 '…남겨 주세요. 확인하는 대로 / 전화드립니다.' 처럼
+    문장 중간이 끊기던 것을 막는다. 만들 때 CENTER_CLASSES 칸(맨 위 h1 포함)의 한 줄(<br> 사이)에 문장이 둘 이상이면
+    문장마다 <span class="sent"> 로 감싸고, 전화번호는 <span class="nb"> 로 묶는다. 맨 위 제목(h1)은 문장마다 끝 두 낱말도
+    <span class="nb"> 로 묶어 끝줄에 '도착합니다.' 한 낱말만 남지 않게 한다(bind_tail). 글자는 하나도 바꾸지 않는다(태그만 더한다).
+    틀에서 그 칸에 문장을 늘려도, 사장님이 서비스 소개 글·가격 안내 문구·공지를 바꿔도 저절로 된다(center_text · sentence_units).
+    지역 9장도 build_pages.py 가 같은 함수를 부른다.
+
 ⚠️ 만들어진 index.html, toilet/index.html 같은 8장을 직접 고치지 않는다.
    다음에 돌리면 틀과 content 내용으로 덮어써진다. 글은 _tools/src/ 의 틀을, 가격·사례 등은 content/ 를 고친다.
    GitHub 자동 작업은 push 에 이 8장(과 지역 9장)을 직접 고친 흔적이 있으면 멈추고 사이트를 바꾸지 않는다.
@@ -642,9 +649,10 @@ def notice_block(notice: dict, today: str) -> str:
             'style="background:var(--yel);color:var(--n900);border-bottom:1px solid rgba(16,35,63,.15)">\n'
             '  <p style="max-width:1100px;margin:0 auto;padding:10px 16px;font-size:14.5px;font-weight:700;'
             'line-height:1.55;text-align:center;word-break:keep-all">'
-            '<span style="display:inline-block;margin-right:8px;padding:1px 8px;border-radius:6px;background:var(--n900);'
-            'color:var(--yel);font-size:12.5px;vertical-align:1px">알림</span>'
-            f'{esc(notice["message"])}</p>\n'
+            + sentence_units(keep_phones(esc(notice["message"])),   # '알림' 표시는 첫 문장과 한 덩어리(혼자 한 줄에 남지 않게)
+                             first='<span style="display:inline-block;margin-right:8px;padding:1px 8px;border-radius:6px;'
+                                   'background:var(--n900);color:var(--yel);font-size:12.5px;vertical-align:1px">알림</span>')
+            + '</p>\n'
             '</div>\n'
             "<script>(function(){var n=document.getElementById('site-notice'),s=n.getAttribute('data-start'),"
             "e=n.getAttribute('data-end'),t=new Date(Date.now()+324e5).toISOString().slice(0,10);"
@@ -658,6 +666,148 @@ def insert_notice(page: str, block: str, label: str) -> str:
     if page.count(NOTICE_AFTER) != 1:
         raise Stop(f"{label}: 공지 띠를 넣을 자리(머리 끝 </header></div>)를 하나로 찾지 못했습니다")
     return page.replace(NOTICE_AFTER, NOTICE_AFTER + block, 1)
+
+
+# ── 가운데 정렬 글: 문장 덩어리 · 전화번호 묶음 (2026-10-28) ──────────
+# 폰(390px)에서 가운데 정렬 글이 문장 중간에서 끊겼다 ('전화가 어려우시면 남겨 주세요. 확인하는 대로 / 전화드립니다.').
+# 한 줄(<br> 사이)에 문장이 둘 이상이면 문장마다 <span class="sent"> 로 감싼다.
+# .sent 는 style.css 에서 inline-block — 자리가 있으면 앞 문장과 같은 줄에 그대로, 모자라면 문장째 다음 줄로 간다.
+# 그래서 PC 처럼 넓은 화면은 지금과 같고, 폰에서만 문장 단위로 줄이 바뀐다.
+# 전화번호(+붙은 조사 '로' 등)는 <span class="nb">(줄바꿈 없음)로 묶는다. 크롬은 010- 뒤에서도 줄을 바꾼다.
+# 글자는 하나도 바꾸지 않는다(태그만 더한다). 태그 안(굵게·링크)에서는 자르지 않는다.
+
+CENTER_CLASSES = ("hero-sub", "pg-hero-sub", "cta-p", "cta-h2", "cta-region", "apply-sub", "price-sub",
+                  "price-note", "price-zero", "price-guide", "zero-body", "zero-h2", "area-more", "sec-ttl")
+PHONE = re.compile(r"0\d{1,2}-\d{3,4}-\d{4}[^\s<]*")
+_TAG = re.compile(r"(<[^>]+>)")
+_VOID = re.compile(r"<(?:br|img|wbr|input|hr|meta|link)\b", re.I)
+
+
+def _depth_step(tag: str) -> int:
+    if tag.startswith("</"):
+        return -1
+    if tag.startswith("<!") or tag.endswith("/>") or _VOID.match(tag):
+        return 0
+    return 1
+
+
+def keep_phones(line: str) -> str:
+    """태그 밖 글의 전화번호를 <span class="nb"> 로 묶는다 (링크 안처럼 이미 다른 태그 안이면 그대로)"""
+    out, depth = [], 0
+    for tok in _TAG.split(line):
+        if tok.startswith("<"):
+            depth += _depth_step(tok)
+            out.append(tok)
+        else:
+            out.append(PHONE.sub(lambda m: f'<span class="nb">{m.group(0)}</span>', tok) if depth == 0 else tok)
+    return "".join(out)
+
+
+def sentence_pieces(line: str) -> list:
+    """한 줄 HTML → [문장, 사이 공백, 문장, …]. 문장 끝 = . ? ! 다음 공백. 태그 안에서는 자르지 않는다."""
+    pieces, cur, gap, depth, last = [], "", "", 0, ""
+    for tok in _TAG.split(line):
+        if not tok:
+            continue
+        if tok.startswith("<"):
+            if gap:
+                pieces += [cur, gap]
+                cur, gap = "", ""
+            cur += tok
+            depth += _depth_step(tok)
+            continue
+        for ch in tok:
+            if ch.isspace():
+                if gap or (depth == 0 and last in ".?!" and cur.strip()):
+                    gap += ch
+                else:
+                    cur += ch
+                continue
+            if gap:
+                pieces += [cur, gap]
+                cur, gap = "", ""
+            cur += ch
+            last = ch
+    pieces.append(cur + gap)
+    return pieces
+
+
+def sentence_units(line: str, first: str = "", each=None) -> str:
+    """한 줄(<br> 없는 HTML)에 문장이 둘 이상이면 문장마다 <span class="sent"> 로 감싼다. 하나면 그대로.
+    first: 첫 문장 앞에 붙일 것(공지 띠의 '알림' 표시) — 첫 문장 덩어리 안에 넣는다.
+    each: 문장마다(하나면 줄 전체에) 더 할 일 — 제목의 끝 두 낱말 묶기(bind_tail)"""
+    lead = line[:len(line) - len(line.lstrip())]
+    body = line.strip()
+    tail = line[len(lead) + len(body):]
+    pieces = sentence_pieces(body) if body else [""]
+    each = each or (lambda x: x)
+    if len(pieces) < 3:
+        return lead + first + (each(body) if body else body) + tail
+    pieces[0] = first + each(pieces[0])
+    return lead + "".join(f'<span class="sent">{p if i == 0 else each(p)}</span>' if i % 2 == 0 else p
+                          for i, p in enumerate(pieces)) + tail
+
+
+TAIL_MAX = 9   # 제목 끝 두 낱말 묶음의 최대 글자 수. 9자 × 27px(폰 제목 글씨) = 243px 라 좁은 폰(320px)에서도 칸 안에 든다
+
+
+def bind_tail(unit: str) -> str:
+    """제목(h1) 한 덩어리의 끝 두 낱말을 <span class="nb"> 로 묶는다 — 끝줄에 '도착합니다.' 처럼 한 낱말만 남지 않게.
+    두 낱말이 태그 경계를 넘거나(굵게·강조가 걸침) 합쳐 TAIL_MAX 자를 넘으면 그대로 둔다."""
+    gaps, depth, i = [], 0, 0
+    for tok in _TAG.split(unit):
+        if tok.startswith("<"):
+            depth += _depth_step(tok)
+        elif depth == 0:
+            gaps += [i + m.start() for m in re.finditer(r"\s+", tok)]
+        i += len(tok)
+    if len(gaps) < 2:
+        return unit
+    start = re.match(r"\s+", unit[gaps[-2]:]).end() + gaps[-2]
+    tail = unit[start:]
+    depth = 0
+    for tok in _TAG.findall(tail):
+        depth += _depth_step(tok)
+        if depth < 0:
+            return unit
+    if depth or len(re.sub(r"<[^>]+>", "", tail)) > TAIL_MAX:
+        return unit
+    return f'{unit[:start]}<span class="nb">{tail}</span>'
+
+
+_CENTER_OPEN = re.compile(r"<(h1|p|div)(\s[^>]*)?>")
+_CENTER_CLASS = re.compile(r'\bclass="([^"]*)"')
+_INNER_BLOCK = re.compile(r"<(?:div|p|h[1-6]|section|ul|ol|li|table|form|figure)\b")
+_SCRIPT = re.compile(r"(<script\b.*?</script>|<style\b.*?</style>)", re.S)
+
+
+def center_text(page: str) -> str:
+    """페이지의 가운데 정렬 짧은 글(CENTER_CLASSES 칸과 h1)에 문장 덩어리·전화번호 묶음을 넣는다.
+    안쪽에 다른 블록(div·p 등)이 있는 칸, <script>·<style> 안은 건드리지 않는다."""
+    def fix_part(part: str) -> str:
+        out, pos = [], 0
+        for m in _CENTER_OPEN.finditer(part):
+            if m.start() < pos:
+                continue
+            tag, attrs = m.group(1), m.group(2) or ""
+            cls = _CENTER_CLASS.search(attrs)
+            if tag != "h1" and not (cls and set(cls.group(1).split()) & set(CENTER_CLASSES)):
+                continue
+            close = part.find(f"</{tag}>", m.end())
+            if close < 0:
+                continue
+            inner = part[m.end():close]
+            if _INNER_BLOCK.search(inner):
+                continue
+            lines = re.split(r"(<br\b[^>]*>)", inner)
+            each = bind_tail if tag == "h1" else None      # 제목은 끝 두 낱말도 묶는다
+            new = "".join(x if i % 2 else sentence_units(keep_phones(x), each=each) for i, x in enumerate(lines))
+            out += [part[pos:m.end()], new]
+            pos = close
+        out.append(part[pos:])
+        return "".join(out)
+
+    return "".join(x if i % 2 else fix_part(x) for i, x in enumerate(_SCRIPT.split(page)))
 
 
 # ── 페이지 만들기 ─────────────────────────────────────
@@ -692,6 +842,7 @@ def build(name: str, cases, data: dict) -> str:
         page = one_slot(page, GUIDE_SLOT, guide_line(prices.guide), label)
     if cases is not None:
         page = one_slot(page, CASES_SLOT, render_cases(cases), label)
+    page = center_text(page)          # 가운데 정렬 글: 문장 덩어리·전화번호 묶음 (공지 띠는 notice_block 이 따로)
     return insert_notice(page, data["notice_block"], label)
 
 
