@@ -10,12 +10,12 @@
   },
   "sink": {
     "simple_min": 70000,
-    "shaft_min": 200000,
+    "shaft_min": 150000,
     "spring_min": 400000
   },
   "drain": {
     "simple_min": 70000,
-    "shaft_min": 300000,
+    "shaft_min": 150000,
     "spring_min": 500000
   },
   "jet": {
@@ -31,7 +31,7 @@
     "home_from": 120000
   },
   "leak": {
-    "detect_min": 100000,
+    "detect_min": 200000,
     "detect_max": 300000,
     "hard_min": 300000,
     "hard_max": 500000,
@@ -41,5 +41,16 @@
     "partial_max": 500000,
     "open_min": 300000,
     "open_max": 1000000
-  }
+  },
+  "_text": {
+    "toilet.object_remove_min": "상담 후 결정",
+    "sink.spring_min": "상담 후 결정",
+    "drain.spring_min": "상담 후 결정",
+    "jet.shaft_min": "상담 후 결정",
+    "jet.spring_min": "상담 후 결정",
+    "leak.hard": "상담 후 결정",
+    "leak.partial": "상담 후 결정",
+    "leak.open": "상담 후 결정"
+  },
+  "_guide": "※ 표기된 가격은 참고용이며, 작업 범위와 현장 여건에 따라 비용 조정이 가능합니다. 불필요한 비용은 줄이고 필요한 작업만 합리적인 금액으로 진행합니다."
 }
