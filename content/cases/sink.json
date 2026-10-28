@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-08-04",
+    "place": "",
+    "title": "무엇이 문제였나",
+    "summary": "내시경을 4.6m 넣자 배관 속에 **덩어리**가 걸려 물을 막고 있었습니다.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/photos/sink-09-02.webp",
+        "caption": "싱크대 아래 수납장을 열었습니다.",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/photos/sink-09-07.webp",
+        "caption": "내시경 4.6m 지점. 덩어리와 이물질이 배관을 막고 있습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-09-09.webp",
+        "caption": "싱크대 밑 바닥 배관까지 확인했습니다.",
+        "tag": ""
+      },
+      {
+        "file": "/photos/sink-09-10.webp",
+        "caption": "작업한 싱크대입니다.",
+        "tag": ""
+      }
+    ],
+    "blog": ""
+  },
+  {
     "date": "2026-08-03",
     "place": "",
     "title": "무엇이 문제였나",
@@ -39,36 +69,6 @@
       {
         "file": "/photos/sink-12-06.webp",
         "caption": "내시경 5.1m 지점. 덩어리가 배관을 거의 채우고 있습니다.",
-        "tag": ""
-      }
-    ],
-    "blog": ""
-  },
-  {
-    "date": "2026-08-04",
-    "place": "",
-    "title": "무엇이 문제였나",
-    "summary": "내시경을 4.6m 넣자 배관 속에 **덩어리**가 걸려 물을 막고 있었습니다.",
-    "facts": [],
-    "photos": [
-      {
-        "file": "/photos/sink-09-02.webp",
-        "caption": "싱크대 아래 수납장을 열었습니다.",
-        "tag": "작업 전"
-      },
-      {
-        "file": "/photos/sink-09-07.webp",
-        "caption": "내시경 4.6m 지점. 덩어리와 이물질이 배관을 막고 있습니다.",
-        "tag": ""
-      },
-      {
-        "file": "/photos/sink-09-09.webp",
-        "caption": "싱크대 밑 바닥 배관까지 확인했습니다.",
-        "tag": ""
-      },
-      {
-        "file": "/photos/sink-09-10.webp",
-        "caption": "작업한 싱크대입니다.",
         "tag": ""
       }
     ],
