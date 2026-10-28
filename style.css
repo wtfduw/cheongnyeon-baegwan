@@ -108,10 +108,13 @@ section[id]{scroll-margin-top:104px}
 .lbl-b{background:rgba(10,22,40,.82);color:#fff}
 .lbl-a{background:var(--yel);color:var(--n900)}
 .slide-caption{text-align:center;color:var(--wt2);font-size:13px;font-weight:600;margin-top:8px}
+/* 사진 한 장짜리 장면 (관리 화면 '첫 화면 사진'에서 1장만 넣었을 때, 2026-10-28): 반쪽이 비지 않게 가운데 한 장 */
+.slide-photo:only-child{grid-column:1/-1;justify-self:center;width:calc(50% - 4px)}
 @media(max-width:768px){
   .hero-slideshow{aspect-ratio:auto;min-height:0}
   .slide-photos{grid-template-columns:1fr}
   .slide-photo{aspect-ratio:4/3}
+  .slide-photo:only-child{width:100%;align-self:center}
 }
 .slide-dots{display:flex;justify-content:center;gap:6px;padding:8px 0 4px}
 .sdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:all .2s}

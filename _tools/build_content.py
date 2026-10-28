@@ -18,8 +18,9 @@ GitHub 에서는 .github/workflows/site.yml 이 main 에 push 될 때마다 --wr
   content/faq/<페이지>.json     자주 묻는 질문 (홈 index 포함 8개)                                       ├→ index.html
   content/services.json         홈 서비스 칸의 이름·증상·가격 설명, 서비스 페이지 맨 위 소개 글          │   toilet/index.html … pipe/index.html
   content/notice.json           공지 띠 (켜기/끄기, 문구, 기간)                                          │   (공지 띠는 privacy/index.html 에도)
+  content/hero.json             홈 첫 화면 사진 장면 (설명 글·사진 1~2장·작업 전/후 표시)               │
   _tools/src/<페이지>.html      페이지 원본 틀 (글·디자인, 클로드가 고침)                                 ┘
-  사장님은 위 content/ 를 관리 화면 탭(시공사례·가격·자주 묻는 질문·서비스 안내·공지)에서 고친다.
+  사장님은 위 content/ 를 관리 화면 탭(시공사례·가격·자주 묻는 질문·서비스 안내·공지·첫 화면 사진)에서 고친다.
 
   틀 안의 자리
     {{p.toilet.simple_min:won}}  → 50,000      {{…:man}} → 5 (만원 단위, 틀에는 '{{…:man}}만원')    {{…:num}} → 50000 (JSON-LD 숫자)
@@ -28,6 +29,21 @@ GitHub 에서는 .github/workflows/site.yml 이 main 에 push 될 때마다 --wr
     {{FAQ_LD}} 줄                → '구글 검색 결과에도 넣기'(search)를 켠 질문만 모은 FAQPage JSON-LD. 하나도 없으면 묶음째 빠진다
     {{s.toilet.name}} 등         → content/services.json 의 글 (name·symptoms·price_note 는 홈 SVCS 자바스크립트 안, intro 는 맨 위 소개 글)
     {{PRICE_GUIDE}} 줄           → 가격 안내 문구. 비어 있으면 줄째 빠진다 (그래서 비어 있으면 지금 HTML 과 한 글자도 다르지 않다)
+    {{HERO_SLIDES}} 줄           → 홈 첫 화면 사진(히어로 슬라이드쇼) 장면 목록. 홈 틀의 const HERO_SLIDES = [ … ]; 안에 한 줄씩
+                                   {cap:'변기 막힘', a:[{src:'변기막힘1_전.webp',t:'b'},{src:'변기막힘1_후.webp',t:'a'}]}, 모양으로 들어간다
+
+  첫 화면 사진 content/hero.json (2026-10-28, 관리 화면 '첫 화면 사진' 탭)
+    [ {"cap": "변기 막힘", "photos": [ {"file": "/변기막힘1_전.webp", "t": "b"}, {"file": "/변기막힘1_후.webp", "t": "a"} ]}, … ]
+    - 위에서부터 홈페이지에 나오는 순서. 장면 1~12개. 첫 장면 사진만 페이지를 열 때 바로 받고 나머지는 다 뜬 뒤 받는다(틀 그대로).
+    - cap: 사진 아래 설명 글. 한 줄, 30자까지, 비우면 안 됨. 자바스크립트 '…' 안에 들어가므로 js_str 로 감싼다
+      (따옴표·꺾쇠를 써도 글자 그대로 나온다. 화면에는 textContent 로 들어간다).
+    - photos: 사진 1~2장, 왼쪽(폰은 위)부터 이 순서. t 는 "b"(작업 전, 어두운 표시) / "a"(작업 후, 노란 표시·노란 테두리) 둘 중 하나.
+    - file: 사이트 맨 위 기준 주소. 사례 사진과 같이 '/' 로 시작한다. 될 수 있는 곳은 셋뿐이다
+        /photos/<영문 이름>.webp      관리 화면으로 올려 process_photos.py 가 줄인 사진 (photos/home-<날짜>-<번호>.webp)
+        /<이름>.webp|jpg|png          맨 처음부터 사이트 맨 위에 있던 사진 (변기막힘1_전.webp 등, 지금 7장면이 쓰는 것)
+        /_uploads/…                   올렸지만 아직 안 줄인 사진 — 이 파일은 멈춘다. process_photos.py --write 를 먼저 (자동 작업 순서)
+      틀에는 앞의 '/' 를 뺀 'photos/home-….webp' 로 들어간다(홈은 사이트 맨 위에 있어서 IMG + src 가 그대로 맞는 주소).
+    - 사진 하나짜리 장면은 style.css 의 .slide-photo:only-child 규칙으로 가운데 한 장만 보인다.
 
   가격을 '글자'로 (관리 화면 가격 탭의 [숫자|글자])
     content/prices.json 의 "_text": {"toilet.simple": "상담 후 결정"} 처럼 가격 줄 하나를 글자로 바꾼다.
@@ -65,6 +81,7 @@ GitHub 에서는 .github/workflows/site.yml 이 main 에 push 될 때마다 --wr
 2026-10-27 처음 만들 때 지금 HTML 8장에서 가격 숫자 122곳(57줄)과 사례 24개를 뽑아 옮겼고,
 그대로 돌리면 8장이 한 글자도 다르지 않게(바이트까지 같게) 나오는 것을 확인했다.
 2026-10-28 자주 묻는 질문(8장 47개, 검색용 34개)·서비스 설명·공지·가격 글자 바꾸기를 더할 때도 같은 확인을 했다.
+2026-10-28 첫 화면 사진 7장면을 틀에서 content/hero.json 으로 옮길 때도 index.html 이 바이트까지 같게 나오는 것을 확인했다.
   - 검색용(JSON-LD) 질문·답은 화면 글과 문장이 다른 곳이 많아 search_q·search_a 에 따로 적었다(비우면 화면 글로).
   - 수전 페이지는 검색용 순서가 화면 순서와 달라 search_order 로 적었다. 관리 화면에서 순서를 바꾸면 이 값은 지워지고 화면 순서를 따른다.
   - 변기 페이지 JSON-LD 의 minPrice·maxPrice(50000·100000)는 가격 파일과 따로 적혀 있어 가격을 바꿔도 안 바뀌던 것을 가격 자리로 바꿨다.
@@ -82,6 +99,7 @@ content/cases/drain.json 에 width·height 를 따로 적어 두었다. 사진�
     (관리 화면 Code.gs 가 저장 전에 같은 규칙으로 막는다)
   - 사례 사진 파일이 photos/ 에 없거나, 아직 줄이지 않은 올린 사진(/_uploads/…)이 남아 있는 경우
     → process_photos.py --write 를 먼저 돌린다 (자동 작업은 이 순서로 돈다)
+  - 첫 화면 사진(content/hero.json)의 장면 수·사진 수·설명 글·전/후 표시·사진 주소가 위 규칙에 맞지 않거나 사진 파일이 없는 경우
   - 만든 페이지의 태그 짝이 안 맞거나, 채우지 못한 {{…}} 자리가 남은 경우 ("확인필요")
 """
 
@@ -115,6 +133,7 @@ CASES_SLOT = "{{CASES}}\n"
 FAQ_SLOT = "{{FAQ}}\n"
 FAQ_LD_SLOT = "{{FAQ_LD}}\n"
 GUIDE_SLOT = "{{PRICE_GUIDE}}\n"
+HERO_SLOT = "{{HERO_SLIDES}}\n"
 
 # 사진 위 작은 표시. 이 셋은 노란색(tag-a), 나머지는 회색(tag-b). build_pages.py 와 같은 규칙
 TAG_A = ("작업 후", "고친 자리", "원인")
@@ -125,6 +144,10 @@ PRICE_TEXT_OK = re.compile(r"^[0-9A-Za-z가-힣·,.()~/+%\- ]{1,10}$")
 GUIDE_MAX, NOTICE_MAX = 120, 100
 FAQ_MAX_ITEMS, FAQ_Q_MAX, FAQ_A_MAX = 20, 120, 1500
 SVC_NAME_MAX, SVC_SYM_MAX, SVC_SYM_ITEMS, SVC_NOTE_MAX, SVC_INTRO_LINES, SVC_INTRO_LINE_MAX = 20, 40, 6, 60, 3, 80
+HERO_SLIDES_MAX, HERO_PHOTOS_MAX, HERO_CAP_MAX = 12, 2, 30
+# 첫 화면 사진 주소: photos/ 의 영문 이름, 또는 사이트 맨 위의 사진(한글 이름 포함, 하위 폴더·밑줄 시작 없음). 관리 화면 Code.gs 와 같은 규칙
+HERO_FILE_OK = re.compile(r"^(?:photos/[A-Za-z0-9][A-Za-z0-9._-]*|[0-9A-Za-z가-힣][0-9A-Za-z가-힣._-]*)\.(?:webp|jpg|jpeg|png)$")
+CONTROL = re.compile(r"[\x00-\x1f\x7f\u2028\u2029]")
 
 
 class Stop(Exception):
@@ -668,6 +691,60 @@ def insert_notice(page: str, block: str, label: str) -> str:
     return page.replace(NOTICE_AFTER, NOTICE_AFTER + block, 1)
 
 
+# ── 첫 화면 사진 (히어로 슬라이드쇼) ─────────────────
+
+def load_hero() -> list:
+    """content/hero.json → [{"cap": 글, "photos": [(틀에 넣을 주소, "b"|"a"), …]}, …]. 규칙은 맨 위 설명과 관리 화면 normalizeHero_ 와 같다."""
+    rel = "content/hero.json"
+    path = CONTENT / "hero.json"
+    if not path.exists():
+        raise Stop(f"{rel}: 파일이 없습니다 (홈 첫 화면 사진)")
+    data = read_json(path)
+    if not isinstance(data, list) or not 1 <= len(data) <= HERO_SLIDES_MAX:
+        raise Stop(f"{rel}: 장면 목록 모양이 아니거나 개수가 맞지 않습니다 (1~{HERO_SLIDES_MAX}개)")
+    out = []
+    for n, slide in enumerate(data, 1):
+        where = f"{rel} {n}번째 장면"
+        if not isinstance(slide, dict):
+            raise Stop(f"{where}: 모양이 아닙니다")
+        cap = one_line(slide.get("cap"), where + " 설명 글", HERO_CAP_MAX, True)
+        if CONTROL.search(cap):
+            raise Stop(f"{where} 설명 글: 보이지 않는 글자(제어 문자)가 섞여 있습니다")
+        photos = slide.get("photos")
+        if not isinstance(photos, list) or not 1 <= len(photos) <= HERO_PHOTOS_MAX:
+            raise Stop(f"{where}: 사진은 1~{HERO_PHOTOS_MAX}장이어야 합니다")
+        shots = []
+        for j, photo in enumerate(photos, 1):
+            pw = f"{where} 사진 {j}"
+            if not isinstance(photo, dict):
+                raise Stop(f"{pw}: 모양이 아닙니다")
+            t = photo.get("t")
+            if t not in ("b", "a"):
+                raise Stop(f"{pw}: 표시는 b(작업 전)·a(작업 후) 중 하나여야 합니다 ({t!r})")
+            file = text_of(photo.get("file"), pw + " 파일", required=True)
+            if not file.startswith("/"):
+                raise Stop(f"{pw}: 사진 주소는 / 로 시작해야 합니다 ({file})")
+            file = file[1:]
+            if file.startswith("_uploads/"):
+                raise Stop(f"{pw}: 아직 줄이지 않은 올린 사진입니다 ({file}). process_photos.py --write 를 먼저 돌리세요")
+            if not HERO_FILE_OK.match(file):
+                raise Stop(f"{pw}: photos/ 폴더나 사이트 맨 위의 사진이 아닙니다 ({file})")
+            if not (SITE / file).is_file():
+                raise Stop(f"{pw}: 사진 파일이 없습니다 ({file})")
+            shots.append((file, t))
+        out.append({"cap": cap, "photos": shots})
+    return out
+
+
+def render_hero(slides: list) -> str:
+    """홈 틀 HERO_SLIDES 안의 줄들. 2026-10-28 까지 틀에 손으로 적혀 있던 모양 그대로 (그래서 그대로면 바이트까지 같다)"""
+    rows = []
+    for i, s in enumerate(slides):
+        photos = ",".join(f"{{src:'{js_str(f)}',t:'{t}'}}" for f, t in s["photos"])
+        rows.append(f"  {{cap:'{js_str(s['cap'])}', a:[{photos}]}}" + ("," if i < len(slides) - 1 else ""))
+    return "".join(r + "\n" for r in rows)
+
+
 # ── 가운데 정렬 글: 문장 덩어리 · 전화번호 묶음 (2026-10-28) ──────────
 # 폰(390px)에서 가운데 정렬 글이 문장 중간에서 끊겼다 ('전화가 어려우시면 남겨 주세요. 확인하는 대로 / 전화드립니다.').
 # 한 줄(<br> 사이)에 문장이 둘 이상이면 문장마다 <span class="sent"> 로 감싼다.
@@ -842,7 +919,9 @@ def build(name: str, cases, data: dict) -> str:
         page = one_slot(page, GUIDE_SLOT, guide_line(prices.guide), label)
     if cases is not None:
         page = one_slot(page, CASES_SLOT, render_cases(cases), label)
-    page = center_text(page)          # 가운데 정렬 글: 문장 덩어리·전화번호 묶음 (공지 띠는 notice_block 이 따로)
+    if name == "index":               # 첫 화면 사진은 홈에만 (홈 틀에 {{HERO_SLIDES}} 줄이 꼭 하나)
+        page = one_slot(page, HERO_SLOT, render_hero(data["hero"]), label)
+    page = center_text(page)         # 가운데 정렬 글: 문장 덩어리·전화번호 묶음 (공지 띠는 notice_block 이 따로)
     return insert_notice(page, data["notice_block"], label)
 
 
@@ -859,6 +938,7 @@ def check(page: str) -> str:
 
 
 PHOTO = re.compile(r'<img\b[^>]*?\ssrc="(?:\.\./)?([^"]+)"')
+HERO_PHOTO = re.compile(r"\{src:'([^'\\]+)',t:'[ab]'\}")    # 홈 첫 화면 사진 (HERO_SLIDES 안, 자바스크립트라 <img> 가 아니다)
 SHOW = 10   # 파일마다 보여 줄 줄 수 (없어지는 줄·생기는 줄 각각)
 
 
@@ -885,8 +965,9 @@ def compare(path: pathlib.Path, new: str) -> str:
             gone += a[i1:i2]
             came += b[j1:j2]
     note = f"바뀜 +{len(came)}줄 / -{len(gone)}줄"
-    lost = sorted(set(PHOTO.findall(old)) - set(PHOTO.findall(new)))
-    added = sorted(set(PHOTO.findall(new)) - set(PHOTO.findall(old)))
+    pics = lambda s: set(PHOTO.findall(s)) | set(HERO_PHOTO.findall(s))
+    lost = sorted(pics(old) - pics(new))
+    added = sorted(pics(new) - pics(old))
     if lost:
         note += f"\n      [주의] 빠지는 사진 {len(lost)}장: {', '.join(lost)}"
     if added:
@@ -900,6 +981,7 @@ def load_all(today: str = None) -> dict:
     return {"prices": prices,
             "faq": {name: load_faq(name, prices) for name, _, _ in PAGES},
             "services": load_services(),
+            "hero": load_hero(),
             "notice": notice,
             "notice_block": notice_block(notice, today or kst_today())}
 

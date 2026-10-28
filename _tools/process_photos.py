@@ -13,6 +13,8 @@ GitHub 에서는 .github/workflows/site.yml 이 build_content.py 보다 먼저 -
   브라우저가 긴 변 1600px JPEG 로 먼저 줄여 _uploads/ 폴더에 커밋하고,
   content/cases/<페이지>.json 에는 '/_uploads/파일이름' 으로 적힌다.
   (_uploads 는 이름이 밑줄로 시작해서 홈페이지 주소로는 열리지 않는다)
+  첫 화면 사진('첫 화면 사진' 탭, 2026-10-28)도 같다: content/hero.json 에 '/_uploads/home-20261028-153000-ab12cd.jpg' 로 적힌다.
+  장면에는 날짜가 없어서 올린 파일 이름의 날짜를 쓴다 → photos/home-20261028-01.webp (이름에 날짜가 없으면 photos/home-hero-01.webp)
 
 이 파일이 하는 일 — 순서를 바꾸지 않는다
   1. 사진 방향 바로 세우기 (ImageOps.exif_transpose)
@@ -21,7 +23,7 @@ GitHub 에서는 .github/workflows/site.yml 이 build_content.py 보다 먼저 -
   3. WebP 품질 80 으로 photos/<페이지>-<날짜>-<번호>.webp 에 저장
      예) 변기 페이지, 2026-10-27 사례의 첫 사진 → photos/toilet-20261027-01.webp
          날짜가 없는 사례는 photos/toilet-case-01.webp. 번호는 이미 있는 파일 다음 번호부터
-  4. content/cases/<페이지>.json 의 '/_uploads/…' 주소를 새 파일 주소('/photos/…')로 바꾸기
+  4. content/cases/<페이지>.json · content/hero.json 의 '/_uploads/…' 주소를 새 파일 주소('/photos/…')로 바꾸기
   5. _uploads/ 의 원본 지우기 (GitHub 커밋 기록에는 남는다)
 
 위치정보(GPS)는 신경 쓰지 않기로 했다(2026-10-27 사용자 결정).
@@ -43,6 +45,8 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 SITE = pathlib.Path(__file__).resolve().parent.parent
 CASES = SITE / "content" / "cases"
+HERO = SITE / "content" / "hero.json"     # 첫 화면 사진. 사진 이름 앞부분은 home
+HERO_KEY = "home"
 UPLOADS = "_uploads/"
 PHOTOS = SITE / "photos"
 LONG = 1200       # 긴 변 픽셀
@@ -58,6 +62,12 @@ def case_key(case: dict) -> str:
     day = str(case.get("date") or "").strip()[:10]
     m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", day)
     return "".join(m.groups()) if m else "case"
+
+
+def hero_key(value: str) -> str:
+    """첫 화면 사진 이름 가운데 부분: 올린 파일 이름의 날짜(_uploads/home-20261028-153000-….jpg → 20261028) 또는 'hero'."""
+    m = re.match(re.escape(UPLOADS + HERO_KEY) + r"-(\d{8})-", value.lstrip("/"))
+    return m.group(1) if m else "hero"
 
 
 def next_name(prefix: str, taken: set) -> str:
@@ -87,23 +97,30 @@ def shrink(src: pathlib.Path):
         raise Stop(f"{src.name}: 읽을 수 없는 사진 형식입니다 (아이폰 HEIC 등). JPG 로 바꿔 다시 올려 주세요")
 
 
+def photo_dicts(data):
+    """사례 json · 첫 화면 json 안의 (사례·장면 dict, 사진 dict). 둘 다 [{…, "photos": [{"file": …}, …]}, …] 모양이다."""
+    if isinstance(data, dict):
+        data = data.get("cases") or []
+    for item in data if isinstance(data, list) else []:
+        for photo in (item.get("photos") or []) if isinstance(item, dict) else []:
+            if isinstance(photo, dict):
+                yield item, photo
+
+
 def find_uploads():
-    """[(json 경로, 페이지, 사례 dict, 사진 dict, 적힌 주소)]"""
+    """[(json 경로, 새 사진 이름 앞부분, 사진 dict, 적힌 주소)] — 사례 7개 파일 + 첫 화면 사진"""
     found = []
-    for yml in sorted(CASES.glob("*.json")):
+    files = [(p, p.stem) for p in sorted(CASES.glob("*.json"))] + ([(HERO, HERO_KEY)] if HERO.exists() else [])
+    for yml, page in files:
         try:
             data = json.loads(yml.read_text(encoding="utf-8")) or []
         except ValueError as e:
             raise Stop(f"{yml.name}: json 모양이 깨졌습니다 ({e})")
-        if isinstance(data, dict):
-            data = data.get("cases") or []
-        for case in data if isinstance(data, list) else []:
-            for photo in (case.get("photos") or []) if isinstance(case, dict) else []:
-                if not isinstance(photo, dict):
-                    continue
-                value = str(photo.get("file") or "")
-                if value.lstrip("/").startswith(UPLOADS):
-                    found.append((yml, yml.stem, case, photo, value))
+        for item, photo in photo_dicts(data):
+            value = str(photo.get("file") or "")
+            if value.lstrip("/").startswith(UPLOADS):
+                key = hero_key(value) if yml == HERO else case_key(item)
+                found.append((yml, f"{page}-{key}", photo, value))
     return found
 
 
@@ -114,17 +131,15 @@ def dump_json(data) -> str:
 
 
 def replace_in_json(js: pathlib.Path, mapping: dict) -> str:
-    """사례 json 에서 올린 사진 주소만 새 주소로 바꾼다. 다른 칸은 손대지 않는다."""
+    """사례 json·첫 화면 json 에서 올린 사진 주소만 새 주소로 바꾼다. 다른 칸은 손대지 않는다."""
     data = json.loads(js.read_text(encoding="utf-8")) or []
-    cases = (data.get("cases") or []) if isinstance(data, dict) else data
-    for case in cases:
-        for photo in case.get("photos") or []:
-            value = photo.get("file")
-            if value in mapping:
-                photo["file"] = mapping[value]
-            # 바꾼 뒤 확인: 남은 올린 사진 주소가 없어야 한다
-            if str(photo.get("file") or "").lstrip("/").startswith(UPLOADS):
-                raise Stop(f"{js.name}: 사진 주소를 바꾸지 못했습니다 ({photo.get('file')})")
+    for _, photo in photo_dicts(data):
+        value = photo.get("file")
+        if value in mapping:
+            photo["file"] = mapping[value]
+        # 바꾼 뒤 확인: 남은 올린 사진 주소가 없어야 한다
+        if str(photo.get("file") or "").lstrip("/").startswith(UPLOADS):
+            raise Stop(f"{js.name}: 사진 주소를 바꾸지 못했습니다 ({photo.get('file')})")
     return dump_json(data)
 
 
@@ -136,14 +151,14 @@ def main() -> None:
         taken = {p.name for p in PHOTOS.glob("*.webp")}
         plan = {}          # 원본 경로(사이트 기준) → (새 파일 이름, webp 바이트, 설명)
         per_yml = {}       # json → {적힌 주소: 새 주소}
-        for yml, page, case, photo, value in items:
+        for yml, prefix, photo, value in items:
             rel = value.lstrip("/")
             if rel not in plan:
                 src = SITE / rel
                 if not src.is_file():
                     raise Stop(f"{yml.name}: 올린 사진이 없습니다 ({value})")
                 data, before, orient, after = shrink(src)
-                name = next_name(f"{page}-{case_key(case)}", taken)
+                name = next_name(prefix, taken)
                 taken.add(name)
                 plan[rel] = (name, data, f"{before[0]}×{before[1]} 방향{orient} → {after[0]}×{after[1]}, {len(data) // 1024}KB")
             per_yml.setdefault(yml, {})[value] = "/photos/" + plan[rel][0]
@@ -163,7 +178,7 @@ def main() -> None:
     for rel, (name, _, note) in plan.items():
         print(f"  {rel} → photos/{name}  ({note})")
     for yml in new_texts:
-        print(f"  주소 고침: content/cases/{yml.name}")
+        print(f"  주소 고침: {yml.relative_to(SITE).as_posix()}")
     if not write:
         print(f"\n새 사진 {len(plan)}장. 아직 아무 파일도 쓰지 않았습니다. 맞으면: python process_photos.py --write")
         sys.exit(1)

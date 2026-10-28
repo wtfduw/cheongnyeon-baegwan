@@ -7,6 +7,8 @@
   켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
   {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
   {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  {{HERO_SLIDES}} 줄에는 첫 화면 사진 장면들(content/hero.json, 관리 화면 '첫 화면 사진' 탭)이 HERO_SLIDES 목록 모양으로 들어간다.
+  장면 글·사진·순서는 여기서 고치지 않는다. 슬라이드쇼가 움직이는 방식(아래 renderHeroSlides)만 이 틀에서 고친다.
   가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
   제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
   ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
@@ -805,13 +807,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox
 
 /* ── 히어로 슬라이드쇼 (데이터 기반 렌더) ── */
 const HERO_SLIDES = [
-  {cap:'변기 막힘', a:[{src:'변기막힘1_전.webp',t:'b'},{src:'변기막힘1_후.webp',t:'a'}]},
-  {cap:'싱크대 막힘', a:[{src:'싱크막힘1_전.webp',t:'b'},{src:'싱크막힘1_후.webp',t:'a'}]},
-  {cap:'하수구 막힘', a:[{src:'하수구막힘_전.webp',t:'b'},{src:'하수구막힘_후.webp',t:'a'}]},
-  {cap:'고압 세척', a:[{src:'고압세척3_전.webp',t:'b'},{src:'고압세척3_후.webp',t:'a'}]},
-  {cap:'배관 설비 공사 · 문제 진단', a:[{src:'배관설비공사_전_1.webp',t:'b'},{src:'배관설비공사_전_2.jpg',t:'b'}]},
-  {cap:'배관 설비 공사 · 보수 완료', a:[{src:'배관설비공사_후_1.webp',t:'a'},{src:'배관설비공사_후_2.webp',t:'a'}]},
-  {cap:'수전 교체 · 부품 교체', a:[{src:'수전교체_1_전.webp',t:'b'},{src:'수전교체_2_후.webp',t:'a'}]}
+{{HERO_SLIDES}}
 ];
 (function renderHeroSlides() {
   const track = document.getElementById('slide-track');
