@@ -4,6 +4,13 @@
   {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
   {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
   {{CASES}} 줄에는 content/cases/jet.json 의 시공 사례가 들어간다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
   이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
 -->
 <!DOCTYPE html>
@@ -70,54 +77,7 @@
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "그냥 뚫으면 안 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "막힌 덩어리만 있으면 뚫는 것으로 충분합니다. 그런데 배관 벽에 기름이 두껍게 붙어 있으면 뚫어도 통로가 좁은 채로 남습니다. 그래서 뚫었는데도 물이 느리거나 같은 자리가 반복해서 막히는 것입니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "스프링을 사서 직접 해봐도 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "권하지 않습니다. 배관 안에서 스프링이 걸리면 배관을 뜯어내는 공사가 됩니다. 특히 꺾이는 자리에서 잘 걸리고, 기름때가 두꺼운 배관일수록 되돌아 나오기 어렵습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "고압세척 비용은 얼마인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "현장 확인 후 견적입니다. 배관이 길거나 꺾이는 자리가 많아 난이도가 올라가면 금액이 올라가고, 보통 배관 길이에 따라 추가 요금이 붙습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "식당인데 얼마나 자주 해야 하나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "일반적으로 6~12개월에 한 번 점검하고 필요할 때 세척합니다. 기름으로 심하게 막혔던 적이 있다면 처음에는 3개월쯤 뒤에 다시 확인해 그 집에 맞는 주기를 정하는 것이 좋습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "장비는 어느 정도인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "압력 300bar(약 4,350 PSI), 최대 340bar, 유량 50L/min, 가솔린 40마력 장비를 사용합니다. 고압세척은 장비가 곧 결과인 작업이라 견적을 비교하실 때 장비 사양을 함께 물어보시는 것을 권합니다."
-      }
-    }
-  ]
-}
-</script>
+{{FAQ_LD}}
 </head>
 <body>
 
@@ -212,8 +172,7 @@
     <div class="pg-hero-body">
       <h1>뚫었는데도 물이 느리신가요?<br><em>막힌 걸 뚫는 것</em>과 다릅니다</h1>
       <p class="pg-hero-sub">
-        배관 벽에 눌어붙은 기름과 슬러지는 뚫어도 그대로 남습니다.<br class="nb">
-        벽까지 씻어내야 같은 자리가 다시 막히지 않습니다.
+{{s.jet.intro}}
       </p>
       <div class="pg-hero-facts">
         <span class="pg-fact">압력 <em>300 bar</em></span>
@@ -483,6 +442,7 @@
         <div class="price-row-num">{{p.jet.spring_min:won}}원 ~</div>
       </div>
     </div>
+{{PRICE_GUIDE}}
     <div class="pg-note rv" style="margin-top:22px">
       <strong>금액이 올라가는 경우</strong>는 배관이 길거나 복잡할 때, 꺾이는 자리가 많아
       고압 호스가 힘을 못 쓰고 들어가지 못할 때입니다. 시간이 오래 걸리고 난이도가 올라갑니다.
@@ -539,30 +499,7 @@
     <div class="rv"><div class="sec-tag">FAQ</div>
     <div class="sec-ttl">자주 묻는 질문</div></div>
     <div class="faq-wrap rv">
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>그냥 뚫으면 안 되나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">막힌 덩어리만 있으면 뚫는 것으로 충분합니다. 그런데 배관 <b>벽에</b> 기름이 두껍게 붙어 있으면 뚫어도 통로가 좁은 채로 남습니다. 그래서 뚫었는데도 물이 느리거나, 같은 자리가 반복해서 막히는 것입니다. 카메라로 함께 보면서 어느 쪽인지 말씀드립니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>스프링을 사서 직접 해봐도 되나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">권하지 않습니다. 배관 안에서 스프링이 걸리면 배관을 뜯어내는 공사가 됩니다. 특히 꺾이는 자리(엘보)에서 잘 걸리고, 기름때가 두꺼운 배관일수록 되돌아 나오기 어렵습니다. 식당이라면 영업을 며칠 쉬게 될 수도 있습니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용이 얼마나 나오나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">고압세척은 현장 확인 후 견적입니다. 배관이 길거나 꺾이는 자리가 많아 난이도가 올라가면 금액이 올라가고, 보통 배관 길이에 따라 추가 요금이 붙습니다. 카메라로 확인한 뒤 금액을 말씀드리고 진행합니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>식당인데 얼마나 자주 해야 하나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">일반적으로 6~12개월에 한 번 점검하고 필요할 때 세척합니다. 기름으로 심하게 막혔던 적이 있다면 처음에는 3개월쯤 뒤에 다시 확인해 그 집에 맞는 주기를 정하는 것이 좋습니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>장비는 어느 정도인가요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">압력 300bar(약 4,350 PSI), 최대 340bar, 유량 50L/min, 가솔린 40마력 장비를 사용합니다. 고압세척은 장비가 곧 결과인 작업이라, 견적을 비교하실 때 장비 사양을 함께 물어보시는 것을 권합니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>어디까지 출동하시나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">광주 전 지역(북구·서구·남구·동구·광산구)과 담양·화순·나주 등 근교로 출동합니다. 광주 시내는 30분, 시외는 1시간 내외로 도착합니다.</div>
-      </div>
+{{FAQ}}
     </div>
   </div>
 </section>

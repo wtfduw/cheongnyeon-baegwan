@@ -4,6 +4,13 @@
   {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
   {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
   {{CASES}} 줄에는 content/cases/drain.json 의 시공 사례가 들어간다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
   이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
 -->
 <!DOCTYPE html>
@@ -70,62 +77,7 @@
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "하수구가 역류하는데 지금 뭘 해야 하나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "먼저 물 사용을 멈추세요. 세탁기, 설거지, 샤워 전부입니다. 그다음 차분히 업체를 알아보시면 됩니다. 급하다고 먼저 눈에 띈 곳을 부르면 금액 이야기 없이 작업부터 시작되는 경우가 있습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "하수구를 직접 뚫어봐도 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "장비 사용법을 확실히 아신다면 가능합니다. 다만 전동스프링이 배관 안에서 말려 빠지지 않으면 배관을 뜯는 공사가 되고 비용이 3~4배까지 올라갑니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "공용배관이 원인이면 비용은 누가 부담하나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "공용배관은 건물이 함께 쓰는 배관이라 관리사무소에서 부담합니다. 세대 배관 문제인지 공용배관 문제인지부터 카메라로 확인해야 합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "뚫었는데 얼마 안 가 또 막힙니다",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "배관이 오래돼 무너졌거나 처음부터 배관 구조가 잘못 시공된 경우일 수 있습니다. 이런 경우는 뚫는 것만으로 해결되지 않습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "비가 올 때만 냄새가 올라옵니다",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "자주 있는 일입니다. 메인배관에서 올라오는 것일 수도, 가지관에서 올라오는 것일 수도 있어 악취 차단과 배관 청소를 함께 해야 하는 경우가 많습니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "하수구 막힘 비용은 얼마인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "샤프트 작업 {{p.drain.shaft_min:man}}만원부터, 스프링 {{p.drain.spring_min:man}}만원부터이고, 고압세척은 현장 확인 후 견적입니다. 배관이 길고 복잡해 막힌 곳을 찾기 어려우면 금액이 올라갑니다."
-      }
-    }
-  ]
-}
-</script>
+{{FAQ_LD}}
 
 </head>
 <body>
@@ -221,8 +173,7 @@
     <div class="pg-hero-body">
       <h1>하수구가 역류하시나요?<br><em>급하다고 아무나</em> 부르지 마세요</h1>
       <p class="pg-hero-sub">
-        먼저 물 사용을 멈추시고, 금액을 확인한 뒤에 부르셔도 늦지 않습니다.<br class="nb">
-        급한 마음에 부르면 비용 협의 없이 진행되는 경우가 있습니다.
+{{s.drain.intro}}
       </p>
       <div class="pg-hero-facts">
         <span class="pg-fact">광주 시내 <em>30분</em> 출동</span>
@@ -467,6 +418,7 @@
         <div class="price-row-num">견적 문의</div>
       </div>
     </div>
+{{PRICE_GUIDE}}
     <div class="pg-note rv" style="margin-top:22px">
       <strong>금액이 올라가는 경우</strong>는 배관이 길고 복잡해서 나가는 배관을 찾아
       막힌 곳을 집중적으로 청소해야 할 때입니다. 물길조차 나지 않아 나가는 배관을 못 찾으면
@@ -519,30 +471,7 @@
     <div class="rv"><div class="sec-tag">FAQ</div>
     <div class="sec-ttl">자주 묻는 질문</div></div>
     <div class="faq-wrap rv">
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>지금 역류하는데 뭘 해야 하나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">먼저 <b>물 사용을 멈추세요.</b> 세탁기, 설거지, 샤워 전부입니다. 그다음 차분히 업체를 알아보시면 됩니다. 급하다고 먼저 눈에 띈 곳을 부르면 금액 이야기 없이 작업부터 시작되는 경우가 있습니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>직접 뚫어봐도 되나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">장비 사용법을 확실히 아신다면 직접 하셔도 됩니다. 다만 <b>전동스프링이 배관 안에서 말려 빠지지 않으면 배관을 뜯는 공사</b>가 되고 비용이 3~4배까지 올라갑니다. 해보셨는데 안 되면 그때 부르시는 것을 권합니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>공용배관이면 비용은 누가 내나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">공용배관은 건물이 함께 쓰는 배관이라 <b>관리사무소에서 비용을 부담합니다.</b> 우리 집 배관 문제인지 공용배관 문제인지부터 확인해야 하는 이유입니다. 카메라로 보면 어디까지가 세대 배관인지 분명해집니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>뚫었는데 얼마 안 가 또 막혀요</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">배관이 오래돼 무너졌거나, 처음부터 배관 구조가 잘못 시공된 경우일 수 있습니다. 이런 경우는 뚫는 것만으로는 해결되지 않습니다. 카메라로 안을 보면 어느 경우인지 알 수 있습니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비 올 때만 냄새가 나요</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">자주 있는 일입니다. 메인배관에서 올라오는 것일 수도, 가지관에서 올라오는 것일 수도 있습니다. 냄새를 막는 작업과 배관 청소를 함께 해야 하는 경우가 많습니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용이 얼마나 나오나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">샤프트 작업 {{p.drain.shaft_min:man}}만원부터, 스프링 {{p.drain.spring_min:man}}만원부터이고, 고압세척은 현장 확인 후 견적입니다. 배관이 길고 복잡해 막힌 곳을 찾기 어려우면 금액이 올라갑니다. 카메라로 확인한 뒤 말씀드리고 진행합니다.</div>
-      </div>
+{{FAQ}}
     </div>
   </div>
 </section>

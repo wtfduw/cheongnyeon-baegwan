@@ -3,6 +3,13 @@
   index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
   {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
   {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
   이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
 -->
 <!DOCTYPE html>
@@ -36,6 +43,40 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── 상담 신청 칸 (2026-10-27 추가) — 이 페이지에만 쓴다. 한글 폭은 px 로만 ── */
+.apply-sec{background:var(--paper)}
+.apply-sub{text-align:center;color:var(--t2);font-size:16px;margin:-18px auto 26px}
+.apply-sub a{color:var(--navy);font-weight:800;border-bottom:2px solid var(--yel);white-space:nowrap}
+.apply-form{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--bd);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(16,35,63,.06)}
+.af-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.af-fld{display:block}
+.af-fld span{display:block;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px}
+.af-fld em,.af-check em{font-style:normal;color:#C2410C;font-size:12px;font-weight:700;margin-left:3px}
+.af-fld input,.af-fld select,.af-fld textarea{box-sizing:border-box;width:100%;min-height:48px;padding:11px 14px;border:1.5px solid var(--bd);border-radius:12px;font:inherit;font-size:16px;color:var(--t1);background:#fff}
+.af-fld textarea{resize:vertical;min-height:110px;line-height:1.6}
+.af-fld input:focus,.af-fld select:focus,.af-fld textarea:focus{outline:none;border-color:var(--n700);box-shadow:0 0 0 3px rgba(31,64,106,.12)}
+.af-wide{grid-column:1/-1}
+.af-bad input,.af-bad select,.af-bad textarea{border-color:#C2410C}
+.af-agree{margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--paper)}
+.af-terms{font-size:13.5px;color:var(--t2);line-height:1.75}
+.af-terms b{color:var(--t1);margin-right:4px}
+.af-terms a{color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--yel)}
+.af-check{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:15px;font-weight:700;color:var(--t1);cursor:pointer}
+.af-check input{width:20px;height:20px;flex-shrink:0;accent-color:var(--n800)}
+.af-check.af-bad{color:#C2410C}
+.af-hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.af-msg{margin-top:14px;font-size:14.5px;font-weight:700;color:var(--t2)}
+.af-msg:empty{display:none}
+.af-msg.bad{color:#C2410C}
+.af-btn{width:100%;justify-content:center;margin-top:16px;font-size:17px;padding:16px 26px}
+.af-btn:disabled{opacity:.6;cursor:default;transform:none}
+.af-done{text-align:center;padding:10px 0}
+.af-done-ic{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--yel);color:var(--n900);font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.af-done-t{font-family:'SUITE Variable',sans-serif;font-size:24px;font-weight:800;color:var(--t1);margin-bottom:6px}
+.af-done p{color:var(--t2)}
+@media(max-width:640px){.apply-form{padding:20px 16px}.af-grid{grid-template-columns:1fr}.apply-sub{font-size:15px}}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -235,6 +276,7 @@
     <div class="sec-ttl">서비스 가격 안내</div></div>
     <p class="price-sub rv">작업 전에 정확한 금액을 먼저 안내드립니다</p>
     <div class="price-list rv" id="price-list"></div>
+{{PRICE_GUIDE}}
     <p class="price-note rv">
       단순 막힘 기준 가격이며, 막힘의 위치·깊이·이물질 종류에 따라 현장 진단 후 확정됩니다.<br>
       현장 상황이 달라지는 경우 반드시 설명드리고 동의를 받은 뒤 진행합니다.
@@ -297,12 +339,7 @@
     <div class="rv"><div class="sec-tag">FAQ</div>
     <div class="sec-ttl">자주 묻는 질문</div></div>
     <div class="faq-wrap">
-      <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>방문 가능 지역이 어딘가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">전남광주통합특별시 전 지역(광주 시내와 목포·여수·순천·나주·광양·담양·화순·해남·무안 등)과 전북특별자치도(전주·군산·익산 등) 전 지역 출동 가능합니다.</div></div>
-      <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>해결 못 하면 정말 0원인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 맞습니다. 현장에서 해결하지 못한 경우 비용을 청구하지 않습니다. 단, 내시경 탐지 후 배관 교체 등 별도 공사가 필요한 경우 견적 안내 후 진행 여부를 결정하시면 됩니다.</div></div>
-      <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용은 어떻게 결정되나요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">막힘의 위치, 깊이, 이물질 종류, 건물 유형 등을 종합해 현장 진단 후 확정됩니다. 방문 전 상황을 말씀해 주시면 예상 비용을 미리 안내해드립니다.</div></div>
-      <div class="faq-item rv d1 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>새벽이나 공휴일에도 출동 가능한가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">네, 24시간 365일 연중무휴로 운영합니다. 새벽, 명절, 공휴일 관계없이 언제든지 연락 주시면 신속하게 출동합니다.</div></div>
-      <div class="faq-item rv d2 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>1년 무상 A/S는 어떤 범위인가요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">작업한 부위에서 동일한 문제가 재발하는 경우 1년 이내 무상으로 재작업해드립니다. 단, 새로운 이물질 투입 등 외부 요인에 의한 재발은 제외됩니다.</div></div>
-      <div class="faq-item rv d3 open"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>시간은 얼마나 소요될까요.</span><span class="faq-arrow">▾</span></div><div class="faq-a">일반적인 변기·싱크대 막힘은 30분에서 1시간 이내에 해결되는 경우가 많습니다. 하수구나 배관 깊숙한 곳의 막힘, 고압 세척이 필요한 경우에는 최대 2시간 정도 소요될 수 있습니다. 방문 후 현장 상황을 먼저 진단하고 예상 소요 시간을 미리 안내해드립니다.</div></div>
+{{FAQ}}
     </div>
   </div>
 </section>
@@ -318,6 +355,49 @@
   </p>
   <div class="zero-char rv">
     <img src="캐릭터로고_배경제거.webp" alt="청년배관 캐릭터" onerror="this.style.display='none'">
+  </div>
+</section>
+
+<!-- 상담 신청 (2026-10-27 추가) — 보내는 곳은 아래 스크립트의 CONSULT_ENDPOINT 한 줄. 받는 쪽은 구글 Apps Script '상담 접수' -->
+<section class="sec apply-sec" id="apply">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Request</div>
+    <div class="sec-ttl">상담 신청</div></div>
+    <p class="apply-sub rv">전화가 어려우시면 남겨 주세요. 확인하는 대로 전화드립니다.<br>급하시면 <a href="tel:010-6872-8284" onclick="trackCTA('call','apply')">010-6872-8284</a>로 바로 전화 주세요.</p>
+    <form class="apply-form rv" id="apply-form" method="post" novalidate onsubmit="return false"><!-- 스크립트가 늦게 떠도 브라우저가 입력값을 주소창(URL)에 붙여 보내지 않게 -->
+      <div id="apply-fields">
+        <div class="af-grid">
+          <label class="af-fld" data-f="phone"><span>연락처<em>필수</em></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="010-1234-5678"></label>
+          <label class="af-fld" data-f="name"><span>성함</span><input name="name" autocomplete="name" maxlength="30" placeholder="예: 홍길동"></label>
+          <label class="af-fld" data-f="area"><span>방문 지역</span><input name="area" maxlength="60" placeholder="예: 광주 북구 운암동"></label>
+          <label class="af-fld" data-f="service"><span>필요한 서비스</span><select name="service">
+            <option value="">골라 주세요</option>
+            <option>변기 막힘</option>
+            <option>싱크대 막힘</option>
+            <option>하수구 막힘</option>
+            <option>누수 탐지</option>
+            <option>고압 세척</option>
+            <option>수전·부품 교체</option>
+            <option>배관 설비 공사</option>
+            <option>잘 모르겠어요</option>
+          </select></label>
+          <label class="af-fld af-wide" data-f="symptom"><span>증상 설명</span><textarea name="symptom" rows="4" maxlength="1000" placeholder="예: 아침부터 변기 물이 안 내려가요"></textarea></label>
+        </div>
+        <div class="af-hp" aria-hidden="true"><label>이 칸은 비워 두세요<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="af-agree">
+          <p class="af-terms"><b>개인정보 수집·이용 안내</b>받는 정보: 연락처(필수), 성함·방문 지역·서비스·증상(선택) · 쓰는 곳: 상담과 출동 연락 · 보관: 접수일로부터 6개월(작업한 경우 보증 기간 최대 1년까지) · 동의하지 않으셔도 전화·카카오톡 상담은 그대로 됩니다. <a href="/privacy/">자세히 보기</a></p>
+          <label class="af-check" data-f="consent"><input type="checkbox" name="consent" value="yes"><span>개인정보 수집·이용에 동의합니다<em>(필수)</em></span></label>
+        </div>
+        <p class="af-msg" id="apply-msg" role="status" aria-live="polite"></p>
+        <button type="submit" class="btn-call af-btn" id="apply-btn">상담 신청하기</button>
+      </div>
+      <div class="af-done" id="apply-done" hidden>
+        <div class="af-done-ic">✓</div>
+        <p class="af-done-t">접수되었습니다</p>
+        <p>확인하는 대로 <b id="apply-done-phone"></b>(으)로 전화드릴게요.<br>급하시면 010-6872-8284로 바로 전화 주세요.</p>
+      </div>
+    </form>
+    <noscript><p class="apply-sub" style="margin-top:16px">이 칸은 자바스크립트가 켜져 있어야 보낼 수 있습니다. 전화나 카카오톡으로 연락 주세요.</p></noscript>
   </div>
 </section>
 
@@ -384,51 +464,51 @@ const IMG = '';
 /* ── 서비스 데이터 ── */
 const SVCS = [
   {
-    name:'변기 막힘', page:'toilet/', pageLabel:'변기 막힘', icon:'i-toilet',
+    name:'{{s.toilet.name}}', page:'toilet/', pageLabel:'변기 막힘', icon:'i-toilet',
     pairs:[{before:'변기막힘1_전.webp', after:'변기막힘1_후.webp'}],
-    symptoms:['물이 올라올 것 같아요','내려가긴 하는데 느려요','아예 안 내려가요','이물질을 빠뜨렸어요'],
-    price:'{{p.toilet.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 막힘 정도에 따라 현장 확인 후 확정'
+    symptoms:[{{s.toilet.symptoms}}],
+    price:'{{p.toilet.simple_min:won}}원~', priceNote:'{{s.toilet.price_note}}'
   },
   {
-    name:'싱크대 막힘', page:'sink/', pageLabel:'싱크대 막힘', icon:'i-sink',
+    name:'{{s.sink.name}}', page:'sink/', pageLabel:'싱크대 막힘', icon:'i-sink',
     pairs:[{before:'싱크막힘1_전.webp', after:'싱크막힘1_후.webp'}],
-    symptoms:['물이 잘 안 내려가요','역류해서 올라와요','악취가 계속 나요','배수가 완전히 막혔어요'],
-    price:'{{p.sink.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 트랩 구조에 따라 현장 확인 후 확정'
+    symptoms:[{{s.sink.symptoms}}],
+    price:'{{p.sink.simple_min:won}}원~', priceNote:'{{s.sink.price_note}}'
   },
   {
-    name:'하수구 막힘', page:'drain/', pageLabel:'하수구 막힘', icon:'i-drain',
+    name:'{{s.drain.name}}', page:'drain/', pageLabel:'하수구 막힘', icon:'i-drain',
     pairs:[{before:'하수구막힘_전.webp', after:'하수구막힘_후.webp'}],
-    symptoms:['욕실 바닥 물이 안 빠져요','냄새가 계속 올라와요','역류하고 있어요','배수구 주변이 항상 젖어있어요'],
-    price:'{{p.drain.simple_min:won}}원~', priceNote:'단순 막힘 기준 · 막힘 위치에 따라 현장 확인 후 확정'
+    symptoms:[{{s.drain.symptoms}}],
+    price:'{{p.drain.simple_min:won}}원~', priceNote:'{{s.drain.price_note}}'
   },
   {
-    name:'누수 탐지', page:'leak/', pageLabel:'누수 탐지', icon:'i-wrench',
+    name:'{{s.leak.name}}', page:'leak/', pageLabel:'누수 탐지', icon:'i-wrench',
     pairs:[{before:'누수1_전.jpg', after:'누수1_후.jpg'}],
-    symptoms:['물을 안 쓰는데 계량기가 돌아요','수도요금이 갑자기 늘었어요','천장이나 벽에서 물이 새요','바닥이 늘 축축해요'],
-    price:'{{p.leak.detect_min:won}}원~', priceNote:'기본 탐지 기준 · 위치와 난이도에 따라 현장 확인 후 확정'
+    symptoms:[{{s.leak.symptoms}}],
+    price:'{{p.leak.detect_min:won}}원~', priceNote:'{{s.leak.price_note}}'
   },
   {
-    name:'고압 세척', page:'jet/', pageLabel:'고압 세척', icon:'i-jet',
+    name:'{{s.jet.name}}', page:'jet/', pageLabel:'고압 세척', icon:'i-jet',
     pairs:[{before:'고압세척3_전.webp', after:'고압세척3_후.webp'}],
-    symptoms:['배관이 자주 막혀요','냄새가 지속적으로 나요','물 빠짐이 점점 느려져요','정기 관리가 필요해요'],
-    price:'현장 견적', priceNote:'배관 길이에 따라 현장 확인 후 확정'
+    symptoms:[{{s.jet.symptoms}}],
+    price:'현장 견적', priceNote:'{{s.jet.price_note}}'
   },
   {
-    name:'배관 설비 공사', page:'pipe/', pageLabel:'배관 설비 공사', icon:'i-wrench',
+    name:'{{s.pipe.name}}', page:'pipe/', pageLabel:'배관 설비 공사', icon:'i-wrench',
     pairs:[
       {before:'배관설비공사_전_1.webp', after:'배관설비공사_후_1.webp'},
       {before:'배관설비공사_전_2.jpg', after:'배관설비공사_후_2.webp'}
     ],
-    symptoms:['배관이 낡아 자주 막혀요','누수가 반복돼요','배관 전체 교체가 필요해요','신규 배관 설치가 필요해요'],
-    price:'현장 견적', priceNote:'공사 범위에 따라 협의'
+    symptoms:[{{s.pipe.symptoms}}],
+    price:'현장 견적', priceNote:'{{s.pipe.price_note}}'
   },
   {
-    name:'수전교체·부품교체', page:'faucet/', pageLabel:'수전·부품 교체', icon:'i-faucet',
+    name:'{{s.faucet.name}}', page:'faucet/', pageLabel:'수전·부품 교체', icon:'i-faucet',
     pairs:[
       {before:'수전교체_1_전.webp', after:'수전교체_1_후.jpg'},
       {before:'수전교체_2_전.jpg', after:'수전교체_2_후.webp'}
     ],
-    symptoms:['수전에서 물이 새거나 헐거워요','변기가 금가거나 고장났어요','세면대가 깨지거나 노후됐어요','변기+세면대 한번에 교체하고 싶어요'],
+    symptoms:[{{s.faucet.symptoms}}],
     priceList:[
       {label:'수전 교체', price:'{{p.faucet.home_from:won}}원~'},
       {label:'변기 교체', price:'{{p.toilet.replace_min:won}}원~'},
@@ -440,13 +520,13 @@ const SVCS = [
 
 /* ── 가격 데이터 ── */
 const PRICES = [
-  {icon:'i-toilet', label:'변기 막힘 (단순)',    num:'{{p.toilet.simple_min:won}}원~'},
-  {icon:'i-sink',   label:'싱크대 막힘 (단순)',  num:'{{p.sink.simple_min:won}}원~'},
-  {icon:'i-drain',  label:'하수구 막힘 (단순)',  num:'{{p.drain.simple_min:won}}원~'},
-  {icon:'i-faucet', label:'수전 교체',           num:'{{p.faucet.home_from:won}}원~'},
-  {icon:'i-toilet', label:'변기 교체',           num:'{{p.toilet.replace_min:won}}원~'},
-  {icon:'i-sink',   label:'세면대 교체',         num:'{{p.toilet.basin_min:won}}원~'},
-  {icon:'i-faucet', label:'변기 + 세면대 교체',  num:'{{p.faucet.combo:won}}원'},
+  {icon:'i-toilet', label:'변기 막힘 (단순)',    num:'{{p.toilet.simple_min:won}}원~'{{#text toilet.simple}}, quote:true{{/text}}},
+  {icon:'i-sink',   label:'싱크대 막힘 (단순)',  num:'{{p.sink.simple_min:won}}원~'{{#text sink.simple_min}}, quote:true{{/text}}},
+  {icon:'i-drain',  label:'하수구 막힘 (단순)',  num:'{{p.drain.simple_min:won}}원~'{{#text drain.simple_min}}, quote:true{{/text}}},
+  {icon:'i-faucet', label:'수전 교체',           num:'{{p.faucet.home_from:won}}원~'{{#text faucet.home_from}}, quote:true{{/text}}},
+  {icon:'i-toilet', label:'변기 교체',           num:'{{p.toilet.replace_min:won}}원~'{{#text toilet.replace_min}}, quote:true{{/text}}},
+  {icon:'i-sink',   label:'세면대 교체',         num:'{{p.toilet.basin_min:won}}원~'{{#text toilet.basin_min}}, quote:true{{/text}}},
+  {icon:'i-faucet', label:'변기 + 세면대 교체',  num:'{{p.faucet.combo:won}}원'{{#text faucet.combo}}, quote:true{{/text}}},
   {icon:'i-jet',    label:'고압 세척',           num:'현장 견적', quote:true},
   {icon:'i-wrench', label:'배관 설비 공사',      num:'현장 견적', quote:true}
 ];
@@ -775,6 +855,103 @@ const revObs = new IntersectionObserver(es => {
   es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
 }, {threshold:.1});
 document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- 상담 신청 보내기 (2026-10-27 추가) -->
+<script>
+/* ▼▼▼ 보내는 곳 — 구글 Apps Script '상담 접수' 웹 앱 주소. 설치(설치_안내.md 4단계) 뒤 이 한 줄만 바꾼다 ▼▼▼ */
+const CONSULT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwRVBLBdrvipSk-ngi66yJOU4okb5QzRgouvttH2B8to7kHCnzaLhtKAm7xp_zjm8w2Rg/exec';
+/* ▲▲▲ 예: 'https://script.google.com/macros/s/AKfy…긴 글자…/exec'  (따옴표는 그대로 둔다) ▲▲▲
+
+   보내는 방법 — 구글 문서에 이 웹 앱의 응답을 다른 주소(이 홈페이지)에서 읽을 수 있다는 보장이 없어서:
+   1) POST 로 보내기만 한다 (mode 'no-cors' — 응답은 읽지 않는다)
+   2) 같은 접수 번호로 '받았는지'만 JSONP(<script>)로 묻는다 → 받았으면 '접수되었습니다'
+   받았는지 확인하지 못하면 확인 못 했다고 그대로 알린다. 다시 눌러도 같은 번호라 시트에는 한 줄만 남는다. */
+
+/* cf-check:start — 입력 검사 (tests/test_i.log 에서 node 로 시험) */
+function cfCheck(d) {
+  var digits = String(d.phone || '').replace(/[^0-9]/g, '');
+  if (!digits) return { ok: false, field: 'phone', msg: '연락처를 적어 주세요.' };
+  if (!/^0\d{8,10}$/.test(digits)) return { ok: false, field: 'phone', msg: '연락처를 확인해 주세요. (예: 010-1234-5678)' };
+  if (String(d.name || '').trim().length > 30) return { ok: false, field: 'name', msg: '성함은 30자까지 적을 수 있어요.' };
+  if (String(d.area || '').trim().length > 60) return { ok: false, field: 'area', msg: '방문 지역은 60자까지 적을 수 있어요.' };
+  if (String(d.symptom || '').length > 1000) return { ok: false, field: 'symptom', msg: '증상 설명은 1,000자까지 적을 수 있어요.' };
+  if (!d.consent) return { ok: false, field: 'consent', msg: '개인정보 수집·이용에 동의해 주세요.' };
+  return { ok: true };
+}
+/* cf-check:end */
+
+(function () {
+  var form = document.getElementById('apply-form');
+  if (!form) return;
+  var msg = document.getElementById('apply-msg'), btn = document.getElementById('apply-btn');
+  var shownAt = Date.now(), sendId = null, busy = false;
+  var CALL = ' 급하시면 010-6872-8284로 전화 주세요.';
+
+  function say(text, bad) { msg.textContent = text; msg.className = 'af-msg' + (bad ? ' bad' : ''); }
+  function newId() {
+    var a = new Uint8Array(8);
+    window.crypto.getRandomValues(a);
+    return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+  function read() {
+    var f = form.elements;
+    return { phone: f.phone.value, name: f.name.value, area: f.area.value, service: f.service.value,
+             symptom: f.symptom.value, consent: f.consent.checked, website: f.website.value };
+  }
+  function checkReceived(id) {
+    return new Promise(function (resolve) {
+      var cb = 'cfcb_' + id.slice(0, 8) + '_' + Date.now(), s = document.createElement('script'), timer;
+      function finish(v) { clearTimeout(timer); window[cb] = function () {}; if (s.parentNode) s.parentNode.removeChild(s); resolve(v); }
+      window[cb] = function (r) { finish(!!(r && r.found)); };
+      s.onerror = function () { finish(false); };
+      timer = setTimeout(function () { finish(false); }, 10000);
+      s.src = CONSULT_ENDPOINT + '?check=' + encodeURIComponent(id) + '&callback=' + cb;
+      document.head.appendChild(s);
+    });
+  }
+
+  form.addEventListener('input', function (e) {
+    var box = e.target.closest('[data-f]');
+    if (box) box.classList.remove('af-bad');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var d = read(), c = cfCheck(d);
+    Array.prototype.forEach.call(form.querySelectorAll('.af-bad'), function (x) { x.classList.remove('af-bad'); });
+    if (!c.ok) {
+      say(c.msg, true);
+      var box = form.querySelector('[data-f="' + c.field + '"]');
+      if (box) { box.classList.add('af-bad'); var inp = box.querySelector('input,select,textarea'); if (inp) inp.focus(); }
+      return;
+    }
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(CONSULT_ENDPOINT)) {
+      say('상담 신청은 아직 준비 중입니다. 전화나 카카오톡으로 연락 주세요.', true);
+      return;
+    }
+    if (!sendId) sendId = newId();
+    busy = true; btn.disabled = true; btn.textContent = '보내는 중…'; say('');
+    var body = new URLSearchParams({
+      phone: d.phone, name: d.name, area: d.area, service: d.service, symptom: d.symptom,
+      consent: 'yes', website: d.website, page: location.pathname, id: sendId, t: String(Date.now() - shownAt)
+    });
+    fetch(CONSULT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () { return checkReceived(sendId); }, function () { return 'net'; })
+      .then(function (r) {
+        if (r === true) {
+          document.getElementById('apply-done-phone').textContent = d.phone.trim();
+          document.getElementById('apply-fields').hidden = true;
+          document.getElementById('apply-done').hidden = false;
+          return;
+        }
+        if (r === 'net') say('보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 주세요.' + CALL, true);
+        else say('보냈지만 접수 확인을 받지 못했습니다. 다시 눌러도 한 번만 접수됩니다.' + CALL, true);
+      })
+      .then(function () { busy = false; btn.disabled = false; btn.textContent = '상담 신청하기'; });
+  });
+})();
 </script>
 
 <!-- CTA 클릭 계측 -->

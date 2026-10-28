@@ -45,9 +45,14 @@
      - 내가 고치지 않은 "없어지는 줄"이나 "생기는 줄"
      - "확인필요"
    --write 한 뒤에도 커밋 전에 git diff 로 한 번 더 보고, 아니면 git checkout -- <파일> 로 되돌린다.
+
+공지 띠(2026-10-28): content/notice.json 이 켜져 있으면 9장 머리 바로 아래에 홈·서비스 페이지와 같은 띠를 넣는다.
+   띠 HTML 은 build_content.py 의 notice_block · insert_notice 를 그대로 빌려 쓴다(모양이 한 곳에서만 정해지게).
+   꺼져 있으면 아무것도 넣지 않는다 = 지금 HTML 과 같다.
 """
 
 import difflib
+import importlib.util
 import json
 import pathlib
 import re
@@ -441,15 +446,33 @@ def compare(path: pathlib.Path, new: str) -> str:
     return note + lines_note("없어지는 줄", gone) + lines_note("생기는 줄", came)
 
 
+def content_tool():
+    """build_content.py 를 파일 위치로 불러온다 (python -I 로 돌리면 같은 폴더라도 import 로는 못 찾는다)"""
+    spec = importlib.util.spec_from_file_location("build_content", pathlib.Path(__file__).with_name("build_content.py"))
+    mod = importlib.util.module_from_spec(spec)
+    keep, sys.dont_write_bytecode = sys.dont_write_bytecode, True   # _tools/__pycache__ 를 만들지 않게
+    try:                                                              # (자동 작업의 git add -A 가 공개 저장소에 올려 버린다)
+        spec.loader.exec_module(mod)
+    finally:
+        sys.dont_write_bytecode = keep
+    return mod
+
+
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")   # 클로드 도구처럼 출력을 받아 읽을 때 한글이 깨지지 않게
     write = "--write" in sys.argv[1:]
+    bc = content_tool()
+    try:
+        notice = bc.notice_block(bc.load_notice(), bc.kst_today())
+    except bc.Stop as e:
+        print(f"멈춤: {e}\n아무 파일도 쓰지 않았습니다.")
+        sys.exit(2)
     template = TEMPLATE.read_text(encoding="utf-8-sig")   # 틀이 BOM 붙어 저장돼도 설명 주석이 지워지게
     template = re.sub(r"^<!--.*?-->\n", "", template, count=1, flags=re.S)   # 틀 파일 설명 주석 제거
 
     outputs = []
     for region in REGIONS:
-        page = build(region, template)
+        page = bc.insert_notice(build(region, template), notice, f"/{region['slug']}/")
 
         left = re.findall(r"\{\{(\w+)\}\}", page)
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S):

@@ -29,6 +29,40 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── 상담 신청 칸 (2026-10-27 추가) — 이 페이지에만 쓴다. 한글 폭은 px 로만 ── */
+.apply-sec{background:var(--paper)}
+.apply-sub{text-align:center;color:var(--t2);font-size:16px;margin:-18px auto 26px}
+.apply-sub a{color:var(--navy);font-weight:800;border-bottom:2px solid var(--yel);white-space:nowrap}
+.apply-form{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--bd);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(16,35,63,.06)}
+.af-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.af-fld{display:block}
+.af-fld span{display:block;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px}
+.af-fld em,.af-check em{font-style:normal;color:#C2410C;font-size:12px;font-weight:700;margin-left:3px}
+.af-fld input,.af-fld select,.af-fld textarea{box-sizing:border-box;width:100%;min-height:48px;padding:11px 14px;border:1.5px solid var(--bd);border-radius:12px;font:inherit;font-size:16px;color:var(--t1);background:#fff}
+.af-fld textarea{resize:vertical;min-height:110px;line-height:1.6}
+.af-fld input:focus,.af-fld select:focus,.af-fld textarea:focus{outline:none;border-color:var(--n700);box-shadow:0 0 0 3px rgba(31,64,106,.12)}
+.af-wide{grid-column:1/-1}
+.af-bad input,.af-bad select,.af-bad textarea{border-color:#C2410C}
+.af-agree{margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--paper)}
+.af-terms{font-size:13.5px;color:var(--t2);line-height:1.75}
+.af-terms b{color:var(--t1);margin-right:4px}
+.af-terms a{color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--yel)}
+.af-check{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:15px;font-weight:700;color:var(--t1);cursor:pointer}
+.af-check input{width:20px;height:20px;flex-shrink:0;accent-color:var(--n800)}
+.af-check.af-bad{color:#C2410C}
+.af-hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+.af-msg{margin-top:14px;font-size:14.5px;font-weight:700;color:var(--t2)}
+.af-msg:empty{display:none}
+.af-msg.bad{color:#C2410C}
+.af-btn{width:100%;justify-content:center;margin-top:16px;font-size:17px;padding:16px 26px}
+.af-btn:disabled{opacity:.6;cursor:default;transform:none}
+.af-done{text-align:center;padding:10px 0}
+.af-done-ic{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--yel);color:var(--n900);font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.af-done-t{font-family:'SUITE Variable',sans-serif;font-size:24px;font-weight:800;color:var(--t1);margin-bottom:6px}
+.af-done p{color:var(--t2)}
+@media(max-width:640px){.apply-form{padding:20px 16px}.af-grid{grid-template-columns:1fr}.apply-sub{font-size:15px}}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -311,6 +345,49 @@
   </p>
   <div class="zero-char rv">
     <img src="캐릭터로고_배경제거.webp" alt="청년배관 캐릭터" onerror="this.style.display='none'">
+  </div>
+</section>
+
+<!-- 상담 신청 (2026-10-27 추가) — 보내는 곳은 아래 스크립트의 CONSULT_ENDPOINT 한 줄. 받는 쪽은 구글 Apps Script '상담 접수' -->
+<section class="sec apply-sec" id="apply">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Request</div>
+    <div class="sec-ttl">상담 신청</div></div>
+    <p class="apply-sub rv">전화가 어려우시면 남겨 주세요. 확인하는 대로 전화드립니다.<br>급하시면 <a href="tel:010-6872-8284" onclick="trackCTA('call','apply')">010-6872-8284</a>로 바로 전화 주세요.</p>
+    <form class="apply-form rv" id="apply-form" method="post" novalidate onsubmit="return false"><!-- 스크립트가 늦게 떠도 브라우저가 입력값을 주소창(URL)에 붙여 보내지 않게 -->
+      <div id="apply-fields">
+        <div class="af-grid">
+          <label class="af-fld" data-f="phone"><span>연락처<em>필수</em></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="010-1234-5678"></label>
+          <label class="af-fld" data-f="name"><span>성함</span><input name="name" autocomplete="name" maxlength="30" placeholder="예: 홍길동"></label>
+          <label class="af-fld" data-f="area"><span>방문 지역</span><input name="area" maxlength="60" placeholder="예: 광주 북구 운암동"></label>
+          <label class="af-fld" data-f="service"><span>필요한 서비스</span><select name="service">
+            <option value="">골라 주세요</option>
+            <option>변기 막힘</option>
+            <option>싱크대 막힘</option>
+            <option>하수구 막힘</option>
+            <option>누수 탐지</option>
+            <option>고압 세척</option>
+            <option>수전·부품 교체</option>
+            <option>배관 설비 공사</option>
+            <option>잘 모르겠어요</option>
+          </select></label>
+          <label class="af-fld af-wide" data-f="symptom"><span>증상 설명</span><textarea name="symptom" rows="4" maxlength="1000" placeholder="예: 아침부터 변기 물이 안 내려가요"></textarea></label>
+        </div>
+        <div class="af-hp" aria-hidden="true"><label>이 칸은 비워 두세요<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="af-agree">
+          <p class="af-terms"><b>개인정보 수집·이용 안내</b>받는 정보: 연락처(필수), 성함·방문 지역·서비스·증상(선택) · 쓰는 곳: 상담과 출동 연락 · 보관: 접수일로부터 6개월(작업한 경우 보증 기간 최대 1년까지) · 동의하지 않으셔도 전화·카카오톡 상담은 그대로 됩니다. <a href="/privacy/">자세히 보기</a></p>
+          <label class="af-check" data-f="consent"><input type="checkbox" name="consent" value="yes"><span>개인정보 수집·이용에 동의합니다<em>(필수)</em></span></label>
+        </div>
+        <p class="af-msg" id="apply-msg" role="status" aria-live="polite"></p>
+        <button type="submit" class="btn-call af-btn" id="apply-btn">상담 신청하기</button>
+      </div>
+      <div class="af-done" id="apply-done" hidden>
+        <div class="af-done-ic">✓</div>
+        <p class="af-done-t">접수되었습니다</p>
+        <p>확인하는 대로 <b id="apply-done-phone"></b>(으)로 전화드릴게요.<br>급하시면 010-6872-8284로 바로 전화 주세요.</p>
+      </div>
+    </form>
+    <noscript><p class="apply-sub" style="margin-top:16px">이 칸은 자바스크립트가 켜져 있어야 보낼 수 있습니다. 전화나 카카오톡으로 연락 주세요.</p></noscript>
   </div>
 </section>
 
@@ -768,6 +845,103 @@ const revObs = new IntersectionObserver(es => {
   es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
 }, {threshold:.1});
 document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- 상담 신청 보내기 (2026-10-27 추가) -->
+<script>
+/* ▼▼▼ 보내는 곳 — 구글 Apps Script '상담 접수' 웹 앱 주소. 설치(설치_안내.md 4단계) 뒤 이 한 줄만 바꾼다 ▼▼▼ */
+const CONSULT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwRVBLBdrvipSk-ngi66yJOU4okb5QzRgouvttH2B8to7kHCnzaLhtKAm7xp_zjm8w2Rg/exec';
+/* ▲▲▲ 예: 'https://script.google.com/macros/s/AKfy…긴 글자…/exec'  (따옴표는 그대로 둔다) ▲▲▲
+
+   보내는 방법 — 구글 문서에 이 웹 앱의 응답을 다른 주소(이 홈페이지)에서 읽을 수 있다는 보장이 없어서:
+   1) POST 로 보내기만 한다 (mode 'no-cors' — 응답은 읽지 않는다)
+   2) 같은 접수 번호로 '받았는지'만 JSONP(<script>)로 묻는다 → 받았으면 '접수되었습니다'
+   받았는지 확인하지 못하면 확인 못 했다고 그대로 알린다. 다시 눌러도 같은 번호라 시트에는 한 줄만 남는다. */
+
+/* cf-check:start — 입력 검사 (tests/test_i.log 에서 node 로 시험) */
+function cfCheck(d) {
+  var digits = String(d.phone || '').replace(/[^0-9]/g, '');
+  if (!digits) return { ok: false, field: 'phone', msg: '연락처를 적어 주세요.' };
+  if (!/^0\d{8,10}$/.test(digits)) return { ok: false, field: 'phone', msg: '연락처를 확인해 주세요. (예: 010-1234-5678)' };
+  if (String(d.name || '').trim().length > 30) return { ok: false, field: 'name', msg: '성함은 30자까지 적을 수 있어요.' };
+  if (String(d.area || '').trim().length > 60) return { ok: false, field: 'area', msg: '방문 지역은 60자까지 적을 수 있어요.' };
+  if (String(d.symptom || '').length > 1000) return { ok: false, field: 'symptom', msg: '증상 설명은 1,000자까지 적을 수 있어요.' };
+  if (!d.consent) return { ok: false, field: 'consent', msg: '개인정보 수집·이용에 동의해 주세요.' };
+  return { ok: true };
+}
+/* cf-check:end */
+
+(function () {
+  var form = document.getElementById('apply-form');
+  if (!form) return;
+  var msg = document.getElementById('apply-msg'), btn = document.getElementById('apply-btn');
+  var shownAt = Date.now(), sendId = null, busy = false;
+  var CALL = ' 급하시면 010-6872-8284로 전화 주세요.';
+
+  function say(text, bad) { msg.textContent = text; msg.className = 'af-msg' + (bad ? ' bad' : ''); }
+  function newId() {
+    var a = new Uint8Array(8);
+    window.crypto.getRandomValues(a);
+    return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+  function read() {
+    var f = form.elements;
+    return { phone: f.phone.value, name: f.name.value, area: f.area.value, service: f.service.value,
+             symptom: f.symptom.value, consent: f.consent.checked, website: f.website.value };
+  }
+  function checkReceived(id) {
+    return new Promise(function (resolve) {
+      var cb = 'cfcb_' + id.slice(0, 8) + '_' + Date.now(), s = document.createElement('script'), timer;
+      function finish(v) { clearTimeout(timer); window[cb] = function () {}; if (s.parentNode) s.parentNode.removeChild(s); resolve(v); }
+      window[cb] = function (r) { finish(!!(r && r.found)); };
+      s.onerror = function () { finish(false); };
+      timer = setTimeout(function () { finish(false); }, 10000);
+      s.src = CONSULT_ENDPOINT + '?check=' + encodeURIComponent(id) + '&callback=' + cb;
+      document.head.appendChild(s);
+    });
+  }
+
+  form.addEventListener('input', function (e) {
+    var box = e.target.closest('[data-f]');
+    if (box) box.classList.remove('af-bad');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var d = read(), c = cfCheck(d);
+    Array.prototype.forEach.call(form.querySelectorAll('.af-bad'), function (x) { x.classList.remove('af-bad'); });
+    if (!c.ok) {
+      say(c.msg, true);
+      var box = form.querySelector('[data-f="' + c.field + '"]');
+      if (box) { box.classList.add('af-bad'); var inp = box.querySelector('input,select,textarea'); if (inp) inp.focus(); }
+      return;
+    }
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(CONSULT_ENDPOINT)) {
+      say('상담 신청은 아직 준비 중입니다. 전화나 카카오톡으로 연락 주세요.', true);
+      return;
+    }
+    if (!sendId) sendId = newId();
+    busy = true; btn.disabled = true; btn.textContent = '보내는 중…'; say('');
+    var body = new URLSearchParams({
+      phone: d.phone, name: d.name, area: d.area, service: d.service, symptom: d.symptom,
+      consent: 'yes', website: d.website, page: location.pathname, id: sendId, t: String(Date.now() - shownAt)
+    });
+    fetch(CONSULT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () { return checkReceived(sendId); }, function () { return 'net'; })
+      .then(function (r) {
+        if (r === true) {
+          document.getElementById('apply-done-phone').textContent = d.phone.trim();
+          document.getElementById('apply-fields').hidden = true;
+          document.getElementById('apply-done').hidden = false;
+          return;
+        }
+        if (r === 'net') say('보내지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 주세요.' + CALL, true);
+        else say('보냈지만 접수 확인을 받지 못했습니다. 다시 눌러도 한 번만 접수됩니다.' + CALL, true);
+      })
+      .then(function () { busy = false; btn.disabled = false; btn.textContent = '상담 신청하기'; });
+  });
+})();
 </script>
 
 <!-- CTA 클릭 계측 -->

@@ -4,6 +4,13 @@
   {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
   {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
   {{CASES}} 줄에는 content/cases/faucet.json 의 시공 사례가 들어간다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
   이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
 -->
 <!DOCTYPE html>
@@ -22,8 +29,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>광주 수전 교체 | 세면대·싱크대 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원, 샤워기 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원 | 청년배관</title>
-<meta name="description" content="수도꼭지에서 물이 샐 때. 세면대·싱크대 수전 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원, 샤워기 수전 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원. 벽에 붙은 수전은 밸브가 부러지면 벽을 깨는 공사가 되니 직접 하지 마세요. 광주 시내 30분 출동.">
+<title>광주 수전 교체{{#any faucet.basin,faucet.shower}} |{{/any}}{{#num faucet.basin}} 세면대·싱크대 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원{{/num}}{{#num faucet.basin,faucet.shower}},{{/num}}{{#num faucet.shower}} 샤워기 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원{{/num}} | 청년배관</title>
+<meta name="description" content="수도꼭지에서 물이 샐 때. {{#num faucet.basin}}세면대·싱크대 수전 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원{{/num}}{{#num faucet.basin,faucet.shower}}, {{/num}}{{#num faucet.shower}}샤워기 수전 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원{{/num}}{{#any faucet.basin,faucet.shower}}. {{/any}}벽에 붙은 수전은 밸브가 부러지면 벽을 깨는 공사가 되니 직접 하지 마세요. 광주 시내 30분 출동.">
 <link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/faucet/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/faucet/">
@@ -43,7 +50,7 @@
   "@type": "Service",
   "serviceType": "수전·부속 교체",
   "name": "광주 수전 교체 · 세면대 변기 교체",
-  "description": "세면대·싱크대 수전 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원, 샤워기 수전 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원. 벽에 붙은 수전은 밸브 파손 위험이 있어 직접 하지 않는 편이 안전합니다.",
+  "description": "{{#num faucet.basin}}세면대·싱크대 수전 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원{{/num}}{{#num faucet.basin,faucet.shower}}, {{/num}}{{#num faucet.shower}}샤워기 수전 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원{{/num}}{{#any faucet.basin,faucet.shower}}. {{/any}}벽에 붙은 수전은 밸브 파손 위험이 있어 직접 하지 않는 편이 안전합니다.",
   "provider": {
     "@type": "Plumber",
     "name": "청년배관",
@@ -70,46 +77,7 @@
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "수전을 직접 바꿔도 되나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "세면대나 싱크대 수전은 전용 공구가 있으면 직접 하셔도 됩니다. 다만 샤워기처럼 벽에 붙은 밸브에 연결하는 것은 권하지 않습니다. 잘못 돌리면 벽 안쪽 밸브가 망가져 벽을 깨는 공사가 됩니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "자재는 손님이 준비해야 하나요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "보통은 저희가 준비해 갑니다. 직접 사두신 제품이 있으면 저희가 가서 설치만 해 드립니다. 둘 다 가능합니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "수전 교체 비용은 얼마인가요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "세면대·싱크대 수전은 모델에 따라 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원, 샤워기 수전은 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원입니다. 변기와 세면대를 함께 교체하면 {{p.faucet.combo:man}}만원이고 약 2시간 걸립니다."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "물이 조금 새는데 그냥 둬도 될까요?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "권하지 않습니다. 새는 물은 아래층으로 갑니다. 수전 교체비보다 아래층 피해 보상이 훨씬 큽니다."
-      }
-    }
-  ]
-}
-</script>
+{{FAQ_LD}}
 
 </head>
 <body>
@@ -205,8 +173,7 @@
     <div class="pg-hero-body">
       <h1>수전 교체,<br><em>벽에 붙은 것</em>은 직접 하지 마세요</h1>
       <p class="pg-hero-sub">
-        밸브를 잘못 돌리면 벽 안쪽 수도밸브가 망가집니다.<br class="nb">
-        그때는 벽을 깨는 공사가 됩니다.
+{{s.faucet.intro}}
       </p>
       <div class="pg-hero-facts">
         <span class="pg-fact">세면대·싱크대 <em>{{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원</em></span>
@@ -395,6 +362,7 @@
         <div class="price-row-num">{{p.faucet.combo:won}}원</div>
       </div>
     </div>
+{{PRICE_GUIDE}}
     <div class="pg-note rv" style="margin-top:22px">
       수전 값은 <strong>모델에 따라</strong> 달라집니다. 안내드린 금액이 교체 비용 전부이고,
       다만 <strong>앵글밸브까지 함께 교환해야 하는 경우</strong>에는 추가 요금이 생길 수 있습니다.
@@ -447,30 +415,7 @@
     <div class="rv"><div class="sec-tag">FAQ</div>
     <div class="sec-ttl">자주 묻는 질문</div></div>
     <div class="faq-wrap rv">
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>직접 바꿔도 되나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">세면대나 싱크대 수전은 전용 공구가 있으시면 직접 하셔도 됩니다. 다만 <b>샤워기처럼 벽에 붙은 밸브에 연결하는 것은 권하지 않습니다.</b> 잘못 돌리면 벽 안쪽 밸브가 망가져 벽을 깨는 공사가 됩니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>자재는 제가 사둬야 하나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">아닙니다. 보통은 저희가 준비해 갑니다. 다만 마음에 드는 제품을 직접 사두셨다면 저희가 가서 설치만 해 드립니다. 둘 다 가능합니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>어느 브랜드를 쓰시나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">국산 중에 많이 쓰는 브랜드를 사용합니다. 비싼 제품과 싼 제품의 차이가 아주 크지는 않지만 기능이나 들어가는 자재에 차이가 있을 수 있습니다. 원하시는 사양이 있으면 말씀해 주세요.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>물이 조금 새는데 그냥 둬도 될까요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">권하지 않습니다. 새는 물은 결국 아래층으로 갑니다. 우리 집 수전 교체비보다 아래층 피해를 물어드리는 비용이 훨씬 큽니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>비용이 얼마나 나오나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">세면대·싱크대 수전은 모델에 따라 {{p.faucet.basin_min:man}}~{{p.faucet.basin_max:man}}만원, 샤워기 수전은 {{p.faucet.shower_min:man}}~{{p.faucet.shower_max:man}}만원입니다. 변기와 세면대를 함께 교체하시면 {{p.faucet.combo:man}}만원이고 약 2시간 걸립니다. 앵글밸브까지 교환해야 하면 추가 요금이 생길 수 있고, 그건 작업 전에 말씀드립니다.</div>
-      </div>
-      <div class="faq-item open">
-        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>어디까지 출동하시나요?</span><span class="faq-arrow">▾</span></div>
-        <div class="faq-a">광주 전 지역과 담양·화순·나주 등 근교, 여수·순천·목포·전주까지 갑니다. 광주 시내는 30분, 시외는 1시간 내외로 도착합니다.</div>
-      </div>
+{{FAQ}}
     </div>
   </div>
 </section>
