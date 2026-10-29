@@ -81,11 +81,24 @@
     "cap": "수전 교체 · 부품 교체",
     "photos": [
       {
-        "file": "/수전교체_1_전.webp",
+        "file": "/_uploads/home-20261029-152042-5f77a3.jpg",
         "t": "b"
       },
       {
-        "file": "/수전교체_2_후.webp",
+        "file": "/_uploads/home-20261029-152045-7941fa.jpg",
+        "t": "a"
+      }
+    ]
+  },
+  {
+    "cap": "씽크대 수전 교체",
+    "photos": [
+      {
+        "file": "/_uploads/home-20261029-152049-f8e12b.jpg",
+        "t": "b"
+      },
+      {
+        "file": "/_uploads/home-20261029-152053-12e88f.jpg",
         "t": "a"
       }
     ]
