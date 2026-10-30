@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "date": "2026-10-30",
+    "place": "광산구 수완지구 아파트",
+    "title": "무엇이 문제였나",
+    "summary": "계량기 수도배관에 누수가 있어 해당 부속 교체로 문제 해결.",
+    "facts": [],
+    "photos": [
+      {
+        "file": "/_uploads/leak-20261030-162102-e70c4c.jpg",
+        "caption": "계량기 밸브에서 누수 발생",
+        "tag": "작업 전"
+      },
+      {
+        "file": "/_uploads/leak-20261030-162105-977b6e.jpg",
+        "caption": "",
+        "tag": "작업 후"
+      },
+      {
+        "file": "/_uploads/leak-20261030-162108-7cef60.jpg",
+        "caption": "",
+        "tag": "작업 후"
+      }
+    ],
+    "blog": ""
+  }
+]
