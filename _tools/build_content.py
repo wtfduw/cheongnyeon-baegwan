@@ -19,8 +19,18 @@ GitHub 에서는 .github/workflows/site.yml 이 main 에 push 될 때마다 --wr
   content/services.json         홈 서비스 칸의 이름·증상·가격 설명, 서비스 페이지 맨 위 소개 글          │   toilet/index.html … pipe/index.html
   content/notice.json           공지 띠 (켜기/끄기, 문구, 기간)                                          │   (공지 띠는 privacy/index.html 에도)
   content/hero.json             홈 첫 화면 사진 장면 (설명 글·사진 1~2장·작업 전/후 표시)               │
-  _tools/src/<페이지>.html      페이지 원본 틀 (글·디자인, 클로드가 고침)                                 ┘
-  사장님은 위 content/ 를 관리 화면 탭(시공사례·가격·자주 묻는 질문·서비스 안내·공지·첫 화면 사진)에서 고친다.
+  content/site.json             기본 정보 (전화·카톡·출동 시간·운영·결제·경력·SNS·사업자) — 처리방침에도 │
+  _tools/src/<페이지>.html      페이지 원본 틀 (글·디자인, 클로드가 고침). privacy.html 도 여기           ┘
+  사장님은 위 content/ 를 관리 화면 탭(시공사례·가격·자주 묻는 질문·서비스 안내·공지·첫 화면 사진·기본 정보)에서 고친다.
+
+  기본 정보 content/site.json (2026-11-05, 관리 화면 '기본 정보' 탭)
+    틀(src/*.html, page-template.html, src/privacy.html)의 {{site.이름}} 자리에 들어간다. 이름과 규칙은 아래 SITE_RULES.
+    {{site.phone}} 010-6872-8284   {{site.phone_intl}} +82-10-6872-8284 (JSON-LD, 전화번호에서 만든다)   {{site.kakao}}
+    {{site.dispatch}} 30분 (검색 제목 '30분 출동', '광주 시내 30분 출동', 홈 '평균 도착')   {{site.area.<지역>}} 지역별 출동 시간
+    {{site.hours}} {{site.pay}} {{site.receipt}} ('출동·결제 안내' 칸)   {{site.years}} 7년  {{site.jobs}} 4,000건
+    {{site.blog}} {{site.instagram}}   {{site.youtube_href}} (유튜브 주소, 비우면 '#' — 지금처럼 아이콘만)   {{site.ceo}} {{site.biz_no}}
+    지역 9장은 build_pages.py 가 같은 값(load_site·fill_site)을 쓴다. 자주 묻는 질문 답 글 속 숫자는 따라 바뀌지 않는다(그 탭에서 따로).
+    2026-11-05 옮길 때 지금 값 그대로 18장이 한 글자도 다르지 않은 것, 시험 값으로 바꾸면 옛 값이 한 곳도 안 남는 것을 확인했다.
 
   틀 안의 자리
     {{p.toilet.simple_min:won}}  → 50,000      {{…:man}} → 5 (만원 단위, 틀에는 '{{…:man}}만원')    {{…:num}} → 50000 (JSON-LD 숫자)
@@ -121,7 +131,7 @@ CONTENT = SITE / "content"
 PAGES = [("index", "index.html", None)] + [
     (p, f"{p}/index.html", p) for p in ("toilet", "sink", "drain", "jet", "faucet", "leak", "pipe")]
 SERVICES = ("toilet", "sink", "drain", "jet", "faucet", "leak", "pipe")
-PRIVACY = "privacy/index.html"          # 손으로 쓰는 파일. 공지 띠 묶음만 넣고 뺀다
+PRIVACY = "privacy/index.html"          # 틀 src/privacy.html 에서 기본 정보·공지 띠만 넣어 만든다 (2026-11-05 전에는 손으로 쓰던 파일)
 
 PRICE_SLOT = re.compile(r"\{\{p\.([a-z_]+)\.([a-z_]+):(won|man|num)\}\}")
 _SLOT = r"\{\{p\.[a-z_]+\.[a-z_]+:(?:won|man)\}\}"
@@ -148,6 +158,29 @@ HERO_SLIDES_MAX, HERO_PHOTOS_MAX, HERO_CAP_MAX = 12, 2, 30
 # 첫 화면 사진 주소: photos/ 의 영문 이름, 또는 사이트 맨 위의 사진(한글 이름 포함, 하위 폴더·밑줄 시작 없음). 관리 화면 Code.gs 와 같은 규칙
 HERO_FILE_OK = re.compile(r"^(?:photos/[A-Za-z0-9][A-Za-z0-9._-]*|[0-9A-Za-z가-힣][0-9A-Za-z가-힣._-]*)\.(?:webp|jpg|jpeg|png)$")
 CONTROL = re.compile(r"[\x00-\x1f\x7f\u2028\u2029]")
+
+# 기본 정보 content/site.json ('기본 정보' 탭, 2026-11-05) — 관리 화면 Code.gs 의 SITE_RULES 와 같아야 한다.
+# 값은 따옴표·꺾쇠·& 가 없는 글자만 받는다(그래야 HTML 글·속성·자바스크립트·JSON-LD 어디에 넣어도 그대로 안전하다).
+SITE_TEXT = r"[0-9A-Za-z가-힣·,.()~/+%\- ]"
+SITE_RULES = {   # 이름: (뜻, 규칙, 비워도 되나)
+    "phone":     ("전화번호", r"0\d{1,2}-\d{3,4}-\d{4}", False),
+    "kakao":     ("카톡 상담 주소", r"https?://pf\.kakao\.com/[A-Za-z0-9_]+(?:/chat)?", False),
+    "dispatch":  ("짧은 출동 시간", SITE_TEXT + r"{1,10}", False),
+    "hours":     ("운영 시간", SITE_TEXT + r"{1,40}", False),
+    "pay":       ("결제", SITE_TEXT + r"{1,40}", False),
+    "receipt":   ("증빙", SITE_TEXT + r"{1,40}", False),
+    "years":     ("경력 연수", SITE_TEXT + r"{1,10}", False),
+    "jobs":      ("작업 건수", SITE_TEXT + r"{1,10}", False),
+    "blog":      ("블로그 주소", r"https://(?:m\.)?blog\.naver\.com/[A-Za-z0-9_-]+", False),
+    "instagram": ("인스타그램 주소", r"https://(?:www\.)?instagram\.com/[A-Za-z0-9._]+/?", False),
+    "youtube":   ("유튜브 주소", r"https://(?:(?:www\.)?youtube\.com/[A-Za-z0-9@._/-]+|youtu\.be/[A-Za-z0-9_-]+)", True),
+    "ceo":       ("대표 이름", r"[가-힣A-Za-z ]{1,10}", False),
+    "biz_no":    ("사업자등록번호", r"\d{3}-\d{2}-\d{5}", False),
+}
+SITE_AREA_RULE = SITE_TEXT + r"{1,10}"
+# 지역 9곳 (build_pages.py REGIONS 와 같은 이름). 새 지역을 늘리면 여기·site.json·Code.gs SITE_AREAS 도 같이 늘린다
+SITE_AREAS = ("gwangju", "gwangyang", "yeosu", "suncheon", "mokpo", "jeonju", "damyang", "hwasun", "muan")
+SITE_SLOT = re.compile(r"\{\{site\.([a-z_]+(?:\.[a-z]+)?)\}\}")
 
 
 class Stop(Exception):
@@ -657,6 +690,52 @@ def load_notice() -> dict:
     return n
 
 
+def load_site() -> dict:
+    """content/site.json → 틀의 {{site.이름}} 에 넣을 값. 규칙은 맨 위 SITE_RULES (관리 화면 normalizeSite_ 와 같다)."""
+    rel = "content/site.json"
+    path = CONTENT / "site.json"
+    if not path.exists():
+        raise Stop(f"{rel}: 파일이 없습니다 (전화번호·출동 시간 같은 기본 정보가 여기 있어야 페이지를 만들 수 있습니다)")
+    data = read_json(path)
+    if not isinstance(data, dict):
+        raise Stop(f"{rel}: 묶음 모양이 아닙니다")
+    out = {}
+    for key, (what, rule, empty_ok) in SITE_RULES.items():
+        value = data.get(key, "")
+        if not isinstance(value, str):
+            raise Stop(f"{rel} {what}: 글이 아닙니다 ({value!r})")
+        value = value.strip()
+        if not value and empty_ok:
+            out[key] = ""
+            continue
+        if not re.fullmatch(rule, value):
+            raise Stop(f"{rel} {what}: 모양이 맞지 않습니다 ({value!r})")
+        out[key] = value
+    areas = data.get("areas")
+    if not isinstance(areas, dict):
+        raise Stop(f"{rel} areas: 지역별 출동 시간 묶음이 없습니다")
+    for slug in SITE_AREAS:
+        value = areas.get(slug, "")
+        value = value.strip() if isinstance(value, str) else value
+        if not isinstance(value, str) or not re.fullmatch(SITE_AREA_RULE, value):
+            raise Stop(f"{rel} 출동 시간({slug}): 모양이 맞지 않습니다 ({value!r})")
+        out[f"area.{slug}"] = value
+    # 만들어 쓰는 값: 검색용 전화번호(+82-10-…), 유튜브 아이콘 주소(비우면 지금처럼 '#')
+    out["phone_intl"] = "+82-" + out["phone"][1:]
+    out["youtube_href"] = out["youtube"] or "#"
+    return out
+
+
+def fill_site(page: str, site: dict, label: str) -> str:
+    """틀의 {{site.이름}} 을 기본 정보로 채운다. 모르는 이름이면 멈춘다."""
+    def put(m):
+        key = m.group(1)
+        if key not in site:
+            raise Stop(f"{label}: {{{{site.{key}}}}} 는 기본 정보에 없는 이름입니다")
+        return site[key]
+    return SITE_SLOT.sub(put, page)
+
+
 NOTICE_START = "<!-- 공지 띠 — content/notice.json (관리 화면 '공지' 탭). 끄면 이 묶음째 빠진다 -->\n"
 NOTICE_END = "<!-- /공지 띠 -->\n"
 NOTICE_AFTER = "</header>\n</div>\n"     # 상단 고정 묶음(site-head)이 끝나는 곳. 18장 모두 한 번씩
@@ -905,7 +984,7 @@ def one_slot(page: str, slot: str, value: str, label: str) -> str:
 def build(name: str, cases, data: dict) -> str:
     label = f"_tools/src/{name}.html"
     prices = data["prices"]
-    page = read_template(name)
+    page = fill_site(read_template(name), data["site"], label)   # 기본 정보는 맨 먼저 (사장님 글이 들어가기 전에)
     faq = data["faq"][name]
     page = one_slot(page, FAQ_SLOT, render_faq(faq, name == "index"), label)
     if name != "index":
@@ -979,6 +1058,7 @@ def load_all(today: str = None) -> dict:
     prices = load_prices()
     notice = load_notice()
     return {"prices": prices,
+            "site": load_site(),
             "faq": {name: load_faq(name, prices) for name, _, _ in PAGES},
             "services": load_services(),
             "hero": load_hero(),
@@ -993,9 +1073,10 @@ def render_all(today: str = None) -> list:
     for name, rel, cases in PAGES:
         page = build(name, cases, data)
         out.append((rel, SITE / rel, page, check(page)))
-    path = SITE / PRIVACY            # 손으로 쓰는 파일: 공지 띠 묶음만 넣고 뺀다
-    page = insert_notice(path.read_text(encoding="utf-8"), data["notice_block"], PRIVACY)
-    out.append((PRIVACY + " (공지 띠만)", path, page, check(page)))
+    # 개인정보처리방침: 틀(src/privacy.html)에 기본 정보와 공지 띠만 넣는다 (가격·문장 묶음 처리는 하지 않는다)
+    label = "_tools/src/privacy.html"
+    page = insert_notice(fill_site(read_template("privacy"), data["site"], label), data["notice_block"], label)
+    out.append((PRIVACY, SITE / PRIVACY, page, check(page)))
     return out
 
 

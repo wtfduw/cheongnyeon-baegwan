@@ -85,7 +85,7 @@
   "@type": "Plumber",
   "name": "청년배관",
   "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
-  "telephone": "+82-10-6872-8284",
+  "telephone": "{{site.phone_intl}}",
   "image": "https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png",
   "description": "광주·전라 전지역 출동. 변기·싱크대·하수구 막힘, 고압세척, 배관설비 전문. 미해결 시 0원.",
   "address": {
@@ -108,8 +108,8 @@
   }],
   "sameAs": [
     "https://map.naver.com/p/entry/place/2043397832",
-    "https://blog.naver.com/tturobro",
-    "https://www.instagram.com/ddurobro"
+    "{{site.blog}}",
+    "{{site.instagram}}"
   ],
   "hasMap": "https://map.naver.com/p/entry/place/2043397832"
 }
@@ -176,8 +176,8 @@
     <div class="mm-item" onclick="location.href='#area';closeMM()"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</div>
   </div>
   <div class="mm-foot">
-    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
-    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:{{site.phone}}'"><svg class="ic"><use href="#i-phone"/></svg> {{site.phone}}</button>
+    <a class="mm-cta mm-cta-kakao" href="{{site.kakao}}" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
   </div>
 </div>
 
@@ -185,9 +185,9 @@
 <div class="site-head">
 <div class="topbar">
   <div class="tpb-social">
-    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="{{site.blog}}" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
     <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
-    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+    <a href="{{site.instagram}}" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
   </div>
   <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
 </div>
@@ -227,8 +227,8 @@
       <span class="nb">광주·전남·전북 전지역 출동</span> <span class="nb">(목포·여수·순천·전주·군산·익산)</span>
     </p>
     <div class="hero-btns">
-      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','hero')"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('hero', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:{{site.phone}}" class="btn-call" onclick="trackCTA('call','hero')"><svg class="ic"><use href="#i-phone"/></svg> {{site.phone}}</a>
+      <a href="{{site.kakao}}" class="btn-kakao" onclick="return ctaKakao('hero', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
 
     <div class="hero-slideshow">
@@ -244,7 +244,7 @@
 <div class="trust-bar">
   <div class="inner">
     <div class="tb-item rv d1"><div class="tb-num">24시간</div><div class="tb-lbl">연중무휴 긴급출동</div></div>
-    <div class="tb-item rv d2"><div class="tb-num">30분</div><div class="tb-lbl">평균 도착 시간</div></div>
+    <div class="tb-item rv d2"><div class="tb-num">{{site.dispatch}}</div><div class="tb-lbl">평균 도착 시간</div></div>
     <div class="tb-item rv d3"><div class="tb-num">0원</div><div class="tb-lbl">미해결 시 청구 비용</div></div>
   </div>
 </div>
@@ -253,7 +253,7 @@
 <div class="blog-band">
   <div class="inner rv">
     <span class="blog-band-txt">실제 작업 현장이 궁금하다면?</span>
-    <a href="https://blog.naver.com/tturobro" class="blog-band-btn">
+    <a href="{{site.blog}}" class="blog-band-btn">
       <img src="naverblog.webp" alt="">
       청년배관 블로그 바로가기
       <svg class="ic"><use href="#i-arrow"/></svg>
@@ -293,15 +293,15 @@
     <div class="rv"><div class="sec-tag">Area</div>
     <div class="sec-ttl">출동 지역</div></div>
     <div class="area-grid rv">
-      <a href="/gwangju/">광주 <em>30분 이내</em></a>
-      <a href="/gwangyang/">광양 <em>30분 이내</em></a>
-      <a href="/yeosu/">여수 <em>30분 이내</em></a>
-      <a href="/suncheon/">순천 <em>30분 이내</em></a>
-      <a href="/mokpo/">목포 <em>30분 이내</em></a>
-      <a href="/jeonju/">전주 <em>30분 이내</em></a>
-      <a href="/damyang/">담양 <em>30분 이내</em></a>
-      <a href="/hwasun/">화순 <em>30분 이내</em></a>
-      <a href="/muan/">무안 <em>30분 이내</em></a>
+      <a href="/gwangju/">광주 <em>{{site.area.gwangju}}</em></a>
+      <a href="/gwangyang/">광양 <em>{{site.area.gwangyang}}</em></a>
+      <a href="/yeosu/">여수 <em>{{site.area.yeosu}}</em></a>
+      <a href="/suncheon/">순천 <em>{{site.area.suncheon}}</em></a>
+      <a href="/mokpo/">목포 <em>{{site.area.mokpo}}</em></a>
+      <a href="/jeonju/">전주 <em>{{site.area.jeonju}}</em></a>
+      <a href="/damyang/">담양 <em>{{site.area.damyang}}</em></a>
+      <a href="/hwasun/">화순 <em>{{site.area.hwasun}}</em></a>
+      <a href="/muan/">무안 <em>{{site.area.muan}}</em></a>
     </div>
     <p class="area-more rv">
       <strong>장성 · 함평 · 나주 · 보성 · 순창 · 남원</strong> 등에도 다녀왔습니다.<br class="nb">
@@ -365,7 +365,7 @@
   <div class="inner">
     <div class="rv"><div class="sec-tag">Request</div>
     <div class="sec-ttl">상담 신청</div></div>
-    <p class="apply-sub rv">전화가 어려우시면 남겨 주세요. 확인하는 대로 전화드립니다.<br>급하시면 <a href="tel:010-6872-8284" onclick="trackCTA('call','apply')">010-6872-8284</a>로 바로 전화 주세요.</p>
+    <p class="apply-sub rv">전화가 어려우시면 남겨 주세요. 확인하는 대로 전화드립니다.<br>급하시면 <a href="tel:{{site.phone}}" onclick="trackCTA('call','apply')">{{site.phone}}</a>로 바로 전화 주세요.</p>
     <form class="apply-form rv" id="apply-form" method="post" novalidate onsubmit="return false"><!-- 스크립트가 늦게 떠도 브라우저가 입력값을 주소창(URL)에 붙여 보내지 않게 -->
       <div id="apply-fields">
         <div class="af-grid">
@@ -396,7 +396,7 @@
       <div class="af-done" id="apply-done" hidden>
         <div class="af-done-ic">✓</div>
         <p class="af-done-t">접수되었습니다</p>
-        <p>확인하는 대로 <span class="nb"><b id="apply-done-phone"></b>(으)로</span> 전화드릴게요.<br>급하시면 <span class="nb">010-6872-8284로</span> 바로 전화 주세요.</p>
+        <p>확인하는 대로 <span class="nb"><b id="apply-done-phone"></b>(으)로</span> 전화드릴게요.<br>급하시면 <span class="nb">{{site.phone}}로</span> 바로 전화 주세요.</p>
       </div>
     </form>
     <noscript><p class="apply-sub" style="margin-top:16px">이 칸은 자바스크립트가 켜져 있어야 보낼 수 있습니다. 전화나 카카오톡으로 연락 주세요.</p></noscript>
@@ -409,17 +409,17 @@
     <div class="cta-tag rv">24시간 긴급출동</div>
     <div class="cta-h2 rv">지금 바로 <em>연락하세요</em></div>
     <p class="cta-p rv">막힘·누수 문제는 빨리 해결할수록 피해가 줄어듭니다.</p>
-    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-phone rv">{{site.phone}}</div>
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
-      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','contact')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('contact', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:{{site.phone}}" class="btn-call" onclick="trackCTA('call','contact')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="{{site.kakao}}" class="btn-kakao" onclick="return ctaKakao('contact', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
     <div class="cta-social-lbl rv">SNS · 블로그</div>
     <div class="cta-social rv">
-      <a href="https://blog.naver.com/tturobro" class="cta-s"><img src="naverblog.webp" alt="네이버 블로그"></a>
-      <a href="#" class="cta-s"><img src="youtube.webp" alt="유튜브"></a>
-      <a href="https://www.instagram.com/ddurobro" class="cta-s"><img src="instagram.webp" alt="인스타그램"></a>
+      <a href="{{site.blog}}" class="cta-s"><img src="naverblog.webp" alt="네이버 블로그"></a>
+      <a href="{{site.youtube_href}}" class="cta-s"><img src="youtube.webp" alt="유튜브"></a>
+      <a href="{{site.instagram}}" class="cta-s"><img src="instagram.webp" alt="인스타그램"></a>
     </div>
   </div>
 </section>
@@ -428,7 +428,7 @@
 <footer>
   <div class="foot-in">
     <div class="foot-logo">청년<em>배관</em></div>
-    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+    <div class="foot-info">사업자등록번호: {{site.biz_no}} · 대표: {{site.ceo}} · {{site.phone}}<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
   </div>
   <div class="foot-areas">
     <span class="foot-areas-l">출동 지역</span>
@@ -447,14 +447,14 @@
 
 <!-- 하단 고정 바 -->
 <div class="bottom-bar">
-  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+  <a href="tel:{{site.phone}}" class="bb-call" onclick="trackCTA('call','fixbar')">
     <svg class="ic"><use href="#i-phone"/></svg>
     <span class="bb-call-txt">
       <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
-      <span class="bb-call-num">010-6872-8284</span>
+      <span class="bb-call-num">{{site.phone}}</span>
     </span>
   </a>
-  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+  <a href="{{site.kakao}}" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
     <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
   </a>
 </div>
@@ -732,7 +732,7 @@ function buildContent(idx) {
   callBtn.className = 'svc-call-btn';
   callBtn.appendChild(svgIcon('i-phone'));
   callBtn.appendChild(document.createTextNode(' 지금 바로 전화하기'));
-  callBtn.onclick = () => { trackCTA('call','modal'); location.href = 'tel:010-6872-8284'; };
+  callBtn.onclick = () => { trackCTA('call','modal'); location.href = 'tel:{{site.phone}}'; };
   const priceLink = document.createElement('a');
   priceLink.className = 'svc-price-link';
   priceLink.href = '#price';
@@ -741,7 +741,7 @@ function buildContent(idx) {
   priceLink.appendChild(svgIcon('i-arrow'));
   const kakaoBtn = document.createElement('a');
   kakaoBtn.className = 'svc-kakao-btn';
-  kakaoBtn.href = 'http://pf.kakao.com/_gxgxmsX/chat';
+  kakaoBtn.href = '{{site.kakao}}';
   kakaoBtn.appendChild(svgIcon('i-chat'));
   kakaoBtn.appendChild(document.createTextNode(' 카카오톡 상담'));
   kakaoBtn.onclick = function(){ return ctaKakao('modal', this.href); };
@@ -909,7 +909,7 @@ function cfCheck(d) {
   if (!form) return;
   var msg = document.getElementById('apply-msg'), btn = document.getElementById('apply-btn');
   var shownAt = Date.now(), sendId = null, busy = false;
-  var CALL = ' 급하시면 010-6872-8284로 전화 주세요.';
+  var CALL = ' 급하시면 {{site.phone}}로 전화 주세요.';
 
   function say(text, bad) { putUnits(msg, text); msg.className = 'af-msg' + (bad ? ' bad' : ''); }   // 문장마다 덩어리(줄바꿈 정리)
   function newId() {

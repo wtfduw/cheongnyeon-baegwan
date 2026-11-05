@@ -25,7 +25,8 @@
 ────────────────────────────────────────────────────────
 
 새 지역을 추가하려면:
-  1. 아래 REGIONS 목록 맨 끝에 덩어리를 하나 더 넣는다
+  1. 아래 REGIONS 목록 맨 끝에 덩어리를 하나 더 넣는다. 출동 시간은 여기 말고 content/site.json 의 areas 에
+     (build_content.py SITE_AREAS, 관리 화면 Code.gs SITE_AREAS 에도 같은 이름을 더한다. 빠지면 멈춘다)
      (중간에 넣으면 "다른 지역도 갑니다" 링크가 바뀌어 기존 9장이 다 "바뀜"으로 나온다)
   2. 이 파일을 실행해서 바뀌는 곳이 새 지역과 sitemap.xml 뿐인지 본다
   3. --write 를 붙여 다시 실행한다. sitemap.xml 도 같이 갱신된다
@@ -45,6 +46,9 @@
      - 내가 고치지 않은 "없어지는 줄"이나 "생기는 줄"
      - "확인필요"
    --write 한 뒤에도 커밋 전에 git diff 로 한 번 더 보고, 아니면 git checkout -- <파일> 로 되돌린다.
+
+기본 정보(2026-11-05): 출동 시간(lead 의 {time} 자리 포함)·전화번호·카톡·SNS·사업자·운영·결제·경력은
+   content/site.json ('기본 정보' 탭)에서 build_content.py 의 load_site · fill_site 로 넣는다.
 
 공지 띠(2026-10-28): content/notice.json 이 켜져 있으면 9장 머리 바로 아래에 홈·서비스 페이지와 같은 띠를 넣는다.
    띠 HTML 은 build_content.py 의 notice_block · insert_notice 를 그대로 빌려 쓴다(모양이 한 곳에서만 정해지게).
@@ -73,8 +77,8 @@ B = "https://blog.naver.com/tturobro/"
 
 REGIONS = [
     {
-        "slug": "gwangju", "name": "광주", "time": "30분 이내", "priority": "0.8",
-        "lead": "광주 전 지역 <em>30분 이내</em>에 도착합니다.",
+        "slug": "gwangju", "name": "광주", "priority": "0.8",
+        "lead": "광주 전 지역 <em>{time}</em>에 도착합니다.",
         "sub": "북구·서구·남구·동구·광산구 어디든 갑니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "북구 · 서구 · 남구 · 동구 · 광산구",
         "cases": [
@@ -106,8 +110,8 @@ REGIONS = [
         "trait": "구도심의 오래된 건물에서 문제가 많습니다. 배관 기울기(구배)가 나빠져 물이 잘 안 빠지거나, 오래된 관에서 누수가 생기는 경우입니다.",
     },
     {
-        "slug": "gwangyang", "name": "광양", "time": "30분 이내", "priority": "0.7",
-        "lead": "광양도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "gwangyang", "name": "광양", "priority": "0.7",
+        "lead": "광양도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "아파트부터 관공서까지 작업합니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "용강리 · 중동 등 광양 전 지역",
         "cases": [
@@ -124,8 +128,8 @@ REGIONS = [
         "trait": "아파트 단지와 관공서·상가가 섞여 있어 작업 규모가 다양합니다. 나무뿌리가 배관으로 파고드는 경우처럼 원인을 찾아야 풀리는 현장이 많습니다.",
     },
     {
-        "slug": "yeosu", "name": "여수", "time": "30분 이내", "priority": "0.7",
-        "lead": "여수도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "yeosu", "name": "여수", "priority": "0.7",
+        "lead": "여수도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "아파트·주택·상가 모두 작업합니다.",
         "areas": "웅천동 · 문수동 · 여서동 등 여수 전 지역",
         "cases": [
@@ -136,8 +140,8 @@ REGIONS = [
         "trait": "오래된 건물에서 문제가 많습니다. 배관 기울기가 나빠지거나 누수가 생기는 경우입니다.",
     },
     {
-        "slug": "suncheon", "name": "순천", "time": "30분 이내", "priority": "0.7",
-        "lead": "순천도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "suncheon", "name": "순천", "priority": "0.7",
+        "lead": "순천도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "식당 주방 배관부터 아파트 싱크대까지 작업합니다.",
         "areas": "연향동 · 조례동 · 신대지구 등 순천 전 지역",
         "cases": [
@@ -148,8 +152,8 @@ REGIONS = [
         "trait": "신대지구 같은 신도시와 구도심이 섞여 있어 작업 성격이 갈립니다. 오래된 건물은 배관 기울기와 누수 문제가 많습니다.",
     },
     {
-        "slug": "mokpo", "name": "목포", "time": "30분 이내", "priority": "0.7",
-        "lead": "목포도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "mokpo", "name": "목포", "priority": "0.7",
+        "lead": "목포도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "식당 주방과 가정집 배관 모두 작업합니다. 아래는 실제로 다녀온 곳입니다.",
         "areas": "하당 · 용해동 등 목포 전 지역",
         "cases": [
@@ -166,8 +170,8 @@ REGIONS = [
         "trait": "식당이 많은 상권이라 주방 배관 작업이 잦습니다. 기름이 쌓여 역류하는 경우가 대부분입니다.",
     },
     {
-        "slug": "jeonju", "name": "전주", "time": "30분 이내", "priority": "0.7",
-        "lead": "전주도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "jeonju", "name": "전주", "priority": "0.7",
+        "lead": "전주도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "하수구 막힘 작업이 특히 많은 지역입니다.",
         "areas": "효자동 · 서신동 · 인후동 등 전주 전 지역",
         "cases": [
@@ -178,8 +182,8 @@ REGIONS = [
         "trait": "오래된 건물에서 문제가 많습니다. 배관 기울기가 나빠지거나 누수가 생기는 경우입니다.",
     },
     {
-        "slug": "damyang", "name": "담양", "time": "30분 이내", "priority": "0.6",
-        "lead": "담양도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "damyang", "name": "담양", "priority": "0.6",
+        "lead": "담양도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "집 안 배관뿐 아니라 농수로처럼 굵은 관도 작업합니다.",
         "areas": "담양읍을 비롯한 담양 전 지역",
         "cases": [
@@ -190,8 +194,8 @@ REGIONS = [
         "trait": "농지와 주거지가 함께 있어 일반 가정 배관 외에 농수로처럼 굵은 관을 다루는 일도 있습니다. 이런 곳은 고압세척 장비가 있어야 합니다.",
     },
     {
-        "slug": "hwasun", "name": "화순", "time": "30분 이내", "priority": "0.6",
-        "lead": "화순도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "hwasun", "name": "화순", "priority": "0.6",
+        "lead": "화순도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "이른 아침이든 늦은 밤이든 연락 주시면 갑니다.",
         "areas": "화순읍을 비롯한 화순 전 지역",
         "cases": [
@@ -202,8 +206,8 @@ REGIONS = [
         "trait": "광주에서 가까워 이른 아침이나 밤에도 출동합니다. 음식물이 그대로 배관에 들어가 막히는 경우가 많습니다.",
     },
     {
-        "slug": "muan", "name": "무안", "time": "30분 이내", "priority": "0.6",
-        "lead": "무안도 갑니다. <em>30분 이내</em>에 도착합니다.",
+        "slug": "muan", "name": "무안", "priority": "0.6",
+        "lead": "무안도 갑니다. <em>{time}</em>에 도착합니다.",
         "sub": "원룸·주택 작업을 주로 다녀왔습니다.",
         "areas": "청계읍을 비롯한 무안 전 지역",
         "cases": [
@@ -216,7 +220,7 @@ REGIONS = [
     },
 ]
 
-# 이 파일이 만들지 않는 페이지들(홈·서비스 7장은 build_content.py 가, privacy 는 손으로). 사이트맵에만 넣는다.
+# 이 파일이 만들지 않는 페이지들(홈·서비스 7장·privacy 는 build_content.py 가). 사이트맵에만 넣는다.
 HANDMADE = [("", "1.0"), ("toilet/", "0.9"), ("sink/", "0.9"), ("drain/", "0.9"),
             ("jet/", "0.9"), ("faucet/", "0.9"), ("leak/", "0.9"), ("pipe/", "0.9"),
             ("privacy/", "0.3")]
@@ -230,14 +234,14 @@ INTERIOR = (
 )
 
 
-def service_ld(region: dict) -> str:
+def service_ld(region: dict, site: dict) -> str:
     data = {
         "@context": "https://schema.org", "@type": "Service",
         "serviceType": "배관 막힘 · 하수구 · 누수 출동 수리",
         "name": f"{region['name']} 배관·하수구 막힘 출동",
         "description": f"{region['name']} 전 지역 {region['time']} 출동. 변기·싱크대·하수구 막힘, 고압세척, 누수탐지.",
         "provider": {
-            "@type": "Plumber", "name": "청년배관", "telephone": "+82-10-6872-8284",
+            "@type": "Plumber", "name": "청년배관", "telephone": site["phone_intl"],
             "url": f"{BASE}/",
             "address": {"@type": "PostalAddress", "streetAddress": "동운로201번길 20",
                         "addressLocality": "북구", "addressRegion": "전남광주통합특별시",
@@ -262,7 +266,7 @@ def shots_html(shots) -> str:
     return '\n        <div class="pg-shots">\n' + "\n".join(figs) + '\n        </div>'
 
 
-def body_html(region: dict) -> str:
+def body_html(region: dict, site: dict) -> str:
     rows = []
     for case in region["cases"]:
         where, what, link = case[0], case[1], case[2]
@@ -289,7 +293,7 @@ def body_html(region: dict) -> str:
       <div class="pg-hero-facts">
         <span class="pg-fact">출동 <em>{region["time"]}</em></span>
         <span class="pg-fact">24시간 <em>연중무휴</em></span>
-        <span class="pg-fact">7년 <em>4,000건</em></span>
+        <span class="pg-fact">{site["years"]} <em>{site["jobs"]}</em></span>
       </div>
     </div>
   </div>
@@ -351,11 +355,11 @@ def body_html(region: dict) -> str:
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">운영 시간</div>
-        <div class="pg-facts-v">24시간 연중무휴 · 야간 추가요금 없음</div>
+        <div class="pg-facts-v">{site["hours"]}</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">결제</div>
-        <div class="pg-facts-v">카드 · 계좌이체 · 간편결제 / 세금계산서 · 현금영수증 발행 가능</div>
+        <div class="pg-facts-v">{site["pay"]} / {site["receipt"]} 발행 가능</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">보증</div>
@@ -372,8 +376,13 @@ def body_html(region: dict) -> str:
 '''
 
 
-def build(region: dict, template: str) -> str:
+def build(region: dict, template: str, site: dict) -> str:
     slug, name = region["slug"], region["name"]
+    # 출동 시간은 content/site.json ('기본 정보' 탭)의 지역별 값. lead 의 {time} 자리에도 그 값이 들어간다
+    if f"area.{slug}" not in site:
+        raise content_tool().Stop(f"/{slug}/: content/site.json 에 이 지역 출동 시간이 없습니다 (새 지역이면 build_content.py SITE_AREAS 와 site.json areas 에 넣는다)")
+    time = site[f"area.{slug}"]
+    region = dict(region, time=time, lead=region["lead"].replace("{time}", time))
     others = [r for r in REGIONS if r["slug"] != slug][:4]
     more = "\n".join(
         f'      <a href="../{r["slug"]}/"><svg class="ic"><use href="#i-drain"/></svg> {r["name"]}</a>'
@@ -386,7 +395,7 @@ def build(region: dict, template: str) -> str:
         "OG_TITLE": f"{name} 하수구·배관 막힘 | {region['time']} 출동",
         "OG_DESC": f"{region['areas']}에서 실제로 작업한 사례를 확인하세요.",
         "URL": f"{BASE}/{slug}/",
-        "JSONLD": service_ld(region),
+        "JSONLD": service_ld(region, site),
         "SLUG": slug,
         "CTA_H2": f"{name} 어디든, <em>지금 바로</em>",
         "CTA_P": f"{region['time']} 안에 도착합니다. 24시간 연중무휴입니다.",
@@ -396,7 +405,8 @@ def build(region: dict, template: str) -> str:
     page = template
     for key, value in filled.items():
         page = page.replace("{{" + key + "}}", value)
-    page = page.replace("<!--본문-->\n", body_html(region))
+    page = page.replace("<!--본문-->\n", body_html(region, site))
+    page = content_tool().fill_site(page, site, f"/{slug}/ (page-template.html)")   # 전화번호·카톡·SNS·사업자 정보 (content/site.json)
     # 가운데 정렬 글(맨 위 제목·소개 글·아래 연락 문구)이 폰에서 문장 중간에 끊기지 않게 — build_content.py 와 같은 처리 (2026-10-28)
     return content_tool().center_text(page)
 
@@ -477,17 +487,18 @@ def main() -> None:
     bc = content_tool()
     try:
         notice = bc.notice_block(bc.load_notice(), bc.kst_today())
+        site = bc.load_site()
+        template = TEMPLATE.read_text(encoding="utf-8-sig")   # 틀이 BOM 붙어 저장돼도 설명 주석이 지워지게
+        template = re.sub(r"^<!--.*?-->\n", "", template, count=1, flags=re.S)   # 틀 파일 설명 주석 제거
+        pages = [(region, bc.insert_notice(build(region, template, site), notice, f"/{region['slug']}/"))
+                 for region in REGIONS]
     except bc.Stop as e:
         print(f"멈춤: {e}\n아무 파일도 쓰지 않았습니다.")
         sys.exit(2)
-    template = TEMPLATE.read_text(encoding="utf-8-sig")   # 틀이 BOM 붙어 저장돼도 설명 주석이 지워지게
-    template = re.sub(r"^<!--.*?-->\n", "", template, count=1, flags=re.S)   # 틀 파일 설명 주석 제거
 
     outputs = []
-    for region in REGIONS:
-        page = bc.insert_notice(build(region, template), notice, f"/{region['slug']}/")
-
-        left = re.findall(r"\{\{(\w+)\}\}", page)
+    for region, page in pages:
+        left = re.findall(r"\{\{[^}]*\}\}", page)
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S):
             json.loads(block)
         bad = [t for t in ("div", "section", "nav", "footer", "header", "html", "body")

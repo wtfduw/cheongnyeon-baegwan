@@ -29,12 +29,12 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>광주 변기막힘 뚫는 업체 | 30분 출동{{#num toilet.simple}} · {{p.toilet.simple_min:man}}만원부터{{/num}} | 청년배관</title>
-<meta name="description" content="변기 물이 안 내려가거나 천천히 내려갈 때. 광주 시내 30분 출동, 내시경으로 원인을 확인하고 작업합니다. {{#num toilet.simple}}단순 막힘 {{p.toilet.simple_min:man}}~{{p.toilet.simple_max:man}}만원, {{/num}}배관 막힘 1년 보증. 7년 4,000건.">
+<title>광주 변기막힘 뚫는 업체 | {{site.dispatch}} 출동{{#num toilet.simple}} · {{p.toilet.simple_min:man}}만원부터{{/num}} | 청년배관</title>
+<meta name="description" content="변기 물이 안 내려가거나 천천히 내려갈 때. 광주 시내 {{site.dispatch}} 출동, 내시경으로 원인을 확인하고 작업합니다. {{#num toilet.simple}}단순 막힘 {{p.toilet.simple_min:man}}~{{p.toilet.simple_max:man}}만원, {{/num}}배관 막힘 1년 보증. {{site.years}} {{site.jobs}}.">
 <link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/toilet/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/toilet/">
-<meta property="og:title" content="광주 변기막힘 뚫는 업체 | 30분 출동{{#num toilet.simple}} · {{p.toilet.simple_min:man}}만원부터{{/num}}">
+<meta property="og:title" content="광주 변기막힘 뚫는 업체 | {{site.dispatch}} 출동{{#num toilet.simple}} · {{p.toilet.simple_min:man}}만원부터{{/num}}">
 <meta property="og:description" content="뚫어뻥으로 안 될 때, 억지로 밀어넣기 전에 읽어보세요. 내시경으로 원인부터 확인합니다.">
 <meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
@@ -50,11 +50,11 @@
   "@type": "Service",
   "serviceType": "변기 막힘 뚫기",
   "name": "광주 변기막힘 출동 서비스",
-  "description": "변기 막힘의 원인을 내시경으로 확인한 뒤 석션기·관통기·고압세척으로 해결합니다. 광주 시내 30분 출동.",
+  "description": "변기 막힘의 원인을 내시경으로 확인한 뒤 석션기·관통기·고압세척으로 해결합니다. 광주 시내 {{site.dispatch}} 출동.",
   "provider": {
     "@type": "Plumber",
     "name": "청년배관",
-    "telephone": "+82-10-6872-8284",
+    "telephone": "{{site.phone_intl}}",
     "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
     "address": {
       "@type": "PostalAddress",
@@ -127,8 +127,8 @@
     <a class="mm-item" href="../index.html#area"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</a>
   </div>
   <div class="mm-foot">
-    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:010-6872-8284'"><svg class="ic"><use href="#i-phone"/></svg> 010-6872-8284</button>
-    <a class="mm-cta mm-cta-kakao" href="http://pf.kakao.com/_gxgxmsX/chat" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:{{site.phone}}'"><svg class="ic"><use href="#i-phone"/></svg> {{site.phone}}</button>
+    <a class="mm-cta mm-cta-kakao" href="{{site.kakao}}" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
   </div>
 </div>
 
@@ -136,9 +136,9 @@
 <div class="site-head">
 <div class="topbar">
   <div class="tpb-social">
-    <a href="https://blog.naver.com/tturobro" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="{{site.blog}}" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
     <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
-    <a href="https://www.instagram.com/ddurobro" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+    <a href="{{site.instagram}}" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
   </div>
   <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
 </div>
@@ -179,9 +179,9 @@
 {{s.toilet.intro}}
       </p>
       <div class="pg-hero-facts">
-        <span class="pg-fact">광주 시내 <em>30분</em> 출동</span>
+        <span class="pg-fact">광주 시내 <em>{{site.dispatch}}</em> 출동</span>
         <span class="pg-fact">단순 막힘 <em>10분</em>이면 완료</span>
-        <span class="pg-fact">7년 <em>4,000건</em></span>
+        <span class="pg-fact">{{site.years}} <em>{{site.jobs}}</em></span>
       </div>
     </div>
   </div>
@@ -451,7 +451,7 @@
     <div class="pg-facts rv">
       <div class="pg-facts-row">
         <div class="pg-facts-k">출동 시간</div>
-        <div class="pg-facts-v">광주 시내·시외 모두 <em>30분</em> 이내</div>
+        <div class="pg-facts-v">광주 시내·시외 모두 <em>{{site.dispatch}}</em> 이내</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">작업 시간</div>
@@ -459,15 +459,15 @@
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">운영 시간</div>
-        <div class="pg-facts-v">24시간 연중무휴 · 야간 추가요금 없음</div>
+        <div class="pg-facts-v">{{site.hours}}</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">결제</div>
-        <div class="pg-facts-v">카드 · 계좌이체 · 간편결제 모두 가능</div>
+        <div class="pg-facts-v">{{site.pay}} 모두 가능</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">증빙</div>
-        <div class="pg-facts-v">세금계산서 · 현금영수증 발행 가능</div>
+        <div class="pg-facts-v">{{site.receipt}} 발행 가능</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">보증</div>
@@ -475,7 +475,7 @@
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">경력</div>
-        <div class="pg-facts-v">7년 · 약 4,000건</div>
+        <div class="pg-facts-v">{{site.years}} · 약 {{site.jobs}}</div>
       </div>
       <div class="pg-facts-row">
         <div class="pg-facts-k">가능한 작업</div>
@@ -506,11 +506,11 @@
     <div class="cta-tag rv">24시간 긴급출동</div>
     <div class="cta-h2 rv">변기 막힘, <em>지금 바로</em></div>
     <p class="cta-p rv">손대지 않고 연락 주시면 대부분 10분이면 끝납니다.</p>
-    <div class="cta-phone rv">010-6872-8284</div>
+    <div class="cta-phone rv">{{site.phone}}</div>
     <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
     <div class="cta-btns rv">
-      <a href="tel:010-6872-8284" class="btn-call" onclick="trackCTA('call','toilet')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
-      <a href="http://pf.kakao.com/_gxgxmsX/chat" class="btn-kakao" onclick="return ctaKakao('toilet', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+      <a href="tel:{{site.phone}}" class="btn-call" onclick="trackCTA('call','toilet')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="{{site.kakao}}" class="btn-kakao" onclick="return ctaKakao('toilet', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
     </div>
   </div>
 </section>
@@ -532,7 +532,7 @@
 <footer>
   <div class="foot-in">
     <div class="foot-logo">청년<em>배관</em></div>
-    <div class="foot-info">사업자등록번호: 725-01-04155 · 대표: 염진웅 · 010-6872-8284<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+    <div class="foot-info">사업자등록번호: {{site.biz_no}} · 대표: {{site.ceo}} · {{site.phone}}<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
   </div>
   <div class="foot-areas">
     <span class="foot-areas-l">출동 지역</span>
@@ -551,14 +551,14 @@
 
 <!-- 하단 고정 바 -->
 <div class="bottom-bar">
-  <a href="tel:010-6872-8284" class="bb-call" onclick="trackCTA('call','fixbar')">
+  <a href="tel:{{site.phone}}" class="bb-call" onclick="trackCTA('call','fixbar')">
     <svg class="ic"><use href="#i-phone"/></svg>
     <span class="bb-call-txt">
       <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
-      <span class="bb-call-num">010-6872-8284</span>
+      <span class="bb-call-num">{{site.phone}}</span>
     </span>
   </a>
-  <a href="http://pf.kakao.com/_gxgxmsX/chat" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+  <a href="{{site.kakao}}" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
     <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
   </a>
 </div>
