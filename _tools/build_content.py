@@ -129,7 +129,8 @@ CONTENT = SITE / "content"
 
 # (틀 이름, 만들 파일, 사례 파일 이름 또는 None)
 PAGES = [("index", "index.html", None)] + [
-    (p, f"{p}/index.html", p) for p in ("toilet", "sink", "drain", "jet", "faucet", "leak", "pipe")]
+    (p, f"{p}/index.html", p) for p in ("toilet", "sink", "drain", "jet", "faucet", "leak", "pipe", "camera", "scaling")]
+# camera(배관 내시경 검사)·scaling(배관 스케일링·플렉스 샤프트)은 2026-11-10 에 넣은 장비·공법 장이라 SERVICES 에는 없다 — 홈 서비스 칸·content/services.json 과 무관
 SERVICES = ("toilet", "sink", "drain", "jet", "faucet", "leak", "pipe")
 PRIVACY = "privacy/index.html"          # 틀 src/privacy.html 에서 기본 정보·공지 띠만 넣어 만든다 (2026-11-05 전에는 손으로 쓰던 파일)
 

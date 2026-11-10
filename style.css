@@ -475,3 +475,38 @@ body{text-wrap:pretty}
 .price-row-num{margin-left:auto}
 /* 사례 아래 둥근 표시('쓴 장비' 등): 이름 칸이 두 줄로 쪼개지지 않게 */
 .case-facts dt{white-space:nowrap}
+/* ── 사례 칸 손질 (2026-11-10): 사진이 카드 가장자리에 붙고, '블로그에서 더 보기'가 왼쪽 끝에 붙고,
+      '원인'·'작업 전' 표시가 설명 글과 붙어 보이던 것 ── */
+.case-shots{padding:0 22px 20px;gap:10px;background:none;border-top:0;margin-top:18px}
+.case-shots figure{border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.case-shots .tag{margin-right:7px}
+/* 사진 칸은 카드 폭을 꽉 채운다(왼쪽으로 몰리지 않게). 폰은 아래에서 2칸 */
+.case-shots{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.case-more{margin:0;padding:0 22px 20px}
+@media(max-width:640px){
+  .case-shots{padding:0 16px 16px;gap:8px;margin-top:14px;grid-template-columns:1fr 1fr}
+  .case-more{padding:0 16px 16px}
+}
+/* PC 에서 본문 글씨가 작다는 지적 (2026-11-10, 두 번 키움) — 넓은 화면에서만. 폰은 그대로 */
+@media(min-width:900px){
+  .pg-note,.pg-step-p,.pg-sym-a,.pg-two-box li,.pg-cause-d,.case-sum,.pg-facts-row{font-size:18px}
+  .pg-step-h{font-size:21.5px}
+  .pg-cause-t{font-size:21px}
+  .pg-sym-q,.pg-two-h{font-size:23px}
+  .case-hd h3{font-size:22.5px}
+  .case-where{font-size:13.5px}
+  .case-shots figcaption{font-size:15.5px}
+  .case-shots .tag{font-size:12.5px}
+  .case-facts dt{font-size:13px}
+  .case-facts dd{font-size:15px}
+  .pg-case-link{font-size:16px}
+  .faq-q{font-size:17.5px}
+  .faq-a{font-size:16.5px}
+  /* 사진 두세 장이 카드 폭을 채울 때 세로로 너무 길어지지 않게 */
+  .case-shots img,.case-land .case-shots img{max-height:470px}
+  /* 사진이 한 장뿐인 사례: 글은 왼쪽, 사진은 오른쪽에 나란히 (사진 한 장이 카드 폭 전체로 커지지 않게) */
+  .case:has(.case-shots>figure:only-child){display:grid;grid-template-columns:minmax(0,1fr) 380px;align-items:start}
+  .case:has(.case-shots>figure:only-child)>*{grid-column:1}
+  .case:has(.case-shots>figure:only-child)>.case-shots{grid-column:2;grid-row:1/span 4;grid-template-columns:1fr;margin-top:0;padding:22px 22px 22px 0}
+  .case:has(.case-shots>figure:only-child)>.case-hd{padding-bottom:22px}
+}

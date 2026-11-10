@@ -1,0 +1,484 @@
+<!--
+  원본 틀 — _tools/build_content.py 가 이 파일을 읽어 camera/index.html 을 만든다.
+  camera/index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
+  {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
+  {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  {{CASES}} 줄에는 content/cases/camera.json 의 시공 사례가 들어간다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
+  이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
+-->
+<!DOCTYPE html>
+<!-- 배관 내시경 검사 페이지 v1 (2026-11-10) — 사례 파일·블로그 글 기반, AI 검색 요청서 4번 -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광주 배관 내시경 검사 | 막힌 자리를 화면으로 확인 | 청년배관</title>
+<meta name="description" content="뚫어도 다시 막히거나 배수구에 물건을 빠뜨렸을 때. 배관에 내시경 카메라를 넣어 몇 m 지점에서 무엇이 막고 있는지 화면으로 함께 확인합니다. 반지·칫솔·기름때·무너진 배관을 찾아낸 실제 화면을 볼 수 있습니다.">
+<link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/camera/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/camera/">
+<meta property="og:title" content="광주 배관 내시경 검사 | 눈으로 확인하고 뚫습니다">
+<meta property="og:description" content="어디가, 왜 막혔는지 내시경 화면으로 함께 확인합니다.">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "배관 내시경 검사",
+  "name": "광주 배관 내시경 검사",
+  "description": "배관에 내시경 카메라를 넣어 몇 m 지점에서 무엇이 막고 있는지 화면으로 함께 확인합니다. 기름때·이물질·무너진 배관을 가려 청소로 될 일인지 공사가 필요한지 판단합니다.",
+  "provider": {
+    "@type": "Plumber",
+    "name": "청년배관",
+    "telephone": "{{site.phone_intl}}",
+    "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "동운로201번길 20",
+      "addressLocality": "북구",
+      "addressRegion": "전남광주통합특별시",
+      "postalCode": "61258",
+      "addressCountry": "KR"
+    }
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "전남광주통합특별시"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "전북특별자치도"
+    }
+  ]
+}
+</script>
+{{FAQ_LD}}
+
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.2a7 7 0 10-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="../leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="../pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
+    <div class="mm-lbl">안내</div>
+    <a class="mm-item" href="../index.html#price"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</a>
+    <a class="mm-item" href="../index.html#area"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</a>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:{{site.phone}}'"><svg class="ic"><use href="#i-phone"/></svg> {{site.phone}}</button>
+    <a class="mm-cta mm-cta-kakao" href="{{site.kakao}}" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="{{site.blog}}" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="{{site.instagram}}" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<header>
+  <a class="hdr-brand" href="../index.html">
+    <img class="hdr-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="../toilet/">변기</a>
+    <a href="../sink/">싱크대</a>
+    <a href="../drain/">하수구</a>
+    <a href="../leak/">누수</a>
+    <a href="../jet/">고압세척</a>
+    <a href="../faucet/">수전교체</a>
+    <a href="../pipe/">배관설비</a>
+    <a href="../index.html#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!-- 상단 -->
+<section class="pg-hero">
+  <div class="inner">
+    <nav class="pg-crumb" aria-label="현재 위치">
+      <a href="../index.html">홈</a> <span>›</span> <span>배관 내시경 검사</span>
+    </nav>
+    <div class="pg-hero-body">
+      <h1>막힌 배관,<br><em>눈으로 확인하고</em> 뚫습니다</h1>
+      <p class="pg-hero-sub">
+        어디가, 왜 막혔는지 내시경 화면으로 함께 확인합니다.<br>
+        확인한 뒤에 필요한 작업만 말씀드립니다.
+      </p>
+      <div class="pg-hero-facts">
+        <span class="pg-fact">광주 시내 <em>{{site.dispatch}}</em> 출동</span>
+        <span class="pg-fact">내시경 화면 <em>함께</em> 확인</span>
+        <span class="pg-fact">{{site.years}} <em>{{site.jobs}}</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 이럴 때 넣습니다 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">When</div>
+    <div class="sec-ttl">이런 경우 내시경 검사가 필요합니다</div></div>
+    <div class="pg-sym rv">
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">뚫었는데 또 막혀요</div>
+        <div class="pg-sym-a">막고 있던 덩어리만 치워지고 배관 벽의 기름때가 남았을 수도 있고, 배관이 어긋나거나 내려앉았을 수도 있습니다. 안을 봐야 어느 쪽인지 알 수 있습니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">배수구에 물건을 빠뜨렸어요</div>
+        <div class="pg-sym-a">반지나 칫솔처럼 손이 닿지 않는 곳으로 들어간 물건은 어디에 걸렸는지부터 확인합니다. 자리를 본 뒤 전용 집게로 꺼냅니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">우리 집 문제인지, 건물 문제인지 모르겠어요</div>
+        <div class="pg-sym-a">아파트나 상가는 세대 배관과 공용배관이 이어져 있습니다. 카메라로 보면 막힌 자리가 어느 쪽인지 분명해집니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 화면에서 보는 것 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Screen</div>
+    <div class="sec-ttl">내시경으로 확인하는 세 가지</div></div>
+    <div class="pg-cause rv">
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">1</div>
+        <div>
+          <div class="pg-cause-t">막힌 위치</div>
+          <div class="pg-cause-d">화면에 표시되는 숫자는 내시경이 들어간 길이입니다. 싱크대 배관 1.5m, 빌라 배수관 3.53m, 주택 땅속 배관 10.75m처럼 막힌 위치를 정확히 알 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">2</div>
+        <div>
+          <div class="pg-cause-t">막힌 원인</div>
+          <div class="pg-cause-d">기름때, 음식물 찌꺼기, 머리카락, 빠뜨린 물건 중 무엇인지에 따라 사용하는 장비가 달라집니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">3</div>
+        <div>
+          <div class="pg-cause-t">배관 상태</div>
+          <div class="pg-cause-d">배관이 어긋났거나 무너진 곳은 청소로 해결되지 않습니다. 작업 전에 미리 알아야 불필요한 비용이 들지 않습니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pg-note rv" style="margin-top:16px">
+      <strong>내시경 화면은 함께 보면서 설명드립니다.</strong> 배관 상태를 직접 확인하신 뒤에
+      필요한 작업과 비용을 말씀드리고, 동의하시면 진행합니다.
+    </div>
+  </div>
+</section>
+
+<!-- 진행 순서 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Process</div>
+    <div class="sec-ttl">내시경 검사 순서</div></div>
+    <div class="pg-steps rv">
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">배수구로 내시경을 넣습니다</div>
+          <div class="pg-step-p">세탁기를 옮기거나 변기를 떼어내야 하는 경우도 있습니다. 이때는 먼저 말씀드리고 동의를 받은 뒤 진행합니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">화면을 함께 보며 막힌 위치와 원인을 확인합니다</div>
+          <div class="pg-step-p">몇 m 지점에서 무엇이 막고 있는지 보여드립니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">필요한 작업과 비용을 말씀드립니다</div>
+          <div class="pg-step-p">청소로 해결되는지, 배관 공사가 필요한지 구분해서 설명드립니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">작업이 끝나면 내시경으로 다시 확인합니다</div>
+          <div class="pg-step-p">배관 안이 깨끗해졌는지 화면으로 보여드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 내시경으로 찾아낸 것들 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Cases</div>
+    <div class="sec-ttl">내시경으로 원인을 찾은 현장</div></div>
+    <div class="cases">
+{{CASES}}
+    </div>
+  </div>
+</section>
+
+<!-- 안 보일 때 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Limit</div>
+    <div class="sec-ttl">내시경만으로 확인이 어려운 경우</div></div>
+    <div class="pg-note rv">
+      <strong>배관에 흐린 물이 차 있으면 화면이 잘 보이지 않습니다.</strong>
+      순창의 한 주택 마당 배수구가 그런 경우였습니다.
+      샤프트로 물이 빠지게 한 뒤 내시경을 다시 넣었고, 배관을 막고 있던 자갈돌을 찾았습니다.
+    </div>
+    <div class="pg-note rv d1">
+      <strong>땅속 배관은 관로탐지 장비를 함께 사용합니다.</strong>
+      내시경으로 배관 안 몇 m 지점에 문제가 있는지 확인하고, 관로탐지로 배관이 얼마나 깊이 묻혀 있는지 확인합니다.
+      도산동 주택에서는 이 방법으로 무너진 곳을 찾아 땅을 팠습니다. 배관은 약 1.4m 깊이에 묻혀 있었습니다.
+    </div>
+  </div>
+</section>
+
+<!-- 본 다음에 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Next</div>
+    <div class="sec-ttl">원인에 따라 작업이 달라집니다</div></div>
+    <div class="pg-two rv">
+      <div class="pg-two-box is-light">
+        <div class="pg-two-h"><span class="pg-two-mark">✓</span> 청소로 해결됩니다</div>
+        <ul>
+          <li>기름때·찌꺼기가 쌓인 경우 — <a href="../scaling/" style="text-decoration:underline"><strong>배관 스케일링</strong></a></li>
+          <li>배관이 길거나 기름이 심하게 굳은 경우 — <a href="../jet/" style="text-decoration:underline"><strong>고압 세척</strong></a></li>
+          <li>물건이 걸린 경우 — 전용 집게로 꺼냅니다</li>
+        </ul>
+      </div>
+      <div class="pg-two-box is-dark">
+        <div class="pg-two-h"><span class="pg-two-mark">!</span> 공사가 필요합니다</div>
+        <ul>
+          <li>배관이 <strong>어긋나거나 무너진</strong> 경우</li>
+          <li>배관 기울기가 나빠 <strong>같은 곳에 물이 계속 고이는</strong> 경우</li>
+          <li><a href="../pipe/" style="text-decoration:underline"><strong>배관 설비 공사</strong></a>로 이어집니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Info</div>
+    <div class="sec-ttl">출동·결제 안내</div></div>
+    <div class="pg-facts rv">
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">출동 시간</div>
+        <div class="pg-facts-v">광주 시내·시외 모두 <em>{{site.dispatch}}</em> 이내</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">운영 시간</div>
+        <div class="pg-facts-v">{{site.hours}}</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">비용</div>
+        <div class="pg-facts-v">내시경으로 확인한 뒤 <em>필요한 작업만</em> 기준으로 안내</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">결제</div>
+        <div class="pg-facts-v">{{site.pay}} / {{site.receipt}} 발행 가능</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">경력</div>
+        <div class="pg-facts-v">{{site.years}} · 약 {{site.jobs}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">FAQ</div>
+    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="faq-wrap rv">
+{{FAQ}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">배관 속 상태, <em>확인부터</em> 하세요</div>
+    <p class="cta-p rv">내시경 화면을 함께 보고 필요한 작업과 비용을 말씀드립니다.</p>
+    <div class="cta-phone rv">{{site.phone}}</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:{{site.phone}}" class="btn-call" onclick="trackCTA('call','camera')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="{{site.kakao}}" class="btn-kakao" onclick="return ctaKakao('camera', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 서비스 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-ttl" style="font-size:clamp(20px,3vw,26px)">다른 문제도 있으신가요?</div></div>
+    <div class="pg-more rv">
+      <a href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+      <a href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+      <a href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+      <a href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: {{site.biz_no}} · 대표: {{site.ceo}} · {{site.phone}}<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+  </div>
+  <div class="foot-areas">
+    <span class="foot-areas-l">출동 지역</span>
+    <a href="/gwangju/">광주</a>
+    <a href="/gwangyang/">광양</a>
+    <a href="/yeosu/">여수</a>
+    <a href="/suncheon/">순천</a>
+    <a href="/mokpo/">목포</a>
+    <a href="/jeonju/">전주</a>
+    <a href="/damyang/">담양</a>
+    <a href="/hwasun/">화순</a>
+    <a href="/muan/">무안</a>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:{{site.phone}}" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">{{site.phone}}</span>
+    </span>
+  </a>
+  <a href="{{site.kakao}}" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 모바일 메뉴 ── */
+function openMM() { document.getElementById('mm').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/IXbWCKDGzYAdEL_x27xE',   /* 카카오 전용 라벨 — 2026-09-22 전화와 분리 */
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "1ae20f9ea7a3ce0";
+if(window.wcs) {
+wcs_do();
+}
+</script>
+</body>
+</html>

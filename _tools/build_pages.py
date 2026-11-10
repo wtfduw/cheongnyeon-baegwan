@@ -223,7 +223,7 @@ REGIONS = [
 # 이 파일이 만들지 않는 페이지들(홈·서비스 7장·privacy 는 build_content.py 가). 사이트맵에만 넣는다.
 HANDMADE = [("", "1.0"), ("toilet/", "0.9"), ("sink/", "0.9"), ("drain/", "0.9"),
             ("jet/", "0.9"), ("faucet/", "0.9"), ("leak/", "0.9"), ("pipe/", "0.9"),
-            ("privacy/", "0.3")]
+            ("camera/", "0.8"), ("scaling/", "0.8"), ("privacy/", "0.3")]
 
 # 모든 지역에서 공통으로 나온 이야기 (사장님 답변 40~44번)
 INTERIOR = (

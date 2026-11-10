@@ -1,0 +1,504 @@
+<!--
+  원본 틀 — _tools/build_content.py 가 이 파일을 읽어 scaling/index.html 을 만든다.
+  scaling/index.html 을 직접 고치면 다음 실행 때 이 틀 내용으로 덮어써진다. 페이지 글은 여기서 고친다.
+  {{p.묶음.이름:won}} 자리에는 content/prices.json 의 가격이 50,000 모양으로,
+  {{p.묶음.이름:man}} 자리에는 5 모양(만원 단위)으로 들어간다. 그래서 틀에는 '{{…:man}}만원' 처럼 쓴다.
+  {{CASES}} 줄에는 content/cases/scaling.json 의 시공 사례가 들어간다.
+  {{FAQ}} 줄에는 content/faq/<페이지>.json 의 자주 묻는 질문 목록이, {{FAQ_LD}} 줄에는 그중 '구글 검색 결과에도 넣기'를
+  켠 질문의 검색용 묶음(FAQPage JSON-LD)이 들어간다. 켠 질문이 하나도 없으면 묶음째 빠진다.
+  {{s.<서비스>.name|symptoms|price_note|intro}} 자리에는 content/services.json 의 서비스 설명 글이 들어간다.
+  {{PRICE_GUIDE}} 줄에는 가격 안내 문구(content/prices.json 의 _guide)가 들어간다. 비어 있으면 줄째 빠진다.
+  가격을 관리 화면에서 '글자'로 바꾸면(content/prices.json 의 _text) 숫자 자리가 그 글자로 바뀐다.
+  제목·설명처럼 글자로 바꾸면 어색한 곳은 {{#num 가격줄}}숫자일 때{{#else}}글자일 때{{/num}} 로 감싸 두었다.
+  ({{#any …}} 는 하나라도 숫자일 때, {{#text …}} 는 하나라도 글자일 때. 자세한 규칙은 build_content.py 맨 위 설명)
+  이 설명 주석은 페이지에 들어가지 않는다(맨 위 주석 하나만 지운다).
+-->
+<!DOCTYPE html>
+<!-- 배관 스케일링(플렉스 샤프트) 페이지 v1 (2026-11-10) — 사례 파일·블로그 글 기반, AI 검색 요청서 4번 -->
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DS9TT9XPFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DS9TT9XPFZ');
+  gtag('config', 'AW-18380945599');   /* 구글 광고 전환 추적 */
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광주 배관 스케일링 | 플렉스 샤프트로 기름때 제거 | 청년배관</title>
+<meta name="description" content="뚫어도 자꾸 막히거나 싱크대에서 냄새가 날 때. 플렉스 샤프트로 배관 벽에 붙은 기름때와 찌꺼기를 긁어내는 배관 스케일링 작업입니다. 내시경으로 작업 전과 후를 함께 확인합니다. 식당·카페 주방 배관 관리도 합니다.">
+<link rel="canonical" href="https://xn--hc0bug19yo4ksghrpb480c.com/scaling/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xn--hc0bug19yo4ksghrpb480c.com/scaling/">
+<meta property="og:title" content="광주 배관 스케일링 | 플렉스 샤프트로 기름때를 긁어냅니다">
+<meta property="og:description" content="배관 벽에 붙은 기름때와 찌꺼기를 긁어내고, 내시경으로 작업 전과 후를 함께 확인합니다.">
+<meta property="og:image" content="https://xn--hc0bug19yo4ksghrpb480c.com/og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "배관 스케일링 · 플렉스 샤프트 배관 청소",
+  "name": "광주 배관 스케일링",
+  "description": "플렉스 샤프트로 배관 벽에 붙은 기름때와 찌꺼기를 긁어내는 배관 스케일링 작업입니다. 내시경 카메라로 작업 전과 후를 확인하며, 식당·카페 주방 배관과 가정집 싱크대·하수구 배관을 청소합니다.",
+  "provider": {
+    "@type": "Plumber",
+    "name": "청년배관",
+    "telephone": "{{site.phone_intl}}",
+    "url": "https://xn--hc0bug19yo4ksghrpb480c.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "동운로201번길 20",
+      "addressLocality": "북구",
+      "addressRegion": "전남광주통합특별시",
+      "postalCode": "61258",
+      "addressCountry": "KR"
+    }
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "전남광주통합특별시"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "전북특별자치도"
+    }
+  ]
+}
+</script>
+{{FAQ_LD}}
+
+</head>
+<body>
+
+<!-- 라인 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 .02h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5C6.8 3.5 2.6 6.7 2.6 10.7c0 2.5 1.7 4.7 4.2 6L6 20.6l4.1-2.2c.6.1 1.2.1 1.9.1 5.2 0 9.4-3.2 9.4-7.2S17.2 3.5 12 3.5z"/></symbol>
+    <symbol id="i-toilet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="9" height="6" rx="1.2"/><path d="M5 9h14a7 7 0 01-7 7h-.5"/><path d="M5 9c0 4 1.5 6.3 4 7l-1 5h7l-1.5-5"/></symbol>
+    <symbol id="i-sink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17l-1.6 5a4 4 0 01-3.8 2.8H8.9A4 4 0 015.1 16z"/><path d="M12 11V6a2 2 0 012-2h1.5M15.5 2.5v3"/></symbol>
+    <symbol id="i-drain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7 9.2h10M6 12h12M7 14.8h10"/></symbol>
+    <symbol id="i-jet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h7.5l3.5-2v9l-3.5-2H2.5z"/><path d="M17 7.5l3.5-1.8M18 12h4M17 16.5l3.5 1.8"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 00-6 5.6L3 17.6 6.4 21l5.7-5.7a4.5 4.5 0 005.6-6l-3.2 3.2-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5h10a4.5 4.5 0 014.5 4.5v1.5h-4V17a1.5 1.5 0 00-1.5-1.5H3z"/><path d="M8 12.5V8h2.5M6 8h7"/><path d="M15.5 22c.8-.8 1.3-1.6 1.3-2.4"/></symbol>
+    <symbol id="i-naver" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h4.6l4.8 7.2V4H19v16h-4.6l-4.8-7.2V20H5z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-won" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M7.5 9l1.6 6 1.9-6 2 6 1.6-6M7 12.5h10" transform="translate(0 -0.5)"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.2a7 7 0 10-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  </defs>
+</svg>
+
+<!-- 모바일 메뉴 -->
+<div class="mm" id="mm">
+  <div class="mm-top">
+    <div class="mm-brand">
+      <img class="mm-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+      <div class="mm-logo">청년<em>배관</em></div>
+    </div>
+    <button class="mm-close" onclick="closeMM()">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-lbl">서비스</div>
+    <a class="mm-item" href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    <a class="mm-item" href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+    <a class="mm-item" href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+    <a class="mm-item" href="../leak/"><svg class="ic"><use href="#i-wrench"/></svg> 누수 탐지</a>
+    <a class="mm-item" href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+    <a class="mm-item" href="../faucet/"><svg class="ic"><use href="#i-faucet"/></svg> 수전교체·부품교체</a>
+    <a class="mm-item" href="../pipe/"><svg class="ic"><use href="#i-shield"/></svg> 배관 설비 공사</a>
+    <div class="mm-lbl">안내</div>
+    <a class="mm-item" href="../index.html#price"><svg class="ic"><use href="#i-won"/></svg> 가격 안내</a>
+    <a class="mm-item" href="../index.html#area"><svg class="ic"><use href="#i-pin"/></svg> 출동 지역</a>
+  </div>
+  <div class="mm-foot">
+    <button class="mm-cta" onclick="trackCTA('call','menu');location.href='tel:{{site.phone}}'"><svg class="ic"><use href="#i-phone"/></svg> {{site.phone}}</button>
+    <a class="mm-cta mm-cta-kakao" href="{{site.kakao}}" onclick="return ctaKakao('menu', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+  </div>
+</div>
+
+<!-- 상단 고정 묶음 -->
+<div class="site-head">
+<div class="topbar">
+  <div class="tpb-social">
+    <a href="{{site.blog}}" aria-label="네이버 블로그"><svg class="ic"><use href="#i-naver"/></svg></a>
+    <a href="#" aria-label="유튜브"><svg class="ic"><use href="#i-yt"/></svg></a>
+    <a href="{{site.instagram}}" aria-label="인스타그램"><svg class="ic"><use href="#i-ig"/></svg></a>
+  </div>
+  <span class="tpb-txt">광주·전라 전지역 | 365일 긴급출동</span>
+</div>
+
+<header>
+  <a class="hdr-brand" href="../index.html">
+    <img class="hdr-char" src="../캐릭터로고_배경제거.webp" alt="" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-logo">청년<em>배관</em></div>
+      <div class="hdr-sub">광주·전라 전지역 출동</div>
+    </div>
+  </a>
+  <nav class="hdr-nav">
+    <a href="../toilet/">변기</a>
+    <a href="../sink/">싱크대</a>
+    <a href="../drain/">하수구</a>
+    <a href="../leak/">누수</a>
+    <a href="../jet/">고압세척</a>
+    <a href="../faucet/">수전교체</a>
+    <a href="../pipe/">배관설비</a>
+    <a href="../index.html#price">가격안내</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="hdr-ham" onclick="openMM()" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+</div>
+
+<!-- 상단 -->
+<section class="pg-hero">
+  <div class="inner">
+    <nav class="pg-crumb" aria-label="현재 위치">
+      <a href="../index.html">홈</a> <span>›</span> <span>배관 스케일링</span>
+    </nav>
+    <div class="pg-hero-body">
+      <h1>배관 벽에 굳은 기름때,<br><em>플렉스 샤프트로</em> 긁어냅니다</h1>
+      <p class="pg-hero-sub">
+        배관 스케일링은 배관 안쪽 벽에 붙은 기름때와 찌꺼기를 긁어내는 청소입니다.<br>
+        내시경으로 작업 전과 후를 함께 확인합니다.
+      </p>
+      <div class="pg-hero-facts">
+        <span class="pg-fact">광주 시내 <em>{{site.dispatch}}</em> 출동</span>
+        <span class="pg-fact"><em>플렉스 샤프트</em> 장비</span>
+        <span class="pg-fact">{{site.years}} <em>{{site.jobs}}</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 스케일링이란 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Scaling</div>
+    <div class="sec-ttl">뚫는 것과 스케일링은 다릅니다</div></div>
+    <div class="pg-two rv">
+      <div class="pg-two-box is-light">
+        <div class="pg-two-h"><span class="pg-two-mark">1</span> 뚫기</div>
+        <ul>
+          <li>막고 있는 덩어리에 <strong>물길을 내는</strong> 작업입니다</li>
+          <li>물은 다시 내려가지만 배관 벽의 기름때는 그대로 남습니다</li>
+          <li>통로가 좁아진 상태라 다시 막히기 쉽습니다</li>
+        </ul>
+      </div>
+      <div class="pg-two-box is-dark">
+        <div class="pg-two-h"><span class="pg-two-mark">2</span> 스케일링</div>
+        <ul>
+          <li>배관 <strong>벽에 붙은 기름때와 찌꺼기</strong>를 긁어내는 작업입니다</li>
+          <li>회전하는 샤프트가 배관 안쪽을 따라가며 벽을 긁습니다</li>
+          <li>작업 뒤 <strong>내시경으로 배관 벽</strong>을 확인합니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 이런 경우 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">When</div>
+    <div class="sec-ttl">이런 경우 스케일링이 필요합니다</div></div>
+    <div class="pg-sym rv">
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">뚫었는데 얼마 안 가서 또 막혀요</div>
+        <div class="pg-sym-a">학동의 한 PC방은 1년 전쯤 석션기로 뚫었지만 주방 싱크대가 다시 역류했습니다. 내시경으로 보니 배관 벽의 기름때가 그대로 남아 있었습니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">물은 내려가는데 냄새가 나요</div>
+        <div class="pg-sym-a">트랩이 있어도 배관 안에 기름때와 음식물 찌꺼기가 쌓이면 냄새가 올라옵니다. 선운지구의 한 아파트가 이런 경우였습니다.</div>
+      </div>
+      <div class="pg-sym-card">
+        <div class="pg-sym-q">기름을 많이 쓰는 가게예요</div>
+        <div class="pg-sym-a">식당·카페·PC방 주방은 배관에 기름이 빨리 쌓입니다. 막히기 전에 6개월~1년에 한 번 청소하시길 권합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 장비 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Tool</div>
+    <div class="sec-ttl">플렉스 샤프트는 이런 장비입니다</div></div>
+    <div class="pg-cause rv">
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">1</div>
+        <div>
+          <div class="pg-cause-t">잘 휘는 샤프트</div>
+          <div class="pg-cause-d">가늘고 유연한 샤프트를 배수구로 밀어 넣습니다. 싱크대, 욕실 배수구, 식당 주방 바닥 배수로(트렌치)에서 사용합니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">2</div>
+        <div>
+          <div class="pg-cause-t">끝에서 회전하는 체인 헤드</div>
+          <div class="pg-cause-d">전동 드릴로 샤프트를 돌리면 끝에 달린 체인 헤드가 회전하면서 배관 벽에 붙은 기름때를 긁어냅니다.</div>
+        </div>
+      </div>
+      <div class="pg-cause-row">
+        <div class="pg-cause-no">3</div>
+        <div>
+          <div class="pg-cause-t">내시경과 함께 사용</div>
+          <div class="pg-cause-d">작업 전에 <a href="../camera/" style="text-decoration:underline">내시경</a>으로 어디에 얼마나 쌓였는지 확인하고, 작업 뒤 다시 넣어 배관 벽이 깨끗해졌는지 봅니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 작업 순서 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Process</div>
+    <div class="sec-ttl">스케일링 작업 순서</div></div>
+    <div class="pg-steps rv">
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">내시경으로 배관 안을 확인합니다</div>
+          <div class="pg-step-p">기름때가 어디에 얼마나 쌓였는지 화면으로 함께 봅니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">필요한 작업과 비용을 말씀드립니다</div>
+          <div class="pg-step-p">동의하신 뒤에 작업을 시작합니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">플렉스 샤프트로 배관 벽을 긁어냅니다</div>
+          <div class="pg-step-p">오래 쌓인 배관은 한 번으로 끝나지 않아 여러 번 반복합니다.</div>
+        </div>
+      </div>
+      <div class="pg-step">
+        <div>
+          <div class="pg-step-h">물을 흘려 보내 배수를 확인합니다</div>
+          <div class="pg-step-p">싱크대에 물을 받아 한꺼번에 내려 보내고, 내시경으로 배관 안을 다시 확인합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 작업 현장 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Cases</div>
+    <div class="sec-ttl">스케일링 작업 현장</div></div>
+    <div class="cases">
+{{CASES}}
+    </div>
+  </div>
+</section>
+
+<!-- 샤프트로 안 될 때 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Next</div>
+    <div class="sec-ttl">샤프트로 해결되지 않는 경우</div></div>
+    <div class="pg-note rv">
+      <strong>대부분은 샤프트 작업으로 해결됩니다.</strong>
+      다만 배관이 굵고 길거나 기름이 심하게 굳은 경우에는 스프링 장비를 쓰고,
+      그래도 안 되면 <a href="../jet/" style="text-decoration:underline"><strong>고압 세척</strong></a>으로 넘어갑니다.
+      장비를 바꿔야 할 때는 이유를 먼저 말씀드립니다.
+    </div>
+    <div class="pg-note rv d1">
+      <strong>배관이 어긋나거나 무너진 경우는 청소로 해결되지 않습니다.</strong>
+      이때는 <a href="../pipe/" style="text-decoration:underline"><strong>배관 공사</strong></a>가 필요합니다.
+      그래서 작업 전에 내시경으로 배관 상태부터 확인합니다.
+    </div>
+  </div>
+</section>
+
+<!-- 비용 -->
+<section class="sec on-dark" style="background:var(--n900)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Price</div>
+    <div class="sec-ttl">비용</div></div>
+    <div class="price-list rv">
+      <div class="price-row">
+        <div class="price-row-lbl">싱크대 배관 청소 · 샤프트</div>
+        <div class="price-row-num">{{p.sink.shaft_min:won}}원 ~</div>
+      </div>
+      <div class="price-row">
+        <div class="price-row-lbl">하수구 배관 청소 · 샤프트</div>
+        <div class="price-row-num">{{p.drain.shaft_min:won}}원 ~</div>
+      </div>
+    </div>
+{{PRICE_GUIDE}}
+    <div class="pg-note rv" style="margin-top:22px">
+      <strong>금액은 배관 길이와 기름이 굳은 정도에 따라 달라집니다.</strong>
+      내시경으로 상태를 확인한 뒤 금액을 말씀드리고 진행합니다.
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Info</div>
+    <div class="sec-ttl">출동·결제 안내</div></div>
+    <div class="pg-facts rv">
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">출동 시간</div>
+        <div class="pg-facts-v">광주 시내·시외 모두 <em>{{site.dispatch}}</em> 이내</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">운영 시간</div>
+        <div class="pg-facts-v">{{site.hours}}</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">결제</div>
+        <div class="pg-facts-v">{{site.pay}} / {{site.receipt}} 발행 가능</div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">보증</div>
+        <div class="pg-facts-v">배관 청소 <em>1년</em> · 기름을 많이 쓰거나 배관 기울기가 좋지 않은 곳은 <em>6개월</em></div>
+      </div>
+      <div class="pg-facts-row">
+        <div class="pg-facts-k">경력</div>
+        <div class="pg-facts-v">{{site.years}} · 약 {{site.jobs}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">FAQ</div>
+    <div class="sec-ttl">자주 묻는 질문</div></div>
+    <div class="faq-wrap rv">
+{{FAQ}}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="inner">
+    <div class="cta-tag rv">24시간 긴급출동</div>
+    <div class="cta-h2 rv">자꾸 막히는 배관, <em>벽까지 청소</em>하세요</div>
+    <p class="cta-p rv">내시경으로 배관 안을 함께 보고 필요한 작업과 비용을 말씀드립니다.</p>
+    <div class="cta-phone rv">{{site.phone}}</div>
+    <div class="cta-region rv">광주·전라 전지역 · 24시간 · 연중무휴</div>
+    <div class="cta-btns rv">
+      <a href="tel:{{site.phone}}" class="btn-call" onclick="trackCTA('call','scaling')"><svg class="ic"><use href="#i-phone"/></svg> 전화하기</a>
+      <a href="{{site.kakao}}" class="btn-kakao" onclick="return ctaKakao('scaling', this.href)"><svg class="ic"><use href="#i-chat"/></svg> 카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 다른 서비스 -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="rv"><div class="sec-ttl" style="font-size:clamp(20px,3vw,26px)">다른 문제도 있으신가요?</div></div>
+    <div class="pg-more rv">
+      <a href="../sink/"><svg class="ic"><use href="#i-sink"/></svg> 싱크대 막힘</a>
+      <a href="../drain/"><svg class="ic"><use href="#i-drain"/></svg> 하수구 막힘</a>
+      <a href="../jet/"><svg class="ic"><use href="#i-jet"/></svg> 고압 세척</a>
+      <a href="../toilet/"><svg class="ic"><use href="#i-toilet"/></svg> 변기 막힘</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">청년<em>배관</em></div>
+    <div class="foot-info">사업자등록번호: {{site.biz_no}} · 대표: {{site.ceo}} · {{site.phone}}<br>24시간 긴급출동 · 광주·전라 전지역 · <a href="/privacy/" style="color:var(--yel);font-weight:700">개인정보 처리방침</a></div>
+  </div>
+  <div class="foot-areas">
+    <span class="foot-areas-l">출동 지역</span>
+    <a href="/gwangju/">광주</a>
+    <a href="/gwangyang/">광양</a>
+    <a href="/yeosu/">여수</a>
+    <a href="/suncheon/">순천</a>
+    <a href="/mokpo/">목포</a>
+    <a href="/jeonju/">전주</a>
+    <a href="/damyang/">담양</a>
+    <a href="/hwasun/">화순</a>
+    <a href="/muan/">무안</a>
+  </div>
+  <div class="foot-copy">© 2026 청년배관. All rights reserved.</div>
+</footer>
+
+<!-- 하단 고정 바 -->
+<div class="bottom-bar">
+  <a href="tel:{{site.phone}}" class="bb-call" onclick="trackCTA('call','fixbar')">
+    <svg class="ic"><use href="#i-phone"/></svg>
+    <span class="bb-call-txt">
+      <span class="bb-call-lbl">24시 무료상담 바로 통화</span>
+      <span class="bb-call-num">{{site.phone}}</span>
+    </span>
+  </a>
+  <a href="{{site.kakao}}" class="bb-kakao" onclick="return ctaKakao('fixbar', this.href)">
+    <svg class="ic"><use href="#i-chat"/></svg> 카톡 상담
+  </a>
+</div>
+
+<script>
+/* ── 모바일 메뉴 ── */
+function openMM() { document.getElementById('mm').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMM() { document.getElementById('mm').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ── 스크롤 Reveal ── */
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); revObs.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+</script>
+
+<!-- CTA 클릭 계측 -->
+<script>
+/* 카카오톡 버튼: 페이지를 떠나므로 신고가 접수된 뒤 이동한다.
+   단 0.8초 안에 응답이 없으면 그냥 이동시킨다 — 구글 문제로 상담을 놓치지 않도록. */
+function ctaKakao(loc, url) {
+  var moved = false;
+  var go = function () { if (!moved) { moved = true; window.location = url; } };
+  if (typeof gtag !== 'function') { go(); return false; }
+  gtag('event', 'cta_click', { cta_type: 'kakao', cta_location: loc });
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18380945599/IXbWCKDGzYAdEL_x27xE',   /* 카카오 전용 라벨 — 2026-09-22 전화와 분리 */
+    'event_callback': go,
+    'event_timeout': 800
+  });
+  return false;
+}
+function trackCTA(type, loc) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'cta_click', { cta_type: type, cta_location: loc });
+    gtag('event', 'conversion', { 'send_to': 'AW-18380945599/pRvsCJ7m5d8cEL_x27xE' });   /* 구글 광고 전환 */
+  }
+}
+</script>
+
+<!-- 네이버 애널리틱스 -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "1ae20f9ea7a3ce0";
+if(window.wcs) {
+wcs_do();
+}
+</script>
+</body>
+</html>
