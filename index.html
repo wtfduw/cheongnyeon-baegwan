@@ -950,6 +950,8 @@ function cfCheck(d) {
       .then(function () { return checkReceived(sendId); }, function () { return 'net'; })
       .then(function (r) {
         if (r === true) {
+          /* 구글 광고 전환 '상담 신청 폼 제출' — 접수가 확인된 때만 한 번 보낸다 (2026-11-11) */
+          try { gtag('event', 'conversion', { 'send_to': 'AW-18380945599/TibTCKq05K0dEL_x27xE' }); } catch (e) {}
           document.getElementById('apply-done-phone').textContent = d.phone.trim();
           document.getElementById('apply-fields').hidden = true;
           document.getElementById('apply-done').hidden = false;
