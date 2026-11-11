@@ -70,7 +70,9 @@ import xml.etree.ElementTree as ET
 SITE = pathlib.Path(__file__).resolve().parent.parent
 TEMPLATE = pathlib.Path(__file__).with_name("page-template.html")
 BASE = "https://xn--hc0bug19yo4ksghrpb480c.com"
-TODAY = "2026-08-15"
+# 사이트맵 날짜(lastmod)는 페이지 내용이 바뀐 날로 넣는다(2026-11-11). 전에는 TODAY = "2026-08-15" 고정이라
+# 77개 주소가 모두 8/15 로 나갔다. 페이지마다 내용 지문(sha)과 날짜를 이 파일에 적어 두고, 지문이 달라졌을 때만 오늘 날짜로 바꾼다.
+DATES = pathlib.Path(__file__).with_name("sitemap_dates.json")
 
 # 블로그 글 주소 앞부분. 사례마다 실제 작업 사진을 볼 수 있게 링크를 단다.
 B = "https://blog.naver.com/tturobro/"
@@ -422,17 +424,29 @@ def case_paths() -> list:
     return [("cases/", "0.8")] + [(f"cases/{c['slug']}/", "0.6") for c in cases]
 
 
-def sitemap_xml() -> str:
-    rows = []
+def page_file(path: str) -> pathlib.Path:
+    return SITE / path / "index.html"
+
+
+def sitemap_xml(new_pages: dict, today: str) -> tuple:
+    """new_pages: 이번에 새로 만든 지역 장 {주소: HTML}. 나머지 장은 지금 파일을 본다. (사이트맵, 날짜 장부 JSON) 을 돌려준다."""
+    import hashlib
+    old = json.loads(DATES.read_text(encoding="utf-8")) if DATES.exists() else {}
+    dates, rows = {}, []
     for path, priority in HANDMADE + [(r["slug"] + "/", r["priority"]) for r in REGIONS] + case_paths():
+        html = new_pages[path] if path in new_pages else page_file(path).read_text(encoding="utf-8")
+        sha = hashlib.sha256(html.replace("\r\n", "\n").encode("utf-8")).hexdigest()[:16]
+        was = old.get(path, {})
+        date = was["date"] if was.get("sha") == sha else today
+        dates[path] = {"date": date, "sha": sha}
         rows.append(
-            f"  <url>\n    <loc>{BASE}/{path}</loc>\n    <lastmod>{TODAY}</lastmod>\n"
+            f"  <url>\n    <loc>{BASE}/{path}</loc>\n    <lastmod>{date}</lastmod>\n"
             f"    <changefreq>monthly</changefreq>\n    <priority>{priority}</priority>\n  </url>")
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            + "\n".join(rows) + "\n</urlset>\n")
     ET.fromstring(xml)
-    return xml
+    return xml, json.dumps(dates, ensure_ascii=False, indent=1) + "\n"
 
 
 PHOTO = re.compile(r'<img\b[^>]*?\ssrc="(?:\.\./)?([^"]+)"')
@@ -517,8 +531,9 @@ def main() -> None:
         note = "정상" if not bad and not left else f"확인필요 {bad}{left}"
         outputs.append((f"/{region['slug']}/", SITE / region["slug"] / "index.html", page,
                         f"{page.count(chr(10))+1}줄  {note}"))
-    xml = sitemap_xml()
+    xml, dates = sitemap_xml({f"{r['slug']}/": page for r, page in pages}, bc.kst_today())
     outputs.append(("sitemap.xml", SITE / "sitemap.xml", xml, f"주소 {xml.count('<url>')}개"))
+    outputs.append(("_tools/sitemap_dates.json", DATES, dates, "사이트맵 날짜 장부"))
 
     changed = []
     for label, path, text, info in outputs:
