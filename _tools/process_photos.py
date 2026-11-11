@@ -23,7 +23,7 @@ GitHub 에서는 .github/workflows/site.yml 이 build_content.py 보다 먼저 -
   3. WebP 품질 80 으로 photos/<페이지>-<날짜>-<번호>.webp 에 저장
      예) 변기 페이지, 2026-10-27 사례의 첫 사진 → photos/toilet-20261027-01.webp
          날짜가 없는 사례는 photos/toilet-case-01.webp. 번호는 이미 있는 파일 다음 번호부터
-  4. content/cases/<페이지>.json · content/hero.json 의 '/_uploads/…' 주소를 새 파일 주소('/photos/…')로 바꾸기
+  4. content/cases/<페이지>.json · content/hero.json · content/casepages.json(사례 페이지, 2026-11-11) 의 '/_uploads/…' 주소를 새 파일 주소('/photos/…')로 바꾸기
   5. _uploads/ 의 원본 지우기 (GitHub 커밋 기록에는 남는다)
 
 위치정보(GPS)는 신경 쓰지 않기로 했다(2026-10-27 사용자 결정).
@@ -47,6 +47,7 @@ SITE = pathlib.Path(__file__).resolve().parent.parent
 CASES = SITE / "content" / "cases"
 HERO = SITE / "content" / "hero.json"     # 첫 화면 사진. 사진 이름 앞부분은 home
 HERO_KEY = "home"
+CASEPAGES = SITE / "content" / "casepages.json"   # 사례 페이지(2026-11-11). 사진 이름 앞부분은 사례마다 그 서비스 이름(toilet 등)
 UPLOADS = "_uploads/"
 PHOTOS = SITE / "photos"
 LONG = 1200       # 긴 변 픽셀
@@ -110,7 +111,8 @@ def photo_dicts(data):
 def find_uploads():
     """[(json 경로, 새 사진 이름 앞부분, 사진 dict, 적힌 주소)] — 사례 7개 파일 + 첫 화면 사진"""
     found = []
-    files = [(p, p.stem) for p in sorted(CASES.glob("*.json"))] + ([(HERO, HERO_KEY)] if HERO.exists() else [])
+    files = ([(p, p.stem) for p in sorted(CASES.glob("*.json"))] + ([(HERO, HERO_KEY)] if HERO.exists() else [])
+             + ([(CASEPAGES, None)] if CASEPAGES.exists() else []))
     for yml, page in files:
         try:
             data = json.loads(yml.read_text(encoding="utf-8")) or []
@@ -120,7 +122,10 @@ def find_uploads():
             value = str(photo.get("file") or "")
             if value.lstrip("/").startswith(UPLOADS):
                 key = hero_key(value) if yml == HERO else case_key(item)
-                found.append((yml, f"{page}-{key}", photo, value))
+                name = page or str(item.get("service") or "")     # 사례 페이지는 사례마다 서비스가 다르다
+                if not re.fullmatch(r"[a-z]+", name):
+                    raise Stop(f"{yml.name}: 서비스 이름이 이상합니다 ({name!r})")
+                found.append((yml, f"{name}-{key}", photo, value))
     return found
 
 

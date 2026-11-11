@@ -152,6 +152,8 @@ MORE_TEXT = "이 작업 블로그에서 더 보기 ›"
 CASE_SHOW = 6            # 사례 목록·홈에서 처음에 보이는 카드 수
 HOME_CASES_SLOT = "{{HOME_CASES}}\n"
 DETAIL_TEXT = "이 현장 자세히 보기 ›"
+AUTO_CARDS = {}    # 서비스 이름 → card 를 켠 사례 페이지 목록 (load_casepages 가 채운다)
+AUTO_CARD_PHOTOS = 3
 CASE_LINK = {}     # 블로그 주소·첫 사진 파일 → 사례 페이지 이름 (load_casepages 가 채운다)
 
 # 사장님 글 규칙 — 관리 화면 Code.gs 의 같은 이름 숫자와 맞춘다
@@ -506,6 +508,41 @@ def render_case(case: dict, where: str) -> list:
     return rows
 
 
+def render_auto_card(c: dict) -> list:
+    """사례 페이지(content/casepages.json)에서 card 를 켠 현장 → 서비스 장 사례 카드. 사장님이 같은 현장을 두 번 쓰지 않게 (2026-11-11).
+    글은 원인·작업 결과, 사진은 앞에서 AUTO_CARD_PHOTOS 장. 모양은 render_case 와 같다."""
+    photos = c["photos"][:AUTO_CARD_PHOTOS]
+    land = any(w > h for _, _, _, w, h in photos)
+    place = " ".join(x for x in (c["region"], c["building"]) if x)
+    rows = [f'      <article class="case{" case-land" if land else ""} rv">',
+            '        <div class="case-hd">',
+            f'          <p class="case-where">{esc(" · ".join(x for x in (c["day"], place) if x))}</p>',
+            f'          <h3>{esc(c["title"])}</h3>',
+            f'          <p class="case-sum">{inline(c["cause"])}</p>',
+            f'          <p class="case-sum">{inline(c["result"])}</p>',
+            '        </div>']
+    if c["facts"]:
+        rows.append('        <dl class="case-facts">')
+        rows += [f'          <div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k, v in c["facts"]]
+        rows.append('        </dl>')
+    if photos:
+        rows.append('        <div class="case-shots">')
+        for file, caption, tag, w, h in photos:
+            tall = ' class="tall"' if land and h > w else ""
+            label = f'<span class="tag tag-{"a" if tag in TAG_A else "b"}">{esc(tag)}</span>' if tag else ""
+            rows += ['        <figure>',
+                     f'          <img{tall} src="../{attr(file)}" alt="{attr(caption)}" loading="lazy" width="{w}" height="{h}">',
+                     f'          <figcaption>{label}{esc(caption)}</figcaption>',
+                     '        </figure>']
+        rows.append('        </div>')
+    links = [f'<a class="pg-case-link" href="../cases/{c["slug"]}/">{DETAIL_TEXT}</a>']
+    if c["blog"]:
+        links.append(f'<a class="pg-case-link" href="{attr(c["blog"])}" target="_blank" rel="noopener">{MORE_TEXT}</a>')
+    rows.append('        <p class="case-more">' + ' &nbsp; '.join(links) + '</p>')
+    rows.append('      </article>')
+    return rows
+
+
 def render_cases(name: str) -> str:
     path = CONTENT / "cases" / f"{name}.json"
     data = read_json(path) if path.exists() else []
@@ -516,6 +553,8 @@ def render_cases(name: str) -> str:
     if not isinstance(data, list):
         raise Stop(f"content/cases/{name}.json: 사례 목록 모양이 아닙니다")
     rows = []
+    for c in sorted(AUTO_CARDS.get(name, []), key=lambda c: c["date"], reverse=True):
+        rows += render_auto_card(c)      # 사례 페이지에서 '서비스 장에도 카드로 보이기'를 켠 현장 (맨 위, 최근 것부터)
     for n, case in enumerate(data, 1):
         rows += render_case(case, f"content/cases/{name}.json 사례 {n}")
     if CASE_LINK:       # 사례 페이지가 있으면 목록 장(/cases/)으로 가는 줄을 맨 아래에
@@ -1075,6 +1114,8 @@ def compare(path: pathlib.Path, new: str) -> str:
 # 칸: slug(주소 이름) · service · date · region · building · title · symptom · cause · diagnosis · equipment
 #     · method · result · note(걸린 시간·배관 길이 같은 숫자) · facts[{name,value}] · tip · photos[{file,caption,tag}] · blog
 #     · match(서비스 장 사례 카드의 첫 사진 — 블로그 주소가 없는 카드와 짝을 지을 때만)
+#     · card(true 면 그 서비스 장 사례 목록 맨 위에도 카드로 나온다 — render_auto_card. 관리 화면 '사례 페이지' 탭)
+# 관리 화면(Code.gs normalizeCasepages_ · CASEPAGE)의 규칙과 아래 숫자가 같아야 한다 (하나를 바꾸면 둘 다).
 BASE_URL = "https://xn--hc0bug19yo4ksghrpb480c.com"
 CASE_SERVICES = {   # service 값: (이름, 그 서비스 장 주소, 아이콘)
     "toilet": ("변기 막힘", "/toilet/", "i-toilet"), "sink": ("싱크대 막힘", "/sink/", "i-sink"),
@@ -1092,6 +1133,7 @@ def load_casepages() -> list:
     path = CONTENT / "casepages.json"
     rel = "content/casepages.json"
     CASE_LINK.clear()
+    AUTO_CARDS.clear()
     if not path.exists():
         return []
     data = read_json(path)
@@ -1133,12 +1175,16 @@ def load_casepages() -> list:
             if not isinstance(ph, dict):
                 raise Stop(f"{pw}: 모양이 아닙니다")
             file = text_of(ph.get("file"), pw + " 파일", required=True).lstrip("/")
+            if file.startswith("_uploads/"):
+                raise Stop(f"{pw}: 아직 줄이지 않은 올린 사진입니다 ({file}). process_photos.py --write 를 먼저 돌리세요")
             if not file.startswith("photos/") or not (SITE / file).is_file():
                 raise Stop(f"{pw}: photos/ 폴더에 없는 사진입니다 ({file})")
             w, h = photo_size(ph, SITE / file, pw)
             photos.append((file, one_line(ph.get("caption"), pw + " 설명", 120), one_line(ph.get("tag"), pw + " 표시", 10), w, h))
         item["photos"] = photos
         out.append(item)
+        if c.get("card") is True:       # 관리 화면 '사례 페이지' 탭의 '서비스 장에도 카드로 보이기'
+            AUTO_CARDS.setdefault(service, []).append(item)
         if item["blog"]:
             CASE_LINK.setdefault(item["blog"], slug)
         match = text_of(c.get("match"), where + " 짝 사진").lstrip("/")
@@ -1341,6 +1387,18 @@ def render_all(today: str = None) -> list:
     return out
 
 
+def stale_case_dirs(outputs: list) -> list:
+    """사례를 지우거나 주소 이름이 바뀌어 남은 옛 cases/<이름>/ 폴더. index.html 하나만 든 폴더만 고른다(다른 파일이 있으면 손대지 않는다).
+    관리 화면에서 사장님이 사례를 지우면 그 페이지가 사이트에서도 빠져야 해서 넣었다 (2026-11-11)."""
+    root = SITE / "cases"
+    paths = {path for _, path, _, _ in outputs}
+    if not root.is_dir() or (root / "index.html") not in paths:
+        return []          # 사례 페이지를 아예 안 만드는 상태면 아무것도 지우지 않는다
+    keep = {path.parent for path in paths}
+    return sorted(d for d in root.iterdir()
+                  if d.is_dir() and d not in keep and [f.name for f in d.iterdir()] == ["index.html"])
+
+
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     write = "--write" in sys.argv[1:]
@@ -1359,14 +1417,17 @@ def main() -> None:
         if diff:
             changed.append((path, text))
 
+    stale = stale_case_dirs(outputs)
+    for d in stale:
+        print(f"  cases/{d.name}/  · 사례가 없어져 지울 폴더")
     if broken:
         print(f"\n확인필요 {len(broken)}개: {', '.join(broken)}. 아무 파일도 쓰지 않았습니다.")
         sys.exit(2)
-    if not changed:
+    if not changed and not stale:
         print("\n지금 파일과 모두 같습니다. 쓸 것이 없습니다.")
         return
     if not write:
-        print(f"\n바뀌는 파일 {len(changed)}개. 아직 아무 파일도 쓰지 않았습니다.")
+        print(f"\n바뀌는 파일 {len(changed)}개, 지울 폴더 {len(stale)}개. 아직 아무 파일도 쓰지 않았습니다.")
         print("내가 고치지 않은 없어지는 줄·생기는 줄이 있으면 쓰지 마세요.")
         print("위 내용이 고친 의도와 맞을 때만 다시 실행: python build_content.py --write")
         sys.exit(1)
@@ -1374,7 +1435,11 @@ def main() -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")   # 줄 끝은 컴퓨터 방식대로 (윈도우 CRLF, GitHub LF) — build_pages.py 와 같음
         print(f"  썼음: {path.relative_to(SITE).as_posix()}")
-    print(f"\n{len(changed)}개 파일을 썼습니다.")
+    for d in stale:
+        (d / "index.html").unlink()
+        d.rmdir()
+        print(f"  지웠음: cases/{d.name}/")
+    print(f"\n{len(changed)}개 파일을 썼습니다." + (f" 폴더 {len(stale)}개를 지웠습니다." if stale else ""))
 
 
 if __name__ == "__main__":
