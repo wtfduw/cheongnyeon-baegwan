@@ -411,9 +411,20 @@ def build(region: dict, template: str, site: dict) -> str:
     return content_tool().center_text(page)
 
 
+def case_paths() -> list:
+    """시공 사례 목록 장과 사례 페이지 주소 (content/casepages.json, 2026-11-11). 파일이 없거나 비면 빈 목록."""
+    path = pathlib.Path(__file__).resolve().parent.parent / "content" / "casepages.json"
+    if not path.exists():
+        return []
+    cases = json.loads(path.read_text(encoding="utf-8"))
+    if not cases:
+        return []
+    return [("cases/", "0.8")] + [(f"cases/{c['slug']}/", "0.6") for c in cases]
+
+
 def sitemap_xml() -> str:
     rows = []
-    for path, priority in HANDMADE + [(r["slug"] + "/", r["priority"]) for r in REGIONS]:
+    for path, priority in HANDMADE + [(r["slug"] + "/", r["priority"]) for r in REGIONS] + case_paths():
         rows.append(
             f"  <url>\n    <loc>{BASE}/{path}</loc>\n    <lastmod>{TODAY}</lastmod>\n"
             f"    <changefreq>monthly</changefreq>\n    <priority>{priority}</priority>\n  </url>")

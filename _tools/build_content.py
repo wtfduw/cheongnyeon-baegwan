@@ -149,6 +149,10 @@ HERO_SLOT = "{{HERO_SLIDES}}\n"
 # 사진 위 작은 표시. 이 셋은 노란색(tag-a), 나머지는 회색(tag-b). build_pages.py 와 같은 규칙
 TAG_A = ("작업 후", "고친 자리", "원인")
 MORE_TEXT = "이 작업 블로그에서 더 보기 ›"
+CASE_SHOW = 6            # 사례 목록·홈에서 처음에 보이는 카드 수
+HOME_CASES_SLOT = "{{HOME_CASES}}\n"
+DETAIL_TEXT = "이 현장 자세히 보기 ›"
+CASE_LINK = {}     # 블로그 주소·첫 사진 파일 → 사례 페이지 이름 (load_casepages 가 채운다)
 
 # 사장님 글 규칙 — 관리 화면 Code.gs 의 같은 이름 숫자와 맞춘다
 PRICE_TEXT_OK = re.compile(r"^[0-9A-Za-z가-힣·,.()~/+%\- ]{1,10}$")
@@ -485,11 +489,19 @@ def render_case(case: dict, where: str) -> list:
                      '        </figure>']
         rows.append('        </div>')
     blog = text_of(case.get("blog"), where + " 블로그 주소")
+    if blog and not re.match(r"^https://[^\s\"<>]+$", blog):
+        raise Stop(f"{where}: 블로그 주소는 https:// 로 시작해야 합니다 ({blog})")
+    # 같은 현장의 사례 페이지(content/casepages.json)가 있으면 그리로 가는 링크를 먼저 단다 — 블로그 주소나 첫 사진으로 짝을 찾는다
+    slug = CASE_LINK.get(blog) if blog else None
+    if not slug and photos:
+        slug = CASE_LINK.get(photos[0][0])
+    links = []
+    if slug:
+        links.append(f'<a class="pg-case-link" href="../cases/{slug}/">{DETAIL_TEXT}</a>')
     if blog:
-        if not re.match(r"^https://[^\s\"<>]+$", blog):
-            raise Stop(f"{where}: 블로그 주소는 https:// 로 시작해야 합니다 ({blog})")
-        rows.append(f'        <p class="case-more"><a class="pg-case-link" href="{attr(blog)}" '
-                    f'target="_blank" rel="noopener">{MORE_TEXT}</a></p>')
+        links.append(f'<a class="pg-case-link" href="{attr(blog)}" target="_blank" rel="noopener">{MORE_TEXT}</a>')
+    if links:
+        rows.append('        <p class="case-more">' + ' &nbsp; '.join(links) + '</p>')
     rows.append('      </article>')
     return rows
 
@@ -506,6 +518,8 @@ def render_cases(name: str) -> str:
     rows = []
     for n, case in enumerate(data, 1):
         rows += render_case(case, f"content/cases/{name}.json 사례 {n}")
+    if CASE_LINK:       # 사례 페이지가 있으면 목록 장(/cases/)으로 가는 줄을 맨 아래에
+        rows.append('      <p class="case-all rv"><a class="pg-case-link" href="../cases/">시공 사례 전체 보기 ›</a></p>')
     return "".join(r + "\n" for r in rows)
 
 
@@ -1001,6 +1015,7 @@ def build(name: str, cases, data: dict) -> str:
         page = one_slot(page, CASES_SLOT, render_cases(cases), label)
     if name == "index":               # 첫 화면 사진은 홈에만 (홈 틀에 {{HERO_SLIDES}} 줄이 꼭 하나)
         page = one_slot(page, HERO_SLOT, render_hero(data["hero"]), label)
+        page = one_slot(page, HOME_CASES_SLOT, render_home_cases(data["casepages"]), label)
     page = center_text(page)         # 가운데 정렬 글: 문장 덩어리·전화번호 묶음 (공지 띠는 notice_block 이 따로)
     return insert_notice(page, data["notice_block"], label)
 
@@ -1055,10 +1070,246 @@ def compare(path: pathlib.Path, new: str) -> str:
     return note + lines_note("없어지는 줄", gone) + lines_note("생기는 줄", came)
 
 
+# ── 시공 사례 페이지 (/cases/, /cases/<이름>/) — 2026-11-11, AI 검색 요청서 5번 ──────────
+# 원본은 content/casepages.json. 사례 하나가 페이지 하나가 되고, cases/index.html 이 목록이다.
+# 칸: slug(주소 이름) · service · date · region · building · title · symptom · cause · diagnosis · equipment
+#     · method · result · note(걸린 시간·배관 길이 같은 숫자) · facts[{name,value}] · tip · photos[{file,caption,tag}] · blog
+#     · match(서비스 장 사례 카드의 첫 사진 — 블로그 주소가 없는 카드와 짝을 지을 때만)
+BASE_URL = "https://xn--hc0bug19yo4ksghrpb480c.com"
+CASE_SERVICES = {   # service 값: (이름, 그 서비스 장 주소, 아이콘)
+    "toilet": ("변기 막힘", "/toilet/", "i-toilet"), "sink": ("싱크대 막힘", "/sink/", "i-sink"),
+    "drain": ("하수구 막힘", "/drain/", "i-drain"), "jet": ("고압 세척", "/jet/", "i-jet"),
+    "faucet": ("수전 교체", "/faucet/", "i-faucet"), "leak": ("누수", "/leak/", "i-wrench"),
+    "pipe": ("배관 공사", "/pipe/", "i-wrench"),
+}
+CASE_SLUG_OK = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+CASE_ROWS = (("symptom", "증상"), ("cause", "원인"), ("diagnosis", "진단 과정"), ("equipment", "사용 장비"),
+             ("method", "작업 방법"), ("result", "작업 결과"), ("note", "참고 사항"))
+CASE_TEXT_MAX = 600
+
+
+def load_casepages() -> list:
+    path = CONTENT / "casepages.json"
+    rel = "content/casepages.json"
+    CASE_LINK.clear()
+    if not path.exists():
+        return []
+    data = read_json(path)
+    if not isinstance(data, list):
+        raise Stop(f"{rel}: 사례 목록 모양이 아닙니다")
+    out, seen = [], set()
+    for n, c in enumerate(data, 1):
+        where = f"{rel} {n}번째 사례"
+        if not isinstance(c, dict):
+            raise Stop(f"{where}: 모양이 아닙니다")
+        slug = text_of(c.get("slug"), where + " 주소 이름", required=True)
+        if not CASE_SLUG_OK.match(slug) or len(slug) > 60:
+            raise Stop(f"{where}: 주소 이름은 영문 소문자·숫자·붙임표만 씁니다 ({slug})")
+        if slug in seen:
+            raise Stop(f"{where}: 주소 이름이 겹칩니다 ({slug})")
+        seen.add(slug)
+        where = f"{rel} {slug}"
+        service = text_of(c.get("service"), where + " 서비스", required=True)
+        if service not in CASE_SERVICES:
+            raise Stop(f"{where}: 서비스는 {', '.join(CASE_SERVICES)} 중 하나여야 합니다 ({service})")
+        item = {"slug": slug, "service": service,
+                "date": text_of(c.get("date"), where + " 날짜"),
+                "day": re.sub(r" \d+일$", "", date_text(c.get("date"), where + " 날짜")),   # 사례 페이지는 월까지만 보인다
+                "region": one_line(c.get("region"), where + " 지역", 40, True),
+                "building": one_line(c.get("building"), where + " 건물", 30),
+                "title": one_line(c.get("title"), where + " 제목", 60, True),
+                "tip": one_line(c.get("tip"), where + " 관리 팁", CASE_TEXT_MAX),
+                "blog": text_of(c.get("blog"), where + " 블로그 주소")}
+        for key, label in CASE_ROWS:
+            item[key] = one_line(c.get(key), f"{where} {label}", CASE_TEXT_MAX, key in ("cause", "method", "result"))
+        if item["blog"] and not re.match(r"^https://[^\s\"<>]+$", item["blog"]):
+            raise Stop(f"{where}: 블로그 주소는 https:// 로 시작해야 합니다")
+        facts = [(one_line(f.get("name"), where + " 표시 이름", 20), one_line(f.get("value"), where + " 표시 값", 60))
+                 for f in (c.get("facts") or []) if isinstance(f, dict)]
+        item["facts"] = [(k, v) for k, v in facts if k and v]
+        photos = []
+        for i, ph in enumerate(c.get("photos") or [], 1):
+            pw = f"{where} 사진 {i}"
+            if not isinstance(ph, dict):
+                raise Stop(f"{pw}: 모양이 아닙니다")
+            file = text_of(ph.get("file"), pw + " 파일", required=True).lstrip("/")
+            if not file.startswith("photos/") or not (SITE / file).is_file():
+                raise Stop(f"{pw}: photos/ 폴더에 없는 사진입니다 ({file})")
+            w, h = photo_size(ph, SITE / file, pw)
+            photos.append((file, one_line(ph.get("caption"), pw + " 설명", 120), one_line(ph.get("tag"), pw + " 표시", 10), w, h))
+        item["photos"] = photos
+        out.append(item)
+        if item["blog"]:
+            CASE_LINK.setdefault(item["blog"], slug)
+        match = text_of(c.get("match"), where + " 짝 사진").lstrip("/")
+        if match:
+            CASE_LINK.setdefault(match, slug)
+    return out
+
+
+def case_place(c: dict) -> str:
+    return " ".join(x for x in (c["region"], c["building"]) if x)
+
+
+def case_ld(graph: list) -> str:
+    body = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=2)
+    return '<script type="application/ld+json">\n' + body.replace("</", "<\\/") + "\n</script>"
+
+
+def ld_business(site: dict) -> dict:
+    return {"@type": "Plumber", "@id": BASE_URL + "/#business", "name": "청년배관", "telephone": site["phone_intl"],
+            "url": BASE_URL + "/",
+            "address": {"@type": "PostalAddress", "streetAddress": "동운로201번길 20", "addressLocality": "북구",
+                        "addressRegion": "전남광주통합특별시", "postalCode": "61258", "addressCountry": "KR"}}
+
+
+def ld_crumbs(items: list) -> dict:
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i, "name": name, "item": url} for i, (name, url) in enumerate(items, 1)]}
+
+
+def fill_slots(page: str, slots: dict, label: str) -> str:
+    for key, value in slots.items():
+        slot = "{{" + key + "}}"
+        if slot not in page:
+            raise Stop(f"{label} 에 {slot} 자리가 없습니다")
+        page = page.replace(slot, value)
+    return page
+
+
+def render_casepage(c: dict, data: dict) -> str:
+    label = "_tools/src/case.html"
+    site = data["site"]
+    name, svc_url, icon = CASE_SERVICES[c["service"]]
+    place = case_place(c)
+    url = f"{BASE_URL}/cases/{c['slug']}/"
+    title = f"{place} {name} 사례 — {c['title']} | 청년배관"
+    desc = " ".join(x for x in (c["symptom"], c["cause"], c["result"]) if x)
+    if len(desc) > 155:
+        desc = desc[:154].rstrip() + "…"
+    rows = []
+    n = 0
+    for key, row_label in CASE_ROWS:
+        if not c[key]:
+            continue
+        n += 1
+        rows += ['      <div class="pg-cause-row">', f'        <div class="pg-cause-no">{n}</div>', '        <div>',
+                 f'          <div class="pg-cause-t">{row_label}</div>',
+                 f'          <div class="pg-cause-d">{inline(c[key])}</div>', '        </div>', '      </div>']
+    chips = [f'        <span class="pg-fact"><em>{esc(name)}</em></span>']
+    chips += [f'        <span class="pg-fact">{esc(k)} <em>{esc(v)}</em></span>' for k, v in c["facts"]]
+    tip = ""
+    if c["tip"]:
+        tip = ('    <div class="pg-note rv" style="margin-top:16px">\n'
+               f'      <strong>현장에서 드린 안내.</strong> {inline(c["tip"])}\n    </div>')
+    photos = ""
+    if c["photos"]:
+        land = any(w > h for _, _, _, w, h in c["photos"])
+        shots = []
+        for file, caption, tag, w, h in c["photos"]:
+            tall = ' class="tall"' if land and h > w else ""
+            tag_html = f'<span class="tag tag-{"a" if tag in TAG_A else "b"}">{esc(tag)}</span>' if tag else ""
+            alt = caption or f"{place} {name} 현장 사진"
+            shots += ['        <figure>',
+                      f'          <img{tall} src="/{attr(file)}" alt="{attr(alt)}" loading="lazy" width="{w}" height="{h}">',
+                      f'          <figcaption>{tag_html}{esc(caption)}</figcaption>', '        </figure>']
+        photos = "\n".join(['<!-- 현장 사진 -->', '<section class="sec" style="background:var(--paper)">', '  <div class="inner">',
+                            '    <div class="rv"><div class="sec-tag">Photo</div>', '    <div class="sec-ttl">현장 사진</div></div>',
+                            '    <div class="cases">', f'      <article class="case{" case-land" if land else ""} rv">',
+                            '        <div class="case-shots" style="margin-top:22px">'] + shots +
+                           ['        </div>', '      </article>', '    </div>', '  </div>', '</section>', ''])
+    links = [f'      <a href="{svc_url}"><svg class="ic"><use href="#{icon}"/></svg> {esc(name)} 안내</a>',
+             '      <a href="/cases/"><svg class="ic"><use href="#i-pin"/></svg> 다른 시공 사례</a>']
+    if c["blog"]:
+        links.append(f'      <a href="{attr(c["blog"])}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-naver"/></svg> 블로그에서 사진 더 보기</a>')
+    article = {"@type": "Article", "headline": f"{place} {name} 사례 — {c['title']}", "description": desc,
+               "mainEntityOfPage": url, "author": {"@id": BASE_URL + "/#business"}, "publisher": {"@id": BASE_URL + "/#business"},
+               "about": name, "contentLocation": {"@type": "Place", "name": c["region"]}}
+    if c["date"]:
+        article["datePublished"] = c["date"][:10]
+    if c["photos"]:
+        article["image"] = [f"{BASE_URL}/{file}" for file, *_ in c["photos"]]
+    ld = case_ld([ld_business(site), article,
+                  ld_crumbs([("홈", BASE_URL + "/"), ("시공 사례", BASE_URL + "/cases/"), (c["title"], url)])])
+    page = fill_site(read_template("case"), site, label)
+    page = fill_slots(page, {
+        "CASE_TITLE": attr(title), "CASE_DESC": attr(desc), "CASE_URL": url, "CASE_LD": ld,
+        "CASE_CRUMB": esc(c["title"]), "CASE_H1": esc(c["title"]),
+        "CASE_WHERE": esc(" · ".join(x for x in (c["day"], place) if x)),
+        "CASE_CHIPS": "\n".join(chips), "CASE_ROWS": "\n".join(rows), "CASE_TIP": tip,
+        "CASE_PHOTOS": photos, "CASE_LINKS": "\n".join(links)}, label)
+    page = center_text(page)
+    return insert_notice(page, data["notice_block"], label)
+
+
+def case_card(c: dict) -> list:
+    where = " · ".join(x for x in (c["day"], case_place(c)) if x)
+    return [f'      <a class="pg-sym-card" href="/cases/{c["slug"]}/">',
+            f'        <div class="case-where" style="margin-bottom:8px">{esc(where)}</div>',
+            f'        <div class="pg-sym-q">{esc(c["title"])}</div>',
+            f'        <div class="pg-sym-a">{inline(c["cause"])}</div>', '      </a>']
+
+
+def render_home_cases(cases: list) -> str:
+    """홈 '최근 시공 사례': 서비스마다 가장 최근 사례 하나씩, 그중 최근 것부터 CASE_SHOW 장."""
+    latest = {}
+    for c in sorted(cases, key=lambda c: c["date"], reverse=True):
+        latest.setdefault(c["service"], c)
+    rows = ['    <div class="pg-sym rv">']
+    for c in sorted(latest.values(), key=lambda c: c["date"], reverse=True)[:CASE_SHOW]:
+        rows += case_card(c)
+    rows += ['    </div>',
+             f'    <p class="more-row rv"><a class="more-btn" href="/cases/">시공 사례 {len(cases)}건 모두 보기 ›</a></p>']
+    return "".join(r + "\n" for r in rows)
+
+
+def render_cases_index(cases: list, data: dict) -> str:
+    label = "_tools/src/cases.html"
+    site = data["site"]
+    url = BASE_URL + "/cases/"
+    blocks = []
+    paper = False
+    for key, (name, svc_url, _) in CASE_SERVICES.items():
+        group = [c for c in cases if c["service"] == key]
+        if not group:
+            continue
+        group.sort(key=lambda c: c["date"], reverse=True)
+        cards = []
+        for c in group:
+            cards += case_card(c)
+        # CASE_SHOW 장만 보이고 나머지는 '더 보기'를 누르면 펼쳐진다 (글은 처음부터 HTML 에 있다)
+        rest = len(group) - CASE_SHOW
+        more = [] if rest <= 0 else [
+            '    <p class="more-row rv"><button type="button" class="more-btn" '
+            "onclick=\"this.closest('.inner').querySelector('.pg-sym').classList.remove('cut');this.parentNode.remove()\">"
+            f'{esc(name)} 사례 {rest}건 더 보기</button></p>']
+        blocks += [f'<!-- {name} -->', '<section class="sec"' + (' style="background:var(--paper)"' if paper else '') + '>',
+                   '  <div class="inner">', f'    <div class="rv"><div class="sec-tag">{len(group)}건</div>',
+                   f'    <div class="sec-ttl">{esc(name)} 사례</div></div>',
+                   f'    <div class="pg-sym{" cut" if more else ""} rv">'] + cards + ['    </div>'] + more + \
+                  ['    <div class="pg-more rv" style="margin-top:22px">',
+                   f'      <a href="{svc_url}">{esc(name)} 안내 보기</a>', '    </div>', '  </div>', '</section>', '']
+        paper = not paper
+    title = "청년배관 시공 사례 | 광주·전라 변기·싱크대·하수구 막힘 현장"
+    desc = (f"광주·전라 지역에서 직접 작업한 시공 사례 {len(cases)}건. "
+            "현장마다 막힌 원인, 진단 과정, 사용한 장비, 작업 방법과 결과를 적었습니다.")
+    items = [{"@type": "ListItem", "position": i, "url": f"{BASE_URL}/cases/{c['slug']}/", "name": c["title"]}
+             for i, c in enumerate(cases, 1)]
+    ld = case_ld([ld_business(site), {"@type": "CollectionPage", "name": "청년배관 시공 사례", "url": url, "description": desc,
+                                       "mainEntity": {"@type": "ItemList", "itemListElement": items}},
+                  ld_crumbs([("홈", BASE_URL + "/"), ("시공 사례", url)])])
+    page = fill_site(read_template("cases"), site, label)
+    page = fill_slots(page, {"CASE_TITLE": attr(title), "CASE_DESC": attr(desc), "CASE_URL": url, "CASE_LD": ld,
+                             "CASE_COUNT": str(len(cases)), "CASE_LIST": "\n".join(blocks)}, label)
+    page = center_text(page)
+    return insert_notice(page, data["notice_block"], label)
+
+
 def load_all(today: str = None) -> dict:
     prices = load_prices()
     notice = load_notice()
     return {"prices": prices,
+            "casepages": load_casepages(),      # CASE_LINK 도 여기서 채워진다 (서비스 장 사례 카드의 '자세히 보기')
             "site": load_site(),
             "faq": {name: load_faq(name, prices) for name, _, _ in PAGES},
             "services": load_services(),
@@ -1078,6 +1329,15 @@ def render_all(today: str = None) -> list:
     label = "_tools/src/privacy.html"
     page = insert_notice(fill_site(read_template("privacy"), data["site"], label), data["notice_block"], label)
     out.append((PRIVACY, SITE / PRIVACY, page, check(page)))
+    # 시공 사례: 목록 한 장 + 사례마다 한 장 (content/casepages.json 이 없거나 비면 만들지 않는다)
+    cases = data["casepages"]
+    if cases:
+        page = render_cases_index(cases, data)
+        out.append(("cases/index.html", SITE / "cases" / "index.html", page, check(page)))
+        for c in cases:
+            rel = f"cases/{c['slug']}/index.html"
+            page = render_casepage(c, data)
+            out.append((rel, SITE / rel, page, check(page)))
     return out
 
 
@@ -1111,7 +1371,7 @@ def main() -> None:
         print("위 내용이 고친 의도와 맞을 때만 다시 실행: python build_content.py --write")
         sys.exit(1)
     for path, text in changed:
-        path.parent.mkdir(exist_ok=True)
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")   # 줄 끝은 컴퓨터 방식대로 (윈도우 CRLF, GitHub LF) — build_pages.py 와 같음
         print(f"  썼음: {path.relative_to(SITE).as_posix()}")
     print(f"\n{len(changed)}개 파일을 썼습니다.")

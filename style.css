@@ -135,15 +135,15 @@ section[id]{scroll-margin-top:104px}
 
 /* ── 서비스 탭 ── */
 #services{padding:84px 5%;background:var(--paper)}
-.svc-tabs-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:24px}
-.svc-tab{display:inline-flex;align-items:center;gap:7px;padding:11px 0;justify-content:center;border-radius:50px;border:1.5px solid var(--bd);font-size:14px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;background:#fff}
+.svc-tabs-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.svc-tab{flex:1 1 22%;display:inline-flex;align-items:center;gap:8px;padding:15px 12px;justify-content:center;text-align:center;border-radius:50px;border:1.5px solid var(--bd);font-size:16px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .2s;background:#fff}
 .svc-tab .ic{font-size:17px;color:var(--t3);transition:color .2s}
 .svc-tab:hover{border-color:var(--n800);color:var(--n800)}
 .svc-tab:hover .ic{color:var(--n800)}
 .svc-tab.act{background:var(--n900);color:#fff;border-color:var(--n900)}
 .svc-tab.act .ic{color:var(--yel)}
-@media(max-width:900px){.svc-tabs-row{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.svc-tabs-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.svc-tab{flex-basis:30%}}
+@media(max-width:640px){.svc-tab{flex-basis:40%;font-size:15px;padding:13px 10px}}
 
 .svc-panel{background:#fff;border-radius:20px;padding:32px 28px;border:1.5px solid var(--bd);box-shadow:0 3px 18px rgba(22,48,79,.05);animation:panelIn .3s ease}
 @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -390,7 +390,7 @@ footer{background:var(--n950);padding:28px 5% 18px;border-top:1px solid rgba(255
    ══════════════════════════════════════════════════ */
 
 /* ── 홈 본문 ── */
-.area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:11px}
+.area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
 .area-grid a{display:flex;align-items:center;justify-content:center;gap:7px;
   background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px 12px;
   font-size:16px;font-weight:700;color:var(--t1);text-align:center;
@@ -510,3 +510,14 @@ body{text-wrap:pretty}
   .case:has(.case-shots>figure:only-child)>.case-shots{grid-column:2;grid-row:1/span 4;grid-template-columns:1fr;margin-top:0;padding:22px 22px 22px 0}
   .case:has(.case-shots>figure:only-child)>.case-hd{padding-bottom:22px}
 }
+/* 서비스 장 사례 구역 맨 아래 '시공 사례 전체 보기' 줄 (2026-11-11) · 사례 목록 장의 카드는 통째로 링크 */
+.case-all{margin:0;text-align:center}
+a.pg-sym-card{display:block}
+/* 2026-11-11 홈: 가격표 자리에 최근 시공 사례 / 사례 목록 '더 보기' / 서비스 칸 두 줄 / 출동 지역 세 칸 */
+#cases{padding:84px 5%;background:var(--n900)}
+.more-row{margin:26px 0 0;text-align:center}
+.more-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--n900);color:var(--n900);border-radius:50px;padding:14px 34px;font:inherit;font-size:16px;font-weight:800;cursor:pointer;transition:all .18s}
+.more-btn:hover{background:var(--n900);color:#fff}
+.on-dark .more-btn,.on-dark .more-btn:hover{background:var(--yel);border-color:var(--yel);color:var(--n900)}
+.pg-sym.cut>a:nth-child(n+7){display:none}
+@media(max-width:640px){.area-grid a{flex-direction:column;gap:2px;padding:14px 6px}}
