@@ -1288,12 +1288,28 @@ def render_casepage(c: dict, data: dict) -> str:
     return insert_notice(page, data["notice_block"], label)
 
 
-def case_card(c: dict) -> list:
+def case_card(c: dict, photo: bool = False) -> list:
     where = " · ".join(x for x in (c["day"], case_place(c)) if x)
-    return [f'      <a class="pg-sym-card" href="/cases/{c["slug"]}/">',
-            f'        <div class="case-where" style="margin-bottom:8px">{esc(where)}</div>',
+    body = [f'        <div class="case-where" style="margin-bottom:8px">{esc(where)}</div>',
             f'        <div class="pg-sym-q">{esc(c["title"])}</div>',
-            f'        <div class="pg-sym-a">{inline(c["cause"])}</div>', '      </a>']
+            f'        <div class="pg-sym-a">{inline(c["cause"])}</div>']
+    if not (photo and c["photos"]):
+        return [f'      <a class="pg-sym-card" href="/cases/{c["slug"]}/">'] + body + ['      </a>']
+    # 홈 '최근 시공 사례' (2026-11-11 밝은 배경): 카드 맨 위에 사진. 작업 전·후가 둘 다 있으면 반씩 나란히
+    # (고객이 '나랑 같은 상황'인지 작업 전 사진으로 알아보고, 작업 후 사진으로 결과를 본다 — 사용자 11/11)
+    before = next((p for p in c["photos"] if p[2] == "작업 전"), None)
+    after = next((p for p in c["photos"] if p[2] in TAG_A and p[2] != "원인"), None)
+    if before and after:
+        def half(p, cls):
+            file, caption, tag, w, h = p
+            return (f'          <span><img src="/{attr(file)}" alt="{attr(caption or c["title"] + " " + tag)}" loading="lazy" width="{w}" height="{h}">'
+                    f'<em class="{cls}">{esc(tag)}</em></span>')
+        top = ['        <div class="pg-sym-ba">', half(before, "lbl-b"), half(after, "lbl-a"), '        </div>']
+    else:
+        file, caption, _, w, h = c["photos"][0]
+        top = [f'        <img class="pg-sym-img" src="/{attr(file)}" alt="{attr(caption or c["title"])}" loading="lazy" width="{w}" height="{h}">']
+    return [f'      <a class="pg-sym-card has-photo" href="/cases/{c["slug"]}/">'] + top + \
+           ['        <div class="pg-sym-body">'] + ["  " + b for b in body] + ['        </div>', '      </a>']
 
 
 def render_home_cases(cases: list) -> str:
@@ -1301,9 +1317,9 @@ def render_home_cases(cases: list) -> str:
     latest = {}
     for c in sorted(cases, key=lambda c: c["date"], reverse=True):
         latest.setdefault(c["service"], c)
-    rows = ['    <div class="pg-sym rv">']
+    rows = ['    <div class="pg-sym home-cases rv">']
     for c in sorted(latest.values(), key=lambda c: c["date"], reverse=True)[:CASE_SHOW]:
-        rows += case_card(c)
+        rows += case_card(c, photo=True)
     rows += ['    </div>',
              f'    <p class="more-row rv"><a class="more-btn" href="/cases/">시공 사례 {len(cases)}건 모두 보기 ›</a></p>']
     return "".join(r + "\n" for r in rows)
