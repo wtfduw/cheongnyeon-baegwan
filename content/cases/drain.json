@@ -111,50 +111,6 @@
     "blog": "https://blog.naver.com/tturobro/224300898047"
   },
   {
-    "date": "",
-    "place": "광주 첨단 · 다세대빌라",
-    "title": "무엇이 문제였나",
-    "summary": "싱크대에서 내려간 기름과 이물질이 배관 안에 쌓여 물을 막고 있었습니다. 하필 P트랩이 아랫층 천장에 있어, 천장을 열고 작업해야 했습니다.",
-    "facts": [
-      {
-        "name": "걸린 시간",
-        "value": "약 2시간"
-      },
-      {
-        "name": "쓴 장비",
-        "value": "내시경카메라 · 플렉스샤프트"
-      }
-    ],
-    "photos": [
-      {
-        "file": "/photos/drain-cheomdan-01.webp",
-        "caption": "바닥 배수구가 잿빛 찌꺼기로 꽉 막혀 있었습니다.",
-        "tag": "작업 전"
-      },
-      {
-        "file": "/photos/drain-cheomdan-02.webp",
-        "caption": "트랩을 꺼내 보니 안쪽까지 굳어 있었습니다.",
-        "tag": ""
-      },
-      {
-        "file": "/photos/drain-cheomdan-12.webp",
-        "caption": "내시경으로 3.53m 지점까지 배관 안을 확인했습니다.",
-        "tag": ""
-      },
-      {
-        "file": "/photos/drain-cheomdan-11.webp",
-        "caption": "아랫층 천장을 열고 P트랩에 플렉스샤프트를 넣었습니다.",
-        "tag": ""
-      },
-      {
-        "file": "/photos/drain-cheomdan-06.webp",
-        "caption": "막고 있던 것을 걷어내 물길이 다시 열렸습니다.",
-        "tag": "작업 후"
-      }
-    ],
-    "blog": ""
-  },
-  {
     "date": "2026-06-27",
     "place": "광산구 신가동 차량정비소",
     "title": "무엇이 문제였나",
